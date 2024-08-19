@@ -2,6 +2,27 @@
 
 Welcome to the SA RedBack project! The AI Chatterbox is a web-based AI chatbot designed to enhance creativity and critical thinking by generating speculative "what if" questions based on user input. This project aims to stimulate creativity and interdisciplinary dialogue through engaging and thought-provoking questions.
 
+## Table of Contents
+
+- [Project Overview](#project-overview)
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Installation and Setup](#installation-and-setup)
+- [Project Links](#project-links)
+- [Usage](#usage)
+- [Scripts](#scripts)
+  - [example.py](#examplepy)
+- [Build Script](#build-script)
+- [Dependencies](#dependencies)
+- [API Endpoints](#api-endpoints)
+- [Geo-data Reference](#geo-data-reference)
+- [Elasticsearch](#elasticsearch)
+- [Testing](#testing)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+- [Changelog](#changelog)
+
 ## Project Overview
 
 The AI Chatterbox transforms the traditional paper-based chatterbox into a digital platform. It generates and explores hypothetical questions to foster creativity and critical thinking. By providing users with eight unique "what if" questions based on their input, the chatbot promotes in-depth exploration of complex topics and enhances user engagement in various settings, such as art galleries and educational environments.
@@ -26,27 +47,62 @@ The AI Chatterbox transforms the traditional paper-based chatterbox into a digit
 
 - **User Feedback Mechanism**: Provides options for users to give feedback on the questions and their experience, helping to refine and improve the chatbot's performance and content.
 
+## Prerequisites
+
+Ensure you have the following installed:
+
+- **Python 3.x**: The project requires Python 3.6 or higher.
+- **Pip**: Python package manager for installing dependencies.
+- **Virtualenv** (optional, but recommended): To create isolated Python environments.
+
+If you don't have these tools installed, please follow the relevant instructions for your operating system to set them up.
+
 ## Installation and Setup
 
 1. Clone the project repository:
    ```bash
    git clone https://github.com/feit-comp90082/SA-RedBack.git
+   ```
 
 2. Navigate to the project directory:
+
+   It is recommended to use a virtual environment. You can create one using:
+   ```bash
+   virtualenv venv
+   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+   ```
+   
+   Then install the required dependencies:
     ```bash
     cd SA-RedBack
+   ```
 
 3. Install dependencies:
     ```bash
     pip install -r requirements.txt
+   ```
 
 4. Run the project:
     ```bash
     python manage.py runserver
+   ```
+## Project Links
+
+- **Trello Board**: [COMP90082 2024 SM2 SA Redback Trello Board](https://trello.com/b/jHGbpSQC/comp90082-2024-sm2-sa-redback)
+- **Confluence Wiki**: [COMP90082 2024 S2 Confluence Wiki](https://comp90082-2024-s2.atlassian.net/wiki/spaces/comp9008223/overview)
+- **Figma Design**: [Project Design on Figma](https://www.figma.com/files/project/265584426)
 
  ## Usage
 
 After setting up, navigate to http://localhost:8000 in your web browser to interact with the AI Chatterbox. Follow the on-screen instructions to start generating and exploring questions.
+
+## Scripts
+
+- **example.py**: For reference only.
+
+## Build Script
+
+The build script automates the data fetching, processing, and analysis workflow. Run the script to set up the environment and start the data pipeline.
 
 ## Contributing
 
@@ -56,19 +112,15 @@ We welcome contributions from the community! For more details on how to contribu
 
 This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
 
-## Changelog
-
-See [CHANGELOG.md](CHANGELOG.md) for detailed updates and changes made in each sprint.
-
 ## Contact
 
 For any inquiries or feedback, please contact the project team:
 - **Yujun Yan (Mentor)**: yujun.yan.1@unimelb.edu.au
 - **YiYao Li Shaelyn (Product Owner)**: yiyao3@student.unimelb.edu.au
-- **Leyao Lyu Lydia (Developer)**: lyull@student.unimelb.edu.au
-- **Jionghao Song Harry (Developer)**: jionghaos@student.unimelb.edu.au
 - **Yiqun Liu Elva (Scrum Master)**: yiqun2@student.unimelb.edu.au
 - **Yingying Guo Vicky (Quality Assurance Leader)**: yinguo3@student.unimelb.edu.au
+- **Leyao Lyu Lydia (Developer)**: lyull@student.unimelb.edu.au
+- **Jionghao Song Harry (Developer)**: jionghaos@student.unimelb.edu.au
 
 ## Changelog
 
