@@ -69,3 +69,30 @@ For any inquiries or feedback, please contact the project team:
 - **Jionghao Song Harry (Developer)**: jionghaos@student.unimelb.edu.au
 - **Yiqun Liu Elva (Scrum Master)**: yiqun2@student.unimelb.edu.au
 - **Yingying Guo Vicky (Quality Assurance Leader)**: yinguo3@student.unimelb.edu.au
+
+## Changelog
+
+All notable changes to this project will be documented in this file.
+
+### [Sprint 1] - 18 August 2024
+
+#### Added
+- Initial project setup, including basic project overview and features.
+- Installation and setup instructions.
+- **Contributing** section with detailed guidelines for contributing to the project.
+- Apache License 2.0 selected as the project license.
+- Confluence setup completed, including cover page, project details, requirements, technical details, meeting minutes, and other relevant information.
+- Trello board created, structured, and organized according to project requirements.
+
+#### Changed
+- Updated **Project Overview** and **Features** to reflect initial project goals and functionalities.
+- Updated folder structure details in the **README.md**.
+
+#### Fixed
+- Corrected typos and formatting issues in the **README.md**.
+
+### [Sprint 2] - To be updated
+
+### [Sprint 3] - To be updated
+
+### [Sprint 4] - To be updated
