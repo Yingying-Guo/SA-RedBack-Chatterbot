@@ -53,7 +53,6 @@ Ensure you have the following installed:
 
 - **Python 3.x**: The project requires Python 3.6 or higher.
 - **Pip**: Python package manager for installing dependencies.
-- **Virtualenv** (optional, but recommended): To create isolated Python environments.
 
 If you don't have these tools installed, please follow the relevant instructions for your operating system to set them up.
 
@@ -65,14 +64,6 @@ If you don't have these tools installed, please follow the relevant instructions
    ```
 
 2. Navigate to the project directory:
-
-   It is recommended to use a virtual environment. You can create one using:
-   ```bash
-   virtualenv venv
-   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-   ```
-   
-   Then install the required dependencies:
     ```bash
     cd SA-RedBack
    ```
