@@ -3,110 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat with Assistant</title>
+    <title>AI Chatbot</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f4f4f4;
+        }
+        #chat-container {
+            width: 800px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
         #chatbox {
-            width: 100%;
-            height: 300px;
-            overflow-y: auto;
-            border: 1px solid #ccc;
+            flex-grow: 1;
+            padding: 15px;
+            border-bottom: 1px solid #ccc;
+            overflow-y: scroll;
+            height: 600px;
+        }
+        #input-container {
+            display: flex;
             padding: 10px;
-            background-color: #fff;
-            margin-bottom: 10px;
+            background-color: #f9f9f9;
         }
         #userInput {
-            width: calc(100% - 110px);
+            flex-grow: 1;
             padding: 10px;
             border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
+            border-radius: 4px;
+            font-size: 16px;
         }
-        #sendBtn {
+        #sendButton {
+            margin-left: 10px;
             padding: 10px 20px;
-            border: none;
             background-color: #4CAF50;
             color: white;
-            border-radius: 5px;
+            border: none;
+            border-radius: 4px;
             cursor: pointer;
+            font-size: 16px;
         }
-        #sendBtn:hover {
+        #sendButton:hover {
             background-color: #45a049;
         }
-        input[type="text"] {
-            /* Prevent line breaks */
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+        .message {
+            margin: 10px 0;
+            padding: 8px 12px;
+            border-radius: 20px;
+            max-width: 70%;
+            word-wrap: break-word; /* 自动换行 */
+            white-space: pre-wrap; /* 保留换行符和空格 */
+        }
+        .user {
+            align-self: flex-end;
+            background-color: #e6f7ff;
+            color: #00529b;
+        }
+        .assistant {
+            align-self: flex-start;
+            background-color: #d4edda;
+            color: #155724;
         }
     </style>
 </head>
 <body>
-    <div>
-        <h1>Chat with Assistant</h1>
-        <div id="chatbox"></div>
-        <div>
-            <input type="text" id="userInput" placeholder="Type a message" onkeypress="return event.keyCode != 13;">
-            <button id="sendBtn">Send</button>
-        </div>
+
+<div id="chat-container">
+    <div id="chatbox"></div>
+    <div id="input-container">
+        <input type="text" id="userInput" placeholder="Type your message here..." />
+        <button id="sendButton">Send</button>
     </div>
+</div>
 
-    <script>
-        document.getElementById("sendBtn").addEventListener("click", async () => {
-            const userInput = document.getElementById("userInput").value;
-            if (!userInput) return;
+<script>
+// JavaScript 部分保持不变
+document.addEventListener('DOMContentLoaded', () => {
+    const chatbox = document.getElementById('chatbox');
+    const userInput = document.getElementById('userInput');
+    const sendButton = document.getElementById('sendButton');
 
-            // Add user message to chatbox
-            const chatbox = document.getElementById("chatbox");
-            const userMessageElement = document.createElement("p");
-            userMessageElement.textContent = `You: ${userInput}`;
-            chatbox.appendChild(userMessageElement);
+    // 监听用户按下Enter键
+    userInput.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            sendMessage();
+        }
+    });
 
-            // Send message to server via AJAX (fetch)
-            try {
-                const response = await fetch("/chat", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ message: userInput }),
-                });
+    // 监听用户点击Send按钮
+    sendButton.addEventListener('click', sendMessage);
 
-                const data = await response.json();
-                const assistantMessage = data.response;
+    function sendMessage() {
+        const message = userInput.value.trim();
+        if (message) {
+            appendMessage('user', message);
+            sendMessageToServer(message);
+            userInput.value = '';
+        }
+    }
 
-                // Add assistant's response to chatbox
-                const assistantMessageElement = document.createElement("p");
-                assistantMessageElement.textContent = `Assistant: ${assistantMessage}`;
-                chatbox.appendChild(assistantMessageElement);
-            } catch (error) {
-                console.error("Error occurred:", error);
-                const errorMessageElement = document.createElement("p");
-                errorMessageElement.textContent = "Error: Unable to get a response from the assistant.";
-                chatbox.appendChild(errorMessageElement);
-            }
+    function appendMessage(role, content) {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('message', role);
+        messageElement.textContent = `${role === 'user' ? 'You' : 'Assistant'}: ${content}`;
+        chatbox.appendChild(messageElement);
+        chatbox.scrollTop = chatbox.scrollHeight; // 自动滚动到底部
+    }
 
-            // Scroll chatbox to the bottom
-            chatbox.scrollTop = chatbox.scrollHeight;
-
-            // Clear the input field
-            document.getElementById("userInput").value = "";
+    function sendMessageToServer(message) {
+        // 使用fetch API来发送请求
+        fetch('/api/chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ message: message }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            appendMessage('assistant', data.reply);
+        })
+        .catch(error => {
+            console.error('Error:', error);
         });
+    }
+});
+</script>
 
-        // Automatically scroll the chatbox to the bottom when new messages are added
-        const observer = new MutationObserver(() => {
-            const chatbox = document.getElementById("chatbox");
-            chatbox.scrollTop = chatbox.scrollHeight;
-        });
-        observer.observe(document.getElementById("chatbox"), { childList: true });
-    </script>
 </body>
 </html>

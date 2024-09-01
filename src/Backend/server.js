@@ -1,48 +1,62 @@
-const express = require("express");
-const { OpenAI } = require("openai"); // 引入 OpenAI SDK
-const dotenv = require("dotenv");
+import { OpenAI } from "openai";
+import dotenv from 'dotenv';
+import express from 'express';
+import bodyParser from 'body-parser';
 
-// Load environment variables
 dotenv.config();
 
-// Initialize OpenAI
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
 
 const app = express();
+const port = 3000;
 
-// Serve static files from the "public" directory
-app.use(express.static("public"));
+app.use(bodyParser.json());
+app.use(express.static('public')); // 假设前端文件在public文件夹中
 
-// Parse JSON bodies (as sent by API clients)
-app.use(express.json());
+let conversation = [
+  {
+    role: "system",
+    content: "You are a personal assistant. Answer the user's questions. You need to generate four What-If questions",
+  }
+];
 
-// Handle incoming POST requests for chat messages
-app.post("/chat", async (req, res) => {
-    const { message } = req.body;
+app.post('/api/chat', async (req, res) => {
+    const userInput = req.body.message;
+
+    // 将用户输入添加到对话历史中
+    conversation.push({
+        role: "user",
+        content: userInput,
+    });
 
     try {
-        const completion = await openai.chat.completions.create({
+        // 发送对话历史并获取助手的回复
+        const response = await openai.chat.completions.create({
             model: "gpt-4o-mini",
-            messages: [
-                { "role": "system", "content": "You are a helpful assistant." },
-                { "role": "system", "content": "You need to generate four What-If questions" },
-                { "role": "user", "content": message },
-            ],
+            messages: conversation,
         });
 
-        const assistantMessage = completion.choices[0].message.content;
-        console.log("Assistant's response:", assistantMessage);
-        res.json({ response: assistantMessage });
+        const assistantReply = response.choices[0].message.content;
+
+        // 打印助手的回复到terminal
+        console.log("Assistant:", assistantReply);
+
+        // 将助手的回复添加到对话历史中
+        conversation.push({
+            role: "assistant",
+            content: assistantReply,
+        });
+
+        // 返回助手的回复给前端
+        res.json({ reply: assistantReply });
     } catch (error) {
-        console.error("Error occurred:", error.message);
-        res.status(500).json({ response: "Sorry, something went wrong." });
+        console.error("Error during interaction:", error.message);
+        res.status(500).json({ error: 'Something went wrong' });
     }
 });
 
-// Start the server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
 });

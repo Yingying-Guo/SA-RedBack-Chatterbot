@@ -2,7 +2,7 @@
   "name": "openai-nodejs-demo",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "module", 
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,6 +13,7 @@
   "dependencies": {
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "marked": "^14.1.0",
     "openai": "^4.57.0"
   }
 }
