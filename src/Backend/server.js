@@ -13,7 +13,7 @@ const app = express();
 const port = 3000;
 
 app.use(bodyParser.json());
-app.use(express.static('public')); // 假设前端文件在public文件夹中
+app.use(express.static('public')); 
 
 let conversation = [
   {
@@ -38,6 +38,7 @@ app.post('/api/chat', async (req, res) => {
             messages: conversation,
         });
 
+        console.log(response);
         const assistantReply = response.choices[0].message.content;
 
         // 打印助手的回复到terminal
