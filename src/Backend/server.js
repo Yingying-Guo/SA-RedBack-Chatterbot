@@ -9,6 +9,9 @@ const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
 
+
+// const openai = new OpenAI({ apiKey: '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' });
+
 const app = express();
 const port = 3000;
 
