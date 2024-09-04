@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const chatbox = document.getElementById('chatbox');
     const userInput = document.getElementById('userInput');
-    const loadingIndicator = document.getElementById('loadingIndicator');
 
     // Listen for user input
     userInput.addEventListener('keypress', function(event) {
