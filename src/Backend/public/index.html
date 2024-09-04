@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function sendMessageToServer(message) {
         // 使用fetch API来发送请求
-        fetch('/api/chat', {
+        fetch('/api/conversations', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
