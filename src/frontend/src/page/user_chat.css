@@ -3,10 +3,12 @@
     Ubuntu, "Helvetica Neue", Helvetica, Arial, "PingFang SC",
     "Hiragino Sans GB", "Microsoft Yahei UI", "Microsoft Yahei",
     "Source Han Sans CN", sans-serif;
+    --sidebar-width: 300px;
+    --button-radius: 40px;
 }
 
 .main-container {
-  overflow: hidden;
+  overflow: auto;
 }
 
 .main-container,
@@ -22,21 +24,30 @@ button {
 }
 
 .main-container {
-  position: relative;
-  width: 1440px;
-  height: 1024px;
+  position: absolute;
+  display: flex;
+  width: 99%;
+  height: 99%;
   margin: 0 auto;
   background: #f4f5f8;
-  overflow: hidden;
+  overflow: auto;
   border-radius: 32px;
 }
 .flex-column-c {
   position: absolute;
-  top: 0;
-  right: 1092px;
+  /* top: 0;
+  right: 75%;
   bottom: 43px;
-  left: 0;
+  left: 0; */
+  width: var(--sidebar-width);
+  height: 100%;
+
   z-index: 89;
+  left: 0%;
+  
+
+  display: flex;
+  /* background-color: #ff0000; */
 }
 .extended-fab {
   display: flex;
@@ -44,11 +55,14 @@ button {
   align-items: center;
   justify-content: center;
   flex-wrap: nowrap;
-  position: relative;
+  position: absolute;
   width: 80px;
   min-width: 80px;
   height: 42px;
-  margin: 939px 0 0 30px;
+  bottom: 0;
+  margin-bottom: 35px;
+  margin-left: 30px;
+  /* margin: 939px 0 0 30px; */
   cursor: pointer;
   background: #ffffff;
   border: none;
@@ -70,7 +84,7 @@ button {
   position: relative;
   min-width: 0;
   min-height: 0;
-  padding: 16px 20px 16px 16px;
+  padding: 16px 16px 16px 16px;
   z-index: 90;
 }
 .label-text-en {
@@ -94,22 +108,23 @@ button {
   flex-wrap: nowrap;
   gap: 10px;
   position: absolute;
-  width: 348px;
-  height: 1024px;
+  width: var(--sidebar-width);
+  height: 100%;
   top: 50%;
   left: 50%;
   background: #ffffff;
-  transform: translate(-50%, -47.9%);
+  transform: translate(-50%, -50%);
   z-index: 11;
 }
 .subtract {
   flex-shrink: 0;
   position: relative;
   width: 348px;
-  height: 1015px;
-  background: url(../assets/images/6b9eb27c-cda9-4819-a087-6e77d8944d2e.png)
+  height: 100%;
+  /* background: url(../assets/images/6b9eb27c-cda9-4819-a087-6e77d8944d2e.png)
     no-repeat center;
-  background-size: cover;
+  background-size: cover; */
+  /* background-color: #f2ff00; */
   z-index: 12;
 }
 .frame-1 {
@@ -120,36 +135,41 @@ button {
   flex-shrink: 0;
   gap: 20px;
   position: absolute;
-  width: 348px;
+  width: var(--sidebar-width);
   height: 130px;
-  top: 138px;
+  top: 38px;
   left: 0;
   z-index: 17;
 }
 .component {
   flex-shrink: 0;
   position: relative;
-  width: 288px;
-  height: 50px;
+  width: var(--sidebar-width);
+  height: var(--button-radius);
   z-index: 18;
+
+
 }
 .group {
   position: absolute;
-  width: 79.17%;
+  width: var(--button-radius);
   height: 100%;
-  top: 0;
-  left: 0;
+  top: 0px;
+  left: 10px;
   cursor: pointer;
   background: transparent;
   border: none;
   z-index: 19;
+
 }
 .group-2 {
   position: relative;
+
   width: 101px;
   height: 24px;
-  margin: 13px 0 0 66px;
+  /* margin: 13px 0 0 66px; */
   z-index: 21;
+  
 }
 .new-chat {
   display: flex;
@@ -167,14 +187,18 @@ button {
   text-align: left;
   white-space: nowrap;
   z-index: 22;
+
 }
+
 .vuesax-linear-add {
   position: absolute;
   width: 17.82%;
   height: 75%;
   top: 12.5%;
-  left: 0;
+  left: 5%;
   z-index: 23;
+
+
 }
 .vuesax-linear-add-3 {
   position: absolute;
@@ -183,6 +207,7 @@ button {
   top: 0;
   left: 0;
   z-index: 24;
+
 }
 .add {
   position: absolute;
@@ -194,6 +219,7 @@ button {
     no-repeat center;
   background-size: 100% 100%;
   z-index: 25;
+
 }
 .rectangle {
   position: absolute;
@@ -209,38 +235,42 @@ button {
 }
 .group-4 {
   position: absolute;
-  width: 17.36%;
-  height: 100%;
-  top: 0;
-  left: 82.64%;
+  width: var(--button-radius);
+  height: var(--button-radius);
+  top: 0px;
+  right: 10px;
   z-index: 26;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+
 }
+
 .vuesax-linear-search-normal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
-  width: 18px;
-  height: 18px;
-  margin: 16px 0 0 16px;
+  width: 100%; 
+  height: 100%;
   z-index: 28;
 }
+
 .vuesax-linear-search-normal-5 {
-  position: absolute;
-  width: 18px;
+  position: relative;
+  width: 18px; 
   height: 18px;
-  top: 0;
-  left: 0;
   z-index: 29;
 }
+
 .search-normal {
-  position: absolute;
   width: 100%;
   height: 100%;
-  top: 0;
-  left: 0;
-  background: url(../assets/images/01568d7a-7d17-4268-a1ba-b4029092e167.png)
-    no-repeat center;
-  background-size: 100% 100%;
+  background: url(../assets/images/01568d7a-7d17-4268-a1ba-b4029092e167.png) no-repeat center;
+  background-size: contain;
   z-index: 30;
 }
+
 .rectangle-6 {
   position: absolute;
   width: 100%;
@@ -249,8 +279,58 @@ button {
   left: 0;
   background: #8a81ff;
   z-index: 27;
-  border-radius: 69px;
+  border-radius: 50%;
 }
+
+
+
+
+
+
+
+.search-input {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  position: absolute;
+
+  width: 220px;
+  height: var(--button-radius);
+  top: 0;
+
+  right: 10px;
+  /* transform: translateX(-50%); */
+  /* margin: 180px 0 0 40px; */
+  padding: 6px 30px 6px 30px;
+  background: #ffffff;
+  overflow: hidden;
+  border-radius: 30px;
+  box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.08);
+
+    /* background-color: #000000; */
+
+}
+
+
+.search-type-input {
+  flex-shrink: 0;
+  position: absolute;
+  width: 1041px;
+  height: 77px;
+  top: 0;
+  left: 0;
+  background: transparent;
+  border: none;
+  z-index: 10;
+  outline: none;
+}
+
+
+
+
+
+
 .frame-7 {
   display: flex;
   flex-direction: column;
@@ -810,11 +890,13 @@ button {
 .group-2c {
   flex-shrink: 0;
   position: absolute;
-  width: 188px;
-  height: 40.472px;
-  top: 39.42px;
-  left: 38px;
+  width: 198px;
+  height: 40px;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 13;
+  /* background-color: #000000; */
 }
 .group-2d {
   position: absolute;
@@ -823,6 +905,8 @@ button {
   top: 0;
   left: 0;
   z-index: 14;
+  
+
 }
 .group-2e {
   position: absolute;
@@ -834,6 +918,7 @@ button {
     no-repeat center;
   background-size: 100% 100%;
   z-index: 15;
+
 }
 .swisp-gpt {
   display: flex;
@@ -861,10 +946,11 @@ button {
   gap: 14px;
   position: absolute;
   width: 130px;
-  height: 112px;
-  top: 935px;
-  left: 179px;
+  height: 52px;
   z-index: 64;
+  bottom: 30px;
+  right: 30px;
+  /* background: #d861bb; */
 }
 .frame-30 {
   display: flex;
@@ -931,6 +1017,7 @@ button {
     no-repeat center;
   background-size: 100% 100%;
   z-index: 70;
+  
 }
 .settings {
   flex-shrink: 0;
@@ -945,14 +1032,17 @@ button {
   text-align: left;
   white-space: nowrap;
   z-index: 71;
+  
 }
 .flex-column-acdd {
   position: absolute;
-  height: 791px;
-  top: 207px;
-  right: 22px;
-  left: 377px;
+  width: calc(100% - var(--sidebar-width));
+  height: 100%;
+  /* top: 207px;
+  right: 22px; */
+  left: var(--sidebar-width);
   z-index: 92;
+
 }
 .frame-34 {
   position: relative;
@@ -961,16 +1051,19 @@ button {
   margin: 0 0 0 80px;
   z-index: 92;
   overflow: hidden;
+
 }
 .group-35 {
   position: relative;
-  width: 147.425px;
-  height: 135.151px;
+  width: 100px;
+  height: 95px;
   margin: 39px 0 0 343px;
   background: url(../assets/images/7a34207c-b9f5-4735-85b7-d2aa5ffe4ea2.png)
     no-repeat center;
   background-size: 100% 100%;
   z-index: 93;
+
+
 }
 .frame-36 {
   position: relative;
@@ -1154,10 +1247,15 @@ button {
   align-items: center;
   justify-content: space-between;
   flex-wrap: nowrap;
-  position: relative;
-  width: 1041px;
-  height: 77px;
-  margin: 180px 0 0 0;
+  position: absolute;
+
+  width: 95%;
+  height: 72px;
+  bottom: 20px;
+
+  left: 50%;
+  transform: translateX(-50%);
+  /* margin: 180px 0 0 40px; */
   padding: 6px 30px 6px 30px;
   background: #ffffff;
   overflow: hidden;
@@ -1237,14 +1335,18 @@ button {
   flex-wrap: nowrap;
   flex-shrink: 0;
   gap: 10px;
-  position: relative;
-  width: 48px;
-  height: 48px;
+  position: absolute;
+  bottom: 36px;
+  right: 4%;
+  width: var(--button-radius);
+  height: var(--button-radius);
   padding: 10px 10px 10px 10px;
   background: #5661f6;
   z-index: 6;
   border-radius: 60px;
   box-shadow: 0 4px 8px 0 rgba(86, 97, 246, 0.25);
+  border: none;
+  cursor: pointer;
 }
 .vuesax-linear-send {
   flex-shrink: 0;
@@ -1271,6 +1373,40 @@ button {
     no-repeat center;
   background-size: 100% 100%;
   z-index: 9;
+}
+
+
+
+
+
+
+
+/* 聊天气泡框的通用样式 */
+.message-box {
+  display: block;  /* 让每个消息气泡成为块级元素，每个消息占一行 */
+  max-width: 70%;  /* 气泡框的最大宽度 */
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 10px;
+  word-wrap: break-word;  /* 当文本过长时，自动换行 */
+  white-space: pre-wrap;  /* 保留用户输入中的换行符 */
+  line-height: 1.5; /* 设置行高以保持消息的可读性 */
+}
+
+/* 用户输入的气泡框 */
+.message-box.user {
+  background-color: #d1e6ff;
+  align-self: flex-end;
+  text-align: right;  /* 文本靠右对齐 */
+  margin-left: auto;
+  width: auto;
+}
+
+/* 机器人回复的气泡框 */
+.message-box.bot {
+  background-color: #e0e0e0;
+  align-self: flex-start;
+  text-align: left;  /* 文本靠左对齐 */
 }
 
 

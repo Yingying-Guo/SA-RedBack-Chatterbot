@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import './user-interface.css';
+import './info_collect.css';
 
 export default function Main() {
   const [showNewInterface, setShowNewInterface] = useState(false);
@@ -12,11 +12,20 @@ export default function Main() {
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedYear, setSelectedYear] = useState('');
   const [inputText, setInputText] = useState('');
+  const [searchInputText, setSearchInputText] = useState('');
+
+  const [isConvStart, setIsConvStart] = useState(false);
+
+  const [isInputFocused, setIsInputFocused] = useState(false);
+
+
+
+  const [conversation, setConversation] = useState([]);
 
   useEffect(() => {
     if (showNewInterface) {
       // 导入第二个界面的 CSS
-      import('./infor-collection.css');
+      import('./user_chat.css');
     }
   }, [showNewInterface]);
 
@@ -60,10 +69,36 @@ export default function Main() {
     setInputText(event.target.value);
   };
 
+  const handleSearchInputChange = (event) => {
+    setSearchInputText(event.target.value);
+  };
+
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   const dates = Array.from({ length: 31 }, (_, i) => i + 1);
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: 100 }, (_, i) => currentYear - i);
+
+  const isButtonEnabled = () => {
+    return isRobotChecked && isDataShared && (selectedCountry || selectedGender || selectedMonth || selectedDate || selectedYear);
+  };
+
+
+  const handleConvStart = () => {
+    setIsConvStart(true);
+  };
+
+  const handleFocus = () => {
+    setIsInputFocused(true);
+  };
+
+  const handleSend = () => {
+    if (inputText.trim()) {
+      setConversation([...conversation, { type: 'user', text: inputText }]);
+      setInputText('');
+    }
+  };
+
+
 
   if (showNewInterface) {
     return (
@@ -80,7 +115,7 @@ export default function Main() {
               <div className='component'>
                 <button className='group'>
                   <div className='group-2'>
-                    <span className='new-chat'>New chat</span>
+                    {/* <span className='new-chat'>New chat</span> */}
                     <div className='vuesax-linear-add'>
                       <div className='vuesax-linear-add-3'>
                         <div className='add' />
@@ -89,14 +124,30 @@ export default function Main() {
                   </div>
                   <div className='rectangle' />
                 </button>
-                <div className='group-4'>
+
+                <div className='search-input'>
+                  <input
+                    className='search-type-input'
+                    value={searchInputText}
+                    onChange={handleSearchInputChange}
+                  // placeholder="What's in your mind?..."
+                  />
+                </div>
+
+
+                <button className='group-4'>
                   <div className='vuesax-linear-search-normal'>
                     <div className='vuesax-linear-search-normal-5'>
                       <div className='search-normal' />
                     </div>
                   </div>
                   <div className='rectangle-6' />
-                </div>
+                </button>
+
+
+
+
+
               </div>
               {/* 其他侧边栏内容 */}
             </div>
@@ -122,7 +173,19 @@ export default function Main() {
             </div>
           </div>
         </div>
+
+        {/* 对话框内容 */}
         <div className='flex-column-acdd'>
+
+        {conversation.map((message, index) => (
+            <div key={index} className={`message-box ${message.type}`}>
+              <span>{message.text}</span>
+            </div>
+          ))}
+
+
+
+        {!isConvStart && (
           <div className='frame-34'>
             <div className='group-35' />
             <div className='frame-36'>
@@ -153,13 +216,17 @@ export default function Main() {
               </div>
             </div>
           </div>
+          )}
           <div className='type'>
-            <input 
-              className='type-input' 
+            <input
+              className='type-input'
               value={inputText}
               onChange={handleInputChange}
-              // placeholder="What's in your mind?..."
+              onFocus={handleFocus}
+            // placeholder="What's in your mind?..."
             />
+
+{!isInputFocused && (
             <div className='frame-3e'>
               <div className='frame-3f'>
                 <div className='group-40'>
@@ -168,14 +235,22 @@ export default function Main() {
                 <span className='whats-mind'>What's in your mind?...</span>
               </div>
             </div>
-            <div className='frame-42'>
-              <div className='vuesax-linear-send'>
-                <div className='vuesax-linear-send-43'>
-                  <div className='send' />
-                </div>
+)}
+
+          </div>
+
+          <button
+            className='frame-42'
+            onClick={() => {
+              handleSend(); 
+              handleConvStart();
+            }}>
+            <div className='vuesax-linear-send'>
+              <div className='vuesax-linear-send-43'>
+                <div className='send' />
               </div>
             </div>
-          </div>
+          </button>
         </div>
       </div>
     );
@@ -193,11 +268,11 @@ export default function Main() {
           <div className='basic-info'>
             <div className='frame-2'>
               <span className='choose-country'>
-                Choose your region or country
+                Choose your region or country *
               </span>
               <div className='frame-3'>
                 <div className='text-field'>
-                  <select 
+                  <select
                     className='country-select'
                     value={selectedCountry}
                     onChange={handleCountryChange}
@@ -258,7 +333,7 @@ export default function Main() {
               </div>
             </div>
             <div className='frame-d'>
-              <span className='date-of-birth'>What's your date of birth?</span>
+              <span className='date-of-birth'>What's your date of birth? *</span>
               <div className='frame-e'>
                 <div className='text-field-f'>
                   <div className='frame-10'>
@@ -311,9 +386,9 @@ export default function Main() {
           <div className='frame-1d'>
             <div className='check-box'>
               <label className="custom-checkbox-label">
-                <input 
-                  type="checkbox" 
-                  className='custom-checkbox-input' 
+                <input
+                  type="checkbox"
+                  className='custom-checkbox-input'
                   checked={isDataShared}
                   onChange={handleDataShareCheck}
                 />
@@ -339,9 +414,9 @@ export default function Main() {
             </div>
             <div className='not-a-robot-checkbox'>
               <label className="custom-checkbox-label">
-                <input 
-                  type="checkbox" 
-                  className='custom-checkbox-input' 
+                <input
+                  type="checkbox"
+                  className='custom-checkbox-input'
                   checked={isRobotChecked}
                   onChange={handleRobotCheck}
                 />
@@ -352,17 +427,25 @@ export default function Main() {
             </div>
           </div>
           <div className='frame-25'>
-            <button className='button' onClick={handleStart}>
-              <div className='button-26'>
+
+
+
+            <button
+              className="button"
+              onClick={handleStart}
+              disabled={!isButtonEnabled()}  // Optional: Disable button when the conditions are not met
+            >
+              <div className={`button-26 ${isButtonEnabled() ? 'button-turn_blue' : ''}`}>
                 <div className='frame-27'>
                   <span className='sign-up-28'>Start</span>
                 </div>
               </div>
             </button>
+
             <div className='have-an-account-login'>
               <div className='have-an-account-login-29'>
-                <span 
-                  className='already-have-an-account' 
+                <span
+                  className='already-have-an-account'
                   onClick={handleSkip}
                   style={{ cursor: 'pointer' }}
                 >
