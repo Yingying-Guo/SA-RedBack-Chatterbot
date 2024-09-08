@@ -93,10 +93,22 @@ export default function Main() {
 
   const handleSend = () => {
     if (inputText.trim()) {
+      // 添加用户的消息到对话框
       setConversation([...conversation, { type: 'user', text: inputText }]);
+      
+      // 清空输入框
       setInputText('');
+  
+      // 模拟机器人回复
+      setTimeout(() => {
+        setConversation((prevConversation) => [
+          ...prevConversation,
+          { type: 'bot', text: '收到🫡' } // 机器人回复 "已收到"
+        ]);
+      }, 500); // 延迟500毫秒后回复，模拟真实聊天的效果
     }
   };
+  
 
 
   const handleKeyPress = (event) => {
@@ -197,7 +209,7 @@ export default function Main() {
 
               <img
                 className="avatar"
-                src={message.type === 'user' ? 'src/assets/images/Group 1437252836.png' : 'src/assets/images/Group 1437252836.png'}
+                src={message.type === 'user' ? 'src/assets/images/IMG_9007.jpg' : 'src/assets/images/Group 1437252836.png'}
                 alt={message.type === 'user' ? 'User Avatar' : 'Bot Avatar'}
               />
 
