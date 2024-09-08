@@ -1,27 +1,3 @@
-// document.addEventListener('DOMContentLoaded', () => {
-//     const chatbox = document.getElementById('chatbox');
-//     const userInput = document.getElementById('userInput');
-
-//     // Listen for user input
-//     userInput.addEventListener('keypress', function(event) {
-//         if (event.key === 'Enter') {
-//             const message = userInput.value.trim();
-//             if (message) {
-//                 appendMessage('user', message);  // Display the user's message in the chatbox
-//                 sendMessageToServer(message);    // Send the user's message to the server
-//                 userInput.value = '';            // Clear the input field
-//             }
-//         }
-//     });
-
-//     function appendMessage(role, content) {
-//         const messageElement = document.createElement('div');
-//         messageElement.classList.add('message', role);
-//         messageElement.textContent = `${role === 'user' ? 'You' : 'Assistant'}: ${content}`;
-//         chatbox.appendChild(messageElement);
-//         chatbox.scrollTop = chatbox.scrollHeight; // Auto-scroll to the bottom of the chatbox
-//     }
-// });
 
 document.addEventListener('DOMContentLoaded', () => {
     const chatbox = document.getElementById('chatbox');
@@ -43,11 +19,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // Select medium by default
     document.querySelector('[data-level="medium"]').classList.add('selected');
 
+    // 创建或获取 sessionId，存储在 sessionStorage 中
+    let sessionId = sessionStorage.getItem('sessionId');
+    if (!sessionId) {
+        sessionId = Date.now() + '-' + Math.random().toString(36).substring(7);  // 简单生成唯一 sessionId
+        sessionStorage.setItem('sessionId', sessionId);
+    }
+
     function sendMessage() {
         const message = userInput.value.trim();
         if (message) {
             appendMessage('user', message);
-            sendMessageToServer(message, selectedCreativityLevel);
+            sendMessageToServer(message, selectedCreativityLevel, sessionId);
             userInput.value = '';
         }
     }
@@ -68,13 +51,13 @@ document.addEventListener('DOMContentLoaded', () => {
         chatbox.scrollTop = chatbox.scrollHeight;
     }
 
-    function sendMessageToServer(message, creativityLevel) {
+    function sendMessageToServer(message, creativityLevel, sessionId) {
         fetch('/api/conversations', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ message, creativityLevel }),
+            body: JSON.stringify({ message, creativityLevel, sessionId }),  // 传递 sessionId
         })
         .then(response => response.json())
         .then(data => {
