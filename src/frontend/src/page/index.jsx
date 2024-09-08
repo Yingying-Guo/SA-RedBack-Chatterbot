@@ -99,6 +99,14 @@ export default function Main() {
   };
 
 
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      handleSend();
+      handleConvStart();
+    }
+  };
+
+
 
   if (showNewInterface) {
     return (
@@ -177,45 +185,61 @@ export default function Main() {
         {/* 对话框内容 */}
         <div className='flex-column-acdd'>
 
-        {conversation.map((message, index) => (
+          {/* {conversation.map((message, index) => (
             <div key={index} className={`message-box ${message.type}`}>
               <span>{message.text}</span>
+            </div>
+          ))} */}
+
+
+          {conversation.map((message, index) => (
+            <div key={index} className={`message-container ${message.type}`}>
+
+              <img
+                className="avatar"
+                src={message.type === 'user' ? 'src/assets/images/Group 1437252836.png' : 'src/assets/images/Group 1437252836.png'}
+                alt={message.type === 'user' ? 'User Avatar' : 'Bot Avatar'}
+              />
+
+              <div className={`message-box ${message.type}`}>
+                <span>{message.text}</span>
+              </div>
             </div>
           ))}
 
 
 
-        {!isConvStart && (
-          <div className='frame-34'>
-            <div className='group-35' />
-            <div className='frame-36'>
-              <div className='frame-37'>
-                <div className='clarity-plane-line' />
-                <span className='plan-a-relaxing-day'>Plan a relaxing day</span>
-              </div>
-              <div className='frame-38'>
-                <div className='group-39' />
-                <span className='nostalgia-kindergarden'>
-                  Nostalgia to a kindergarden
-                </span>
-              </div>
-              <div className='frame-3a'>
-                <div className='carbon-idea'>
-                  <div className='vector-3b' />
+          {!isConvStart && (
+            <div className='frame-34'>
+              <div className='group-35' />
+              <div className='frame-36'>
+                <div className='frame-37'>
+                  <div className='clarity-plane-line' />
+                  <span className='plan-a-relaxing-day'>Plan a relaxing day</span>
                 </div>
-                <span className='activities-friends-new-city'>
-                  Activities to make <br />
-                  friends in new city
-                </span>
-              </div>
-              <div className='frame-3c'>
-                <div className='projector-screen-light'>
-                  <div className='vector-3d' />
+                <div className='frame-38'>
+                  <div className='group-39' />
+                  <span className='nostalgia-kindergarden'>
+                    Nostalgia to a kindergarden
+                  </span>
                 </div>
-                <span className='software-project'>Software Project</span>
+                <div className='frame-3a'>
+                  <div className='carbon-idea'>
+                    <div className='vector-3b' />
+                  </div>
+                  <span className='activities-friends-new-city'>
+                    Activities to make <br />
+                    friends in new city
+                  </span>
+                </div>
+                <div className='frame-3c'>
+                  <div className='projector-screen-light'>
+                    <div className='vector-3d' />
+                  </div>
+                  <span className='software-project'>Software Project</span>
+                </div>
               </div>
             </div>
-          </div>
           )}
           <div className='type'>
             <input
@@ -223,26 +247,27 @@ export default function Main() {
               value={inputText}
               onChange={handleInputChange}
               onFocus={handleFocus}
+              onKeyPress={handleKeyPress}
             // placeholder="What's in your mind?..."
             />
 
-{!isInputFocused && (
-            <div className='frame-3e'>
-              <div className='frame-3f'>
-                <div className='group-40'>
-                  <div className='group-41' />
+            {!isInputFocused && (
+              <div className='frame-3e'>
+                <div className='frame-3f'>
+                  <div className='group-40'>
+                    <div className='group-41' />
+                  </div>
+                  <span className='whats-mind'>What's in your mind?...</span>
                 </div>
-                <span className='whats-mind'>What's in your mind?...</span>
               </div>
-            </div>
-)}
+            )}
 
           </div>
 
           <button
             className='frame-42'
             onClick={() => {
-              handleSend(); 
+              handleSend();
               handleConvStart();
             }}>
             <div className='vuesax-linear-send'>
