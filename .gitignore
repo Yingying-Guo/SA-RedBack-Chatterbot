@@ -8,6 +8,7 @@ __pycache__/
 # Ignore virtual environment directories
 venv/
 env/
+.env
 
 # Ignore node_modules for Node.js projects
 node_modules/
