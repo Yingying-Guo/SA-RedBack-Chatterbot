@@ -1,22 +1,25 @@
-# Ignore the .idea folder
-.idea/
-
-# Ignore Python cache files
-__pycache__/
-*.pyc
-
-# Ignore virtual environment directories
-venv/
-env/
-.env
-
-# Ignore node_modules for Node.js projects
-node_modules/
-
-# Ignore logs and temporary files
+# Logs
+logs
 *.log
-*.tmp
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# Ignore OS-specific files
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
 .DS_Store
-Thumbs.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.env

@@ -34,7 +34,10 @@ export default function Main() {
   const [isWaitingForBotResponse, setIsWaitingForBotResponse] = useState(false); // 新状态
 
   const messagesEndRef = useRef(null); // 引用消息列表底部
-  const [selectedLevel, setSelectedLevel] = useState('Medium');
+  
+  const [creativityLevel, setCreativityLevel] = useState('medium');
+
+  const [sessionId, setSessionId] = useState([]);
 
 
 
@@ -52,68 +55,6 @@ export default function Main() {
     }
   }, [conversation]);
 
-  {
-    // // 定义 handleRobotCheck 函数，用于处理机器人检测的勾选状态
-    // const handleRobotCheck = () => {
-    //   setIsRobotChecked(!isRobotChecked);
-    // };
-
-    // // 定义 handleDataShareCheck 函数，用于处理数据共享的勾选状态
-    // const handleDataShareCheck = () => {
-    //   setIsDataShared(!isDataShared);
-    // };
-
-    // // 定义 handleCountryChange 函数，用于处理国家选择的改变
-    // const handleCountryChange = (event) => {
-    //   setSelectedCountry(event.target.value);
-    // };
-
-    // // 定义 handleGenderChange 函数，用于处理性别选择的改变
-    // const handleGenderChange = (event) => {
-    //   setSelectedGender(event.target.value);
-    // };
-
-    // // 定义 handleMonthChange 函数，用于处理月份选择的改变
-    // const handleMonthChange = (event) => {
-    //   setSelectedMonth(event.target.value);
-    // };
-
-    // // Function to handle date changes
-    // const handleDateChange = (event) => {
-    //   // Set the selected date to the value of the event target
-    //   setSelectedDate(event.target.value);
-    // };
-
-    // // Function to handle year changes
-    // const handleYearChange = (event) => {
-    //   // Set the selected year to the value of the event target
-    //   setSelectedYear(event.target.value);
-    // };
-
-    // // Function to handle the start button
-    // const handleStart = () => {
-    //   // Set showNewInterface to true
-    //   setShowNewInterface(true);
-    // };
-
-    // // Function to handle the skip button
-    // const handleSkip = () => {
-    //   // Set showNewInterface to true
-    //   setShowNewInterface(true);
-    // };
-
-    // // Function to handle input changes
-    // const handleInputChange = (event) => {
-    //   // Set the inputText to the value of the event target
-    //   setInputText(event.target.value);
-    // };
-
-    // // Function to handle search input changes
-    // const handleSearchInputChange = (event) => {
-    //   // Set the searchInputText to the value of the event target
-    //   setSearchInputText(event.target.value);
-    // };
-  }
 
   // Declare an array of months
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -130,38 +71,17 @@ export default function Main() {
     return isRobotChecked && isDataShared && (selectedCountry || selectedGender || selectedMonth || selectedDate || selectedYear);
   };
 
-  {
-    // // 处理对话开始
-    // const handleConvStart = () => {
-    //   setIsConvStart(true);
-    // };
-
-    // // 处理输入框获得焦点
-    // const handleFocus = () => {
-    //   setIsInputFocused(true);
-    // };
-  }
-
-  // 处理发送消息
-  const handleSend = async () => {
-    if (inputText.trim()) {
-
-      setIsWaitingForBotResponse(true);
-      //TODO
-      // 添加用户的消息到对话框
-      setConversation([...conversation, { type: 'user', text: inputText }]);
-
-      // 清空输入框
-      setInputText('');
-
+  // Function to send the user's message to the server
+  const sendMessageToServer = async (message, creativityLevel, sessionId) => {
+    if (message.trim()) {
       try {
-        // 调用后端 API 获取 AI 回复
+        // 调用后端 API 获取助手回复
         const response = await fetch('http://127.0.0.1:3001/completion', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ text: inputText }),
+          body: JSON.stringify({ message: message, creativityLevel: creativityLevel, sessionId: sessionId }),
         });
 
         const data = await response.json();
@@ -170,11 +90,19 @@ export default function Main() {
         setTimeout(() => {
           setConversation((prevConversation) => [
             ...prevConversation,
-            { type: 'bot', text: data.message.content } // 从后端获取的 AI 回复
+            { type: 'bot', text: data.reply } // 从后端获取的 AI 回复
           ]);
-          setIsWaitingForBotResponse(false);
 
+          if(!sessionId) {
+            setSessionId(data.sessionId); // 更新会话 ID
+          } else if (data.sessionId !== sessionId) {
+            throw new Error('Session ID mismatch');
+          }
+          setSessionId(data.sessionId); // 更新会话 ID
+
+          setIsWaitingForBotResponse(false);
         }, 500); // 延迟500毫秒后回复，模拟真实聊天的效果
+
       } catch (error) {
         console.error('Error fetching completion:', error);
         // 模拟机器人回复
@@ -183,36 +111,33 @@ export default function Main() {
             ...prevConversation,
             { type: 'bot', text: 'Error retrieving response from the server.' }
           ]);
-          setIsWaitingForBotResponse(false);
 
+          setIsWaitingForBotResponse(false);
         }, 500); // 延迟500毫秒后回复，模拟真实聊天的效果
       }
-
-      // // 模拟机器人回复
-      // setTimeout(() => {
-      //   setConversation((prevConversation) => [
-      //     ...prevConversation,
-      //     { type: 'bot', text: 'Error retrieving response from the server.' }
-      //   ]);
-      // }, 500); // 延迟500毫秒后回复，模拟真实聊天的效果
     }
   };
 
+  // 处理发送消息
+  const handleSend = async () => {
+    if (inputText.trim()) {
 
+      //TODO
+      // 添加用户的消息到对话框
+      setConversation([...conversation, { type: 'user', text: inputText }]);
 
-  // // 处理按下键盘事件
-  // const handleKeyPress = (event) => {
-  //   if (event.key === 'Enter') {
-  //     handleSend();
-  //     () => setIsConvStart(true);
-  //   }
+      // 清空输入框
+      setInputText('');
+
+      await sendMessageToServer(inputText, creativityLevel, sessionId);
+    }
+  };
+
+  // const handleCreativityChange = (level) => {
+  //   setCreativityLevel(level);
   // };
 
-  const handleCreativityChange = (level) => {
-    setSelectedLevel(level);
-  };
-  
-  
+
 
 
   if (showNewInterface) {
@@ -280,7 +205,7 @@ export default function Main() {
 
 
 
-            
+
             {/* <div className='frame-2f'>
               <button className='frame-30'>
                 <div className='frame-31'>
@@ -300,20 +225,20 @@ export default function Main() {
 
 
 
-<div className="creativity-level-container">
-  <div className="creativity-level-header">Choose a creativity level</div>
-  <div className="creativity-level-buttons">
-    <button className={`creativity-level-button ${selectedLevel === 'creative' ? 'active' : ''}`} onClick={() => setSelectedLevel('creative')}>
-      Low
-    </button>
-    <button className={`creativity-level-button ${selectedLevel === 'balanced' ? 'active' : ''}`} onClick={() => setSelectedLevel('balanced')}>
-      Medium
-    </button>
-    <button className={`creativity-level-button ${selectedLevel === 'precise' ? 'active' : ''}`} onClick={() => setSelectedLevel('precise')}>
-      High
-    </button>
-  </div>
-</div>
+            <div className="creativity-level-container">
+              <div className="creativity-level-header">Choose a creativity level</div>
+              <div className="creativity-level-buttons">
+                <button className={`creativity-level-button ${creativityLevel === 'low' ? 'active' : ''}`} onClick={() => setCreativityLevel('low')}>
+                  Low
+                </button>
+                <button className={`creativity-level-button ${creativityLevel === 'medium' ? 'active' : ''}`} onClick={() => setCreativityLevel('medium')}>
+                  Medium
+                </button>
+                <button className={`creativity-level-button ${creativityLevel === 'high' ? 'active' : ''}`} onClick={() => setCreativityLevel('high')}>
+                  High
+                </button>
+              </div>
+            </div>
 
 
 
@@ -634,5 +559,3 @@ export default function Main() {
     </div>
   );
 }
-
-
