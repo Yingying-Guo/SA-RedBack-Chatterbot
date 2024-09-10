@@ -1,14 +1,26 @@
 :root {
+  --default-font-size: 16px;
   --default-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Ubuntu, "Helvetica Neue", Helvetica, Arial, "PingFang SC",
     "Hiragino Sans GB", "Microsoft Yahei UI", "Microsoft Yahei",
     "Source Han Sans CN", sans-serif;
     --sidebar-width: 300px;
     --button-radius: 40px;
+    --element-side-gap: 10px;
+}
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden; /* 禁止整个页面滚动 */
+  font-size: var(--default-font-size); /* Apply global font size */
+  font-family: var(--default-font-family);
 }
 
+input, select, textarea, button {
+  font-size: var(--default-font-size); /* Apply font size to form elements */
+}
 .main-container {
-  overflow: auto;
+  overflow: hidden;
 }
 
 .main-container,
@@ -26,12 +38,12 @@ button {
 .main-container {
   position: absolute;
   display: flex;
-  width: 99%;
-  height: 99%;
+  width: 100%;
+  height: 100%;
   margin: 0 auto;
   background: #f4f5f8;
-  overflow: auto;
-  border-radius: 32px;
+  overflow: hidden;
+  border-radius: 0px;
 }
 .flex-column-c {
   position: absolute;
@@ -155,7 +167,7 @@ button {
   width: var(--button-radius);
   height: 100%;
   top: 0px;
-  left: 10px;
+  left: var(--element-side-gap);
   cursor: pointer;
   background: transparent;
   border: none;
@@ -169,7 +181,6 @@ button {
   height: 24px;
   /* margin: 13px 0 0 66px; */
   z-index: 21;
-  
 }
 .new-chat {
   display: flex;
@@ -181,7 +192,6 @@ button {
   left: 27.72%;
   color: #ffffff;
   font-family: Inter, var(--default-font-family);
-  font-size: 16px;
   font-weight: 400;
   line-height: 24px;
   text-align: left;
@@ -197,7 +207,6 @@ button {
   top: 12.5%;
   left: 5%;
   z-index: 23;
-
 
 }
 .vuesax-linear-add-3 {
@@ -239,7 +248,7 @@ button {
   width: var(--button-radius);
   height: var(--button-radius);
   top: 0px;
-  right: 10px;
+  right: var(--element-side-gap);
   z-index: 26;
   border: none;
   cursor: pointer;
@@ -255,6 +264,7 @@ button {
   width: 100%; 
   height: 100%;
   z-index: 28;
+
 }
 
 .vuesax-linear-search-normal-5 {
@@ -300,7 +310,7 @@ button {
   height: var(--button-radius);
   top: 0;
 
-  right: 10px;
+  right: var(--element-side-gap);
   /* transform: translateX(-50%); */
   /* margin: 180px 0 0 40px; */
   padding: 6px 30px 6px 30px;
@@ -317,14 +327,16 @@ button {
 .search-type-input {
   flex-shrink: 0;
   position: absolute;
-  width: 1041px;
-  height: 77px;
+  width: 180px;
+  height: var(--button-radius);
   top: 0;
   left: 0;
   background: transparent;
   border: none;
   z-index: 10;
   outline: none;
+  
+  /* background-color: #000000; */
 }
 
 
@@ -1043,7 +1055,9 @@ button {
   right: 22px; */
   left: var(--sidebar-width);
   z-index: 92;
-
+  overflow-y: hidden;
+  padding-bottom: 80px;
+/* background-color: #000000; */
 }
 .frame-34 {
   position: relative;
@@ -1251,7 +1265,7 @@ button {
   position: absolute;
 
   width: 95%;
-  height: 72px;
+  height: 60px;
   bottom: 20px;
 
   left: 50%;
@@ -1266,8 +1280,8 @@ button {
 .type-input {
   flex-shrink: 0;
   position: absolute;
-  width: 1041px;
-  height: 77px;
+  width: calc(100% - var(--button-radius) - 30px);
+  height: 60px;
   top: 0;
   left: 0;
   background: transparent;
@@ -1336,13 +1350,35 @@ button {
   flex-wrap: nowrap;
   flex-shrink: 0;
   gap: 10px;
-  position: absolute;
-  bottom: 36px;
+  position: fixed;
+  bottom: 31px;
   right: 4%;
   width: var(--button-radius);
   height: var(--button-radius);
   padding: 10px 10px 10px 10px;
   background: #5661f6;
+  z-index: 6;
+  border-radius: 60px;
+  box-shadow: 0 4px 8px 0 rgba(86, 97, 246, 0.25);
+  border: none;
+  cursor: pointer;
+}
+
+.frame-42-grey {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  gap: 10px;
+  position: fixed;
+  bottom: 31px;
+  right: 4%;
+  width: var(--button-radius);
+  height: var(--button-radius);
+  padding: 10px 10px 10px 10px;
+  background: #e0e0e0;
+
   z-index: 6;
   border-radius: 60px;
   box-shadow: 0 4px 8px 0 rgba(86, 97, 246, 0.25);
@@ -1377,11 +1413,6 @@ button {
 }
 
 
-
-
-
-
-
 /* 聊天气泡框的通用样式 */
 .message-box {
   display: block; 
@@ -1393,13 +1424,14 @@ button {
   white-space: pre-wrap; 
   line-height: 1.5;
   clear: both; 
+
 }
 
 /* 用户输入的气泡框 */
 .message-box.user {
   background-color: #d1e6ff;
   float: right; 
-  text-align: right; 
+  text-align: left; 
   margin-left: auto;
   width: auto; 
   height:var(--button-radius)+4;
@@ -1410,7 +1442,8 @@ button {
   background-color: #e0e0e0;
   float: left; 
   text-align: left; 
-  width: auto; 
+  width: auto;
+  height:var(--button-radius)+4; 
 }
 
 
@@ -1442,9 +1475,75 @@ button {
   width: var(--button-radius);
   height: var(--button-radius);
   border-radius: 50%;
-  margin: 2px 10px;
+  margin: 2px var(--element-side-gap);
+}
+
+.message-column {
+  position: absolute;
+  width: 100%;
+  height: calc(100% - 100px);
+  left: 0;
+  z-index: 92;
+  overflow-y: auto;
 }
 
 
 
 
+
+.creativity-level-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 3px; /* 调整位置 */
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 15px;
+  /* border: 2px solid #e0e0e0; 更细的边框颜色 */
+  /* border-radius: 30px; 更加柔和的圆角 */
+  background-color: transparent;
+  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 调整阴影效果 */
+  z-index: 99;
+  width:299px;
+}
+
+.creativity-level-header {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.creativity-level-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* 控制按钮之间的间距 */
+}
+
+.creativity-level-button {
+  padding: 10px 20px; /* 调整按钮内边距，变得更大 */
+  border-radius: 10px; /* 圆角按钮 */
+  border: 1px solid #ccc;
+  background-color: #f5f5f5;
+  /* font-weight: bold; */
+  color: #333;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.creativity-level-button.active {
+  background-color: #5661f6;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 选中时添加阴影 */
+}
+
+.creativity-level-button:hover {
+  background-color: #e0e0e0; /* 按钮悬停时颜色变化 */
+}
+
+.creativity-level-button.active:hover {
+  background-color: #3c49c0; /* 选中按钮悬停时的颜色变化 */
+}
