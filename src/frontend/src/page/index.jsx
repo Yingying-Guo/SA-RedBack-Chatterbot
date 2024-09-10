@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './info_collect.css';
 
-export default function Main() {
+/* export default function Main() {
   // 定义 showNewInterface 状态，用于控制是否显示新界面
   const [showNewInterface, setShowNewInterface] = useState(false);
   // 定义 isRobotChecked 状态，用于记录是否勾选机器人检测
@@ -131,13 +131,120 @@ export default function Main() {
 
       await sendMessageToServer(inputText, creativityLevel, sessionId);
     }
+  }; */
+
+// const handleCreativityChange = (level) => {
+//   setCreativityLevel(level);
+// };
+
+export default function Main() {
+  // 定义状态
+  const [showNewInterface, setShowNewInterface] = useState(false);
+  const [isRobotChecked, setIsRobotChecked] = useState(false);
+  const [isDataShared, setIsDataShared] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState('');
+  const [selectedGender, setSelectedGender] = useState('');
+  const [selectedMonth, setSelectedMonth] = useState('');
+  const [selectedDate, setSelectedDate] = useState('');
+  const [selectedYear, setSelectedYear] = useState('');
+  const [inputText, setInputText] = useState('');
+  const [searchInputText, setSearchInputText] = useState('');
+  const [isConvStart, setIsConvStart] = useState(false);
+  const [isInputFocused, setIsInputFocused] = useState(false);
+  const [conversation, setConversation] = useState([]);
+  const [isWaitingForBotResponse, setIsWaitingForBotResponse] = useState(false);
+  const messagesEndRef = useRef(null);
+  const [creativityLevel, setCreativityLevel] = useState('medium');
+  const [sessionId, setSessionId] = useState([]);
+
+  // 导入第二个界面的 CSS
+  useEffect(() => {
+    if (showNewInterface) {
+      import('./user_chat.css');
+    }
+  }, [showNewInterface]);
+
+  // Scroll 到消息末端
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [conversation]);
+
+  // 从 localStorage 读取 conversation 数据
+  useEffect(() => {
+    const savedConversation = localStorage.getItem('conversation');
+    if (savedConversation) {
+      setConversation(JSON.parse(savedConversation));
+    }
+  }, []);
+
+  // 每次 conversation 变化时，将其保存到 localStorage
+  useEffect(() => {
+    localStorage.setItem('conversation', JSON.stringify(conversation));
+  }, [conversation]);
+
+  // 声明月份、日期和年份数组
+  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const dates = Array.from({ length: 31 }, (_, i) => i + 1);
+  const currentYear = new Date().getFullYear();
+  const years = Array.from({ length: 100 }, (_, i) => currentYear - i);
+
+  // 检查按钮是否启用
+  const isButtonEnabled = () => {
+    return isRobotChecked && isDataShared && (selectedCountry || selectedGender || selectedMonth || selectedDate || selectedYear);
   };
 
-  // const handleCreativityChange = (level) => {
-  //   setCreativityLevel(level);
-  // };
+  // 发送消息到服务器
+  const sendMessageToServer = async (message, creativityLevel, sessionId) => {
+    if (message.trim()) {
+      try {
+        const response = await fetch('http://127.0.0.1:3001/completion', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ message: message, creativityLevel: creativityLevel, sessionId: sessionId }),
+        });
 
+        const data = await response.json();
 
+        setTimeout(() => {
+          setConversation((prevConversation) => [
+            ...prevConversation,
+            { type: 'bot', text: data.reply }
+          ]);
+
+          if (!sessionId) {
+            setSessionId(data.sessionId);
+          } else if (data.sessionId !== sessionId) {
+            throw new Error('Session ID mismatch');
+          }
+          setSessionId(data.sessionId);
+          setIsWaitingForBotResponse(false);
+        }, 500);
+
+      } catch (error) {
+        console.error('Error fetching completion:', error);
+        setTimeout(() => {
+          setConversation((prevConversation) => [
+            ...prevConversation,
+            { type: 'bot', text: 'Error retrieving response from the server.' }
+          ]);
+          setIsWaitingForBotResponse(false);
+        }, 500);
+      }
+    }
+  };
+
+  // 处理消息发送
+  const handleSend = async () => {
+    if (inputText.trim()) {
+      setConversation([...conversation, { type: 'user', text: inputText }]);
+      setInputText('');
+      await sendMessageToServer(inputText, creativityLevel, sessionId);
+    }
+  };
 
 
   if (showNewInterface) {
@@ -257,6 +364,8 @@ export default function Main() {
           ))} */}
 
 
+
+
           <div className='message-column'>
             {conversation.map((message, index) => (
               <div key={index} className={`message-container ${message.type}`}>
@@ -276,8 +385,7 @@ export default function Main() {
           </div>
 
 
-
-          {!isConvStart && (
+          {conversation.length === 0 && !isConvStart && (
             <div className='frame-34'>
               <div className='group-35' />
               <div className='frame-36'>
@@ -309,6 +417,7 @@ export default function Main() {
               </div>
             </div>
           )}
+
 
           {/* TODO */}
           <div className='type'>
