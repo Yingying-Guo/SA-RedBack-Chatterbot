@@ -51,11 +51,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Create or retrieve a sessionId stored in sessionStorage
     let sessionId = sessionStorage.getItem('sessionId');
-    if (!sessionId) {
-        // If no sessionId exists, generate a unique one and store it in sessionStorage
-        sessionId = Date.now() + '-' + Math.random().toString(36).substring(7);  // Simple unique sessionId generation
-        sessionStorage.setItem('sessionId', sessionId);
-    }
+    // if (!sessionId) {
+    //     // If no sessionId exists, generate a unique one and store it in sessionStorage
+    //     sessionId = Date.now() + '-' + Math.random().toString(36).substring(7);  // Simple unique sessionId generation
+    //     sessionStorage.setItem('sessionId', sessionId);
+    // }
 
     // Function to handle sending the user's message
     function sendMessage() {
