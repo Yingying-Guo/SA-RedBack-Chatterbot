@@ -2,7 +2,7 @@ import { OpenAI } from "openai";
 import dotenv from 'dotenv';
 import express from 'express';
 import bodyParser from 'body-parser';
-import { v4 as uuidv4 } from 'uuid';  // If the client doesn't provide a sessionId, generate a new one
+import { Snowflake } from 'node-snowflake';  // Import Snowflake from node-snowflake
 import { lowCreativityMessage, mediumCreativityMessage, highCreativityMessage, guidelines } from './prompt.js';
 
 dotenv.config();  // Load environment variables from the .env file
@@ -73,9 +73,9 @@ app.post('/api/conversations', async (req, res) => {
         return res.status(400).json({ error: 'Invalid input type. Expected a string.' });
     }
 
-    // If no sessionId is provided by the client, generate a new one
+    // If no sessionId is provided by the client, generate a new one using Snowflake
     if (!sessionId) {
-        sessionId = uuidv4();  // Generate a unique sessionId using uuid
+        sessionId = Snowflake.nextId();  // Generate a unique sessionId using Snowflake
     }
 
     // Initialize conversation history if it's the first message in the session
