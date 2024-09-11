@@ -152,12 +152,11 @@ export default function Main() {
                 </div>
 
                 {/* Conversation 列表部分，放在搜索框后面 */}
-                <div className="conversation-section">
-                  {/* <h2>Conversations</h2> */}
+                {/* <div className="conversation-section">
                   <ul>
                     <li onClick={() => alert('Conversation 1 clicked!')}>Conversation 1</li>
                   </ul>
-                </div>
+                </div> */}
 
 
                 <button className='group-4'>
