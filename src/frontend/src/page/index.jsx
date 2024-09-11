@@ -19,7 +19,7 @@ export default function Main() {
   const [isWaitingForBotResponse, setIsWaitingForBotResponse] = useState(false);
   const messagesEndRef = useRef(null);
   const [creativityLevel, setCreativityLevel] = useState('medium');
-  const [sessionId, setSessionId] = useState([]);
+  const [sessionId, setSessionId] = useState('');
 
   // 导入第二个界面的 CSS
   useEffect(() => {
@@ -149,6 +149,14 @@ export default function Main() {
                     onChange={(e) => setSearchInputText(e.target.value)}
                   // placeholder="What's in your mind?..."
                   />
+                </div>
+
+                {/* Conversation 列表部分，放在搜索框后面 */}
+                <div className="conversation-section">
+                  {/* <h2>Conversations</h2> */}
+                  <ul>
+                    <li onClick={() => alert('Conversation 1 clicked!')}>Conversation 1</li>
+                  </ul>
                 </div>
 
 
