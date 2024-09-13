@@ -20,6 +20,7 @@ export default function Main() {
   const messagesEndRef = useRef(null);
   const [creativityLevel, setCreativityLevel] = useState('medium');
   const [sessionId, setSessionId] = useState('');
+  const [DoB, setDoB] = useState('');
 
   // 导入第二个界面的 CSS
   useEffect(() => {
@@ -48,6 +49,15 @@ export default function Main() {
     localStorage.setItem('conversation', JSON.stringify(conversation));
   }, [conversation]);
 
+  // Update DoB whenever selectedYear, selectedMonth, or selectedDate changes
+  useEffect(() => {
+    if (selectedYear && selectedMonth && selectedDate) {
+      const formattedDoB = `${selectedYear}-${months.indexOf(selectedMonth) + 1}-${selectedDate}`;
+      setDoB(formattedDoB);
+      console.log('DoB:', formattedDoB); // Output the DoB
+    }
+  }, [selectedYear, selectedMonth, selectedDate]);
+
   // 声明月份、日期和年份数组
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   const dates = Array.from({ length: 31 }, (_, i) => i + 1);
@@ -63,7 +73,7 @@ export default function Main() {
   const sendMessageToServer = async (message, creativityLevel, sessionId) => {
     if (message.trim()) {
       try {
-        const response = await fetch('http://127.0.0.1:3001/completion', {
+        const response = await fetch('http://127.0.0.1:3001/openai/completion', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -86,7 +96,7 @@ export default function Main() {
             // 如果 sessionId 已存在但不匹配，抛出错误
             throw new Error('Session ID mismatch');
           }
-          setSessionId(data.sessionId);
+          // setSessionId(data.sessionId);
           setIsWaitingForBotResponse(false);
         }, 10);
 
@@ -112,6 +122,45 @@ export default function Main() {
     }
   };
 
+  // 发送用户消息到服务器
+  const sendUserInformationToServer = async (location, gender, DoB, sessionId) => {
+    try {
+      const response = await fetch('http://127.0.0.1:3001/db/user-info', { // 假设 API 路径为 /user-info
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          location: location,
+          gender: gender,
+          DoB: DoB,
+          sessionId: sessionId,
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+  
+      // 处理服务器响应（如有需要）
+      const data = await response.json();
+      console.log('Server response:', data.message);
+
+      if (!sessionId) {
+        // 如果 sessionId 不存在，则设置新的 sessionId
+        setSessionId(data.sessionId);
+      }
+  
+    } catch (error) {
+      console.error('Error sending user information:', error);
+    }
+  };
+
+  // 处理用户信息页
+  const handleStartChat = async () => {
+    // console.log('DoB:', DoB);
+    await sendUserInformationToServer(selectedCountry, selectedGender, DoB, sessionId);
+  };
 
   if (showNewInterface) {
     return (
@@ -361,7 +410,7 @@ export default function Main() {
                     onChange={(e) => setSelectedCountry(e.target.value)}
                   >
                     <option value="">Select a country</option>
-                    <option value="australia">Australia</option>
+                    <option value="Australia">Australia</option>
                     {/* Add more countries here as needed */}
                   </select>
                 </div>
@@ -514,7 +563,10 @@ export default function Main() {
 
             <button
               className="button"
-              onClick={() => setShowNewInterface(true)}
+              onClick={() => {
+                handleStartChat();
+                setShowNewInterface(true);
+              }}
               disabled={!isButtonEnabled()}  // Optional: Disable button when the conditions are not met
             >
               <div className={`button-26 ${isButtonEnabled() ? 'button-turn_blue' : ''}`}>
@@ -528,7 +580,10 @@ export default function Main() {
               <div className='have-an-account-login-29'>
                 <span
                   className='already-have-an-account'
-                  onClick={() => setShowNewInterface(true)}
+                  onClick={() => {
+                    handleStartChat();
+                    setShowNewInterface(true); 
+                  }}
                   style={{ cursor: 'pointer' }}
                 >
                   skip
