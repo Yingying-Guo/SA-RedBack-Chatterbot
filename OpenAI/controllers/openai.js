@@ -7,7 +7,12 @@ const openai = new OpenAI({ apiKey: process.env.VITE_OPENAI_API_KEY });
 
 // sessionId
 import { Snowflake } from 'node-snowflake';  // Import Snowflake from node-snowflake
-import { lowCreativityMessage, mediumCreativityMessage, highCreativityMessage, guidelines } from './prompt/prompt.js';
+import { lowCreativityMessage, mediumCreativityMessage, highCreativityMessage, guidelines } from '../prompt/prompt.js';
+
+// Import moment-timezone using ES Module syntax
+import moment from 'moment-timezone';
+
+import { createOpenAIChat } from '../../Database/controllers/db.controller.js';
 
 // Create a Map to store conversation history by sessionId
 const conversationHistory = new Map();
@@ -54,7 +59,7 @@ function getTemperatureForCreativityLevel(creativityLevel) {
  * POST /completion
  * Handles a conversation request, generates AI responses, and returns the updated conversation.
  */
-export const getCompletion = async (userInput, creativityLevel, sessionId) => {
+const getCompletion = async (userInput, creativityLevel, sessionId) => {
     const temperature = getTemperatureForCreativityLevel(creativityLevel);  // Set temperature based on creativity level
 
     // Validate input: userInput must be a string
@@ -95,6 +100,7 @@ export const getCompletion = async (userInput, creativityLevel, sessionId) => {
         });
 
         const assistantReply = response.choices[0].message.content;  // Extract the assistant's reply
+        const timestamp = response.created;  // Extract the Unix timestamp of the response
 
         // Add the assistant's reply to the conversation history
         conversation.push({
@@ -110,6 +116,10 @@ export const getCompletion = async (userInput, creativityLevel, sessionId) => {
         console.log("Temperature:", temperature);  // Log the temperature used
         console.log("Assistant:", assistantReply);  // Log the assistant's response
         console.log("Response:", response);  // Log the full API response
+        // console.log("Timestamp:", moment.unix(timestamp).tz('Australia/Sydney').format('YYYY-MM-DD HH:mm:ss z')); // 添加时区简称 'z' 或完整偏移 'ZZ' // 使用 moment-timezone 将 Unix 时间戳转换为悉尼时间，并添加时区表示
+
+        // 保存对话记录到数据库
+        await createOpenAIChat(chatID, response.created, creativityLevel, userInput, assistantReply, sessionId);
 
         // Send the assistant's reply and the sessionId back to the client
         const myMap = new Map();
@@ -121,8 +131,39 @@ export const getCompletion = async (userInput, creativityLevel, sessionId) => {
     } catch (error) {
         // Handle errors during the OpenAI interaction
         console.error("Error during interaction:", error.message);
-        throw new Error('Internal Server Error'); // Return an error response to the client
+        throw new Error(error.message); // Return an error response to the client
         //   res.status(500).json({ error: 'Internal Server Error' });  
     }
 };
 
+/**
+ * POST /completion
+ * Handles a conversation request, generates AI responses, and returns the updated conversation.
+ */
+export const handleConversation = async (req, res) => {
+    const userInput = req.body.message;  // User's input message
+    const creativityLevel = req.body.creativityLevel || 'medium';  // Get creativity level from request, default to medium
+    let sessionId = req.body.sessionId;  // Get sessionId from request (if provided)
+
+    try {
+        // Send the conversation to the OpenAI API and get the assistant's reply
+        const response = await getCompletion(userInput, creativityLevel, sessionId); // Pass sessionId to the getCompletion function
+
+        const assistantReply = response.get('reply');  // Extract the assistant's reply
+
+        sessionId = response.get('sessionId');  // Get the updated sessionId from the response
+
+        // Send the assistant's reply and the sessionId back to the client
+        res.json({ reply: assistantReply, sessionId: sessionId });
+
+    } catch (error) {
+        // Handle errors during the OpenAI interaction
+        console.error("Error during interaction:", error.message);
+        if (error.message === 'Invalid input type. Expected a string.') {
+            return res.status(400).json({ error: 'Invalid input type. Expected a string.' });
+        } else {
+            // Return an error response to the client
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
+    }
+};
