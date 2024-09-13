@@ -1,142 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './info_collect.css';
 
-/* export default function Main() {
-  // 定义 showNewInterface 状态，用于控制是否显示新界面
-  const [showNewInterface, setShowNewInterface] = useState(false);
-  // 定义 isRobotChecked 状态，用于记录是否勾选机器人检测
-  const [isRobotChecked, setIsRobotChecked] = useState(false);
-  // 定义 isDataShared 状态，用于记录是否勾选数据共享
-  const [isDataShared, setIsDataShared] = useState(false);
-  // 定义 selectedCountry 状态，用于记录选择的的国家
-  const [selectedCountry, setSelectedCountry] = useState('');
-  // 定义 selectedGender 状态，用于记录选择的性别
-  const [selectedGender, setSelectedGender] = useState('');
-  // 定义 selectedMonth 状态，用于记录选择的月份
-  const [selectedMonth, setSelectedMonth] = useState('');
-  // 定义 selectedDate 状态，用于记录选择的日期
-  const [selectedDate, setSelectedDate] = useState('');
-  // 定义 selectedYear 状态，用于记录选择的年份
-  const [selectedYear, setSelectedYear] = useState('');
-
-
-  // 定义 inputText 状态，用于记录输入的文本
-  const [inputText, setInputText] = useState('');
-  // 定义 searchInputText 状态，用于记录搜索的文本
-  const [searchInputText, setSearchInputText] = useState('');
-  // 定义 isConvStart 状态，用于记录是否开始对话
-  const [isConvStart, setIsConvStart] = useState(false);
-  // 定义 isInputFocused 状态，用于记录输入框是否获得焦点
-  const [isInputFocused, setIsInputFocused] = useState(false);
-  // 定义 conversation 状态，用于记录对话内容
-  const [conversation, setConversation] = useState([]);
-
-  const [isWaitingForBotResponse, setIsWaitingForBotResponse] = useState(false); // 新状态
-
-  const messagesEndRef = useRef(null); // 引用消息列表底部
-  
-  const [creativityLevel, setCreativityLevel] = useState('medium');
-
-  const [sessionId, setSessionId] = useState([]);
-
-
-
-  // 导入第二个界面的 CSS
-  useEffect(() => {
-    if (showNewInterface) {
-      // 导入第二个界面的 CSS
-      import('./user_chat.css');
-    }
-  }, [showNewInterface]);
-
-  useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [conversation]);
-
-
-  // Declare an array of months
-  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  // Declare an array of dates
-  const dates = Array.from({ length: 31 }, (_, i) => i + 1);
-  // Declare the current year
-  const currentYear = new Date().getFullYear();
-  // Declare an array of years
-  const years = Array.from({ length: 100 }, (_, i) => currentYear - i);
-
-  // Function to check if button is enabled
-  const isButtonEnabled = () => {
-    // Return true if robot is checked, data is shared, and at least one of the following is selected: country, gender, month, date, or year
-    return isRobotChecked && isDataShared && (selectedCountry || selectedGender || selectedMonth || selectedDate || selectedYear);
-  };
-
-  // Function to send the user's message to the server
-  const sendMessageToServer = async (message, creativityLevel, sessionId) => {
-    if (message.trim()) {
-      try {
-        // 调用后端 API 获取助手回复
-        const response = await fetch('http://127.0.0.1:3001/completion', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ message: message, creativityLevel: creativityLevel, sessionId: sessionId }),
-        });
-
-        const data = await response.json();
-
-        // 模拟机器人回复
-        setTimeout(() => {
-          setConversation((prevConversation) => [
-            ...prevConversation,
-            { type: 'bot', text: data.reply } // 从后端获取的 AI 回复
-          ]);
-
-          if(!sessionId) {
-            setSessionId(data.sessionId); // 更新会话 ID
-          } else if (data.sessionId !== sessionId) {
-            throw new Error('Session ID mismatch');
-          }
-          setSessionId(data.sessionId); // 更新会话 ID
-
-          setIsWaitingForBotResponse(false);
-        }, 500); // 延迟500毫秒后回复，模拟真实聊天的效果
-
-      } catch (error) {
-        console.error('Error fetching completion:', error);
-        // 模拟机器人回复
-        setTimeout(() => {
-          setConversation((prevConversation) => [
-            ...prevConversation,
-            { type: 'bot', text: 'Error retrieving response from the server.' }
-          ]);
-
-          setIsWaitingForBotResponse(false);
-        }, 500); // 延迟500毫秒后回复，模拟真实聊天的效果
-      }
-    }
-  };
-
-  // 处理发送消息
-  const handleSend = async () => {
-    if (inputText.trim()) {
-
-      //TODO
-      // 添加用户的消息到对话框
-      setConversation([...conversation, { type: 'user', text: inputText }]);
-
-      // 清空输入框
-      setInputText('');
-
-      await sendMessageToServer(inputText, creativityLevel, sessionId);
-    }
-  }; */
-
-// const handleCreativityChange = (level) => {
-//   setCreativityLevel(level);
-// };
-
 export default function Main() {
   // 定义状态
   const [showNewInterface, setShowNewInterface] = useState(false);
@@ -216,13 +80,15 @@ export default function Main() {
           ]);
 
           if (!sessionId) {
+            // 如果 sessionId 不存在，则设置新的 sessionId
             setSessionId(data.sessionId);
           } else if (data.sessionId !== sessionId) {
+            // 如果 sessionId 已存在但不匹配，抛出错误
             throw new Error('Session ID mismatch');
           }
           setSessionId(data.sessionId);
           setIsWaitingForBotResponse(false);
-        }, 500);
+        }, 10);
 
       } catch (error) {
         console.error('Error fetching completion:', error);
@@ -232,7 +98,7 @@ export default function Main() {
             { type: 'bot', text: 'Error retrieving response from the server.' }
           ]);
           setIsWaitingForBotResponse(false);
-        }, 500);
+        }, 10);
       }
     }
   };
@@ -286,12 +152,11 @@ export default function Main() {
                 </div>
 
                 {/* Conversation 列表部分，放在搜索框后面 */}
-                <div className="conversation-section">
-                  {/* <h2>Conversations</h2> */}
+                {/* <div className="conversation-section">
                   <ul>
                     <li onClick={() => alert('Conversation 1 clicked!')}>Conversation 1</li>
                   </ul>
-                </div>
+                </div> */}
 
 
                 <button className='group-4'>
