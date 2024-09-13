@@ -4,13 +4,14 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start:backend": "nodemon server.js",
+    "start": "concurrently --kill-others-on-fail \"npm run start:backend\" \"npm run start:frontend\"",
+    "start:backend": "nodemon Server/server.js",
+    "dev": "node Run/start.js",
     "start:frontend": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start:all": "node start.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "axios": "^1.7.6",
@@ -32,6 +33,7 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
+    "concurrently": "^9.0.1",
     "eslint": "^9.9.0",
     "eslint-plugin-react": "^7.35.0",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",

@@ -1,4 +1,4 @@
-import { User, OpenAIChat } from '../models/product.model.js';
+import { User, OpenAIChat } from '../models/db.model.js';
 
 // Create a user record
 const createUser = async (req, res) => {

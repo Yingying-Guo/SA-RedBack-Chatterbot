@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-import { createUser, createOpenAIChat, getOpenAIChatByUser } from '../controllers/product.controller.js';
+import { createUser, createOpenAIChat, getOpenAIChatByUser } from '../controllers/db.controller.js';
 
 // add a user
 router.post('/', createUser);

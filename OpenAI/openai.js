@@ -1,21 +1,13 @@
-import { OpenAI } from "openai";
+// openai
 import dotenv from 'dotenv';
-import express from 'express';
-import bodyParser from 'body-parser';
+dotenv.config();
+
+import OpenAI from "openai";
+const openai = new OpenAI({ apiKey: process.env.VITE_OPENAI_API_KEY });
+
+// sessionId
 import { Snowflake } from 'node-snowflake';  // Import Snowflake from node-snowflake
-import { lowCreativityMessage, mediumCreativityMessage, highCreativityMessage, guidelines } from './prompt.js';
-
-dotenv.config();  // Load environment variables from the .env file
-
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,  // Set the OpenAI API key from the environment variable
-});
-
-const app = express();
-const port = 3000;
-
-app.use(bodyParser.json());  // Middleware to parse JSON request bodies
-app.use(express.static('public'));  // Serve static files from the 'public' directory
+import { lowCreativityMessage, mediumCreativityMessage, highCreativityMessage, guidelines } from './prompt/prompt.js';
 
 // Create a Map to store conversation history by sessionId
 const conversationHistory = new Map();
@@ -59,18 +51,16 @@ function getTemperatureForCreativityLevel(creativityLevel) {
 }
 
 /**
- * POST /api/conversations
+ * POST /completion
  * Handles a conversation request, generates AI responses, and returns the updated conversation.
  */
-app.post('/api/conversations', async (req, res) => {
-    const userInput = req.body.message;  // User's input message
-    const creativityLevel = req.body.creativityLevel || 'medium';  // Get creativity level from request, default to medium
-    let sessionId = req.body.sessionId;  // Get sessionId from request (if provided)
+export const getCompletion = async (userInput, creativityLevel, sessionId) => {
     const temperature = getTemperatureForCreativityLevel(creativityLevel);  // Set temperature based on creativity level
 
     // Validate input: userInput must be a string
     if (typeof userInput !== 'string') {
-        return res.status(400).json({ error: 'Invalid input type. Expected a string.' });
+        throw new Error('Invalid input type. Expected a string.');
+        //   return res.status(400).json({ error: 'Invalid input type. Expected a string.' });
     }
 
     // If no sessionId is provided by the client, generate a new one using Snowflake
@@ -122,16 +112,17 @@ app.post('/api/conversations', async (req, res) => {
         console.log("Response:", response);  // Log the full API response
 
         // Send the assistant's reply and the sessionId back to the client
-        res.json({ reply: assistantReply, sessionId: sessionId });
+        const myMap = new Map();
+        myMap.set('reply', assistantReply); // Add the assistant's reply to the map
+        myMap.set('sessionId', sessionId); // Add the sessionId to the map
+        //   res.json({ reply: assistantReply, sessionId: sessionId });
+        return myMap;
 
     } catch (error) {
         // Handle errors during the OpenAI interaction
         console.error("Error during interaction:", error.message);
-        res.status(500).json({ error: 'Internal Server Error' });  // Return an error response to the client
+        throw new Error('Internal Server Error'); // Return an error response to the client
+        //   res.status(500).json({ error: 'Internal Server Error' });  
     }
-});
+};
 
-// Start the Express server
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
-});
