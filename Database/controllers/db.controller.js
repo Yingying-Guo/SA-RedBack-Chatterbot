@@ -64,12 +64,12 @@ import moment from 'moment-timezone';
 const createOpenAIChat = async (chatID, timestamp, creativityLevel, userInput, response, userID) => {
   try {
     // 判断 userID 是否存在
-    if (!req.body.userID) {
+    if (!userID) {
       return res.status(400).json({ message: "userID is required." });
     }
 
     // 判断 userID 是否为有效字符串（此处你可以加入其他格式校验逻辑，如UUID格式）
-    if (typeof req.body.userID !== 'string' || req.body.userID.trim() === '') {
+    if (typeof userID !== 'string' || userID.trim() === '') {
       return res.status(400).json({ message: "Invalid userID format." });
     }
 

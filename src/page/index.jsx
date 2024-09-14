@@ -101,7 +101,7 @@ export default function Main() {
         }, 10);
 
       } catch (error) {
-        console.error('Error fetching completion:', error);
+        console.log('Error fetching completion:', error);
         setTimeout(() => {
           setConversation((prevConversation) => [
             ...prevConversation,

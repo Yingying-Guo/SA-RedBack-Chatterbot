@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "concurrently --kill-others-on-fail \"npm run start:backend\" \"npm run start:frontend\"",
+    "prestart": "npm install", 
+    "start": "npm install && concurrently --kill-others-on-fail \"npm run start:backend\" \"npm run start:frontend\"",
     "start:backend": "nodemon Server/server.js",
     "dev": "node Run/start.js",
     "start:frontend": "vite",

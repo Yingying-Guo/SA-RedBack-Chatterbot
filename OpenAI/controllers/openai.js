@@ -101,6 +101,7 @@ const getCompletion = async (userInput, creativityLevel, sessionId) => {
 
         const assistantReply = response.choices[0].message.content;  // Extract the assistant's reply
         const timestamp = response.created;  // Extract the Unix timestamp of the response
+        const chatID = response.id;  // Extract the chat ID from the response
 
         // Add the assistant's reply to the conversation history
         conversation.push({
@@ -119,7 +120,7 @@ const getCompletion = async (userInput, creativityLevel, sessionId) => {
         // console.log("Timestamp:", moment.unix(timestamp).tz('Australia/Sydney').format('YYYY-MM-DD HH:mm:ss z')); // 添加时区简称 'z' 或完整偏移 'ZZ' // 使用 moment-timezone 将 Unix 时间戳转换为悉尼时间，并添加时区表示
 
         // 保存对话记录到数据库
-        await createOpenAIChat(chatID, response.created, creativityLevel, userInput, assistantReply, sessionId);
+        await createOpenAIChat(chatID, timestamp, creativityLevel, userInput, assistantReply, sessionId);
 
         // Send the assistant's reply and the sessionId back to the client
         const myMap = new Map();
@@ -154,7 +155,7 @@ export const handleConversation = async (req, res) => {
         sessionId = response.get('sessionId');  // Get the updated sessionId from the response
 
         // Send the assistant's reply and the sessionId back to the client
-        res.json({ reply: assistantReply, sessionId: sessionId });
+        res.status(200).json({ reply: assistantReply, sessionId: sessionId });
 
     } catch (error) {
         // Handle errors during the OpenAI interaction
