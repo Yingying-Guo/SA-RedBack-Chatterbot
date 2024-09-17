@@ -4,21 +4,30 @@
     Ubuntu, "Helvetica Neue", Helvetica, Arial, "PingFang SC",
     "Hiragino Sans GB", "Microsoft Yahei UI", "Microsoft Yahei",
     "Source Han Sans CN", sans-serif;
-    --sidebar-width: 300px;
-    --button-radius: 40px;
-    --element-side-gap: 10px;
+  --sidebar-width: 300px;
+  --button-radius: 40px;
+  --element-side-gap: 10px;
 }
-html, body {
+
+html,
+body {
   height: 100%;
   margin: 0;
-  overflow: hidden; /* 禁止整个页面滚动 */
-  font-size: var(--default-font-size); /* Apply global font size */
+  overflow: hidden;
+  /* Disable whole page scrolling */
+  font-size: var(--default-font-size);
+  /* Apply global font size */
   font-family: var(--default-font-family);
 }
 
-input, select, textarea, button {
-  font-size: var(--default-font-size); /* Apply font size to form elements */
+input,
+select,
+textarea,
+button {
+  font-size: var(--default-font-size);
+  /* Apply font size to form elements */
 }
+
 .main-container {
   overflow: hidden;
 }
@@ -45,22 +54,16 @@ button {
   overflow: hidden;
   border-radius: 0px;
 }
+
 .flex-column-c {
   position: absolute;
-  /* top: 0;
-  right: 75%;
-  bottom: 43px;
-  left: 0; */
   width: var(--sidebar-width);
   height: 100%;
-
   z-index: 89;
   left: 0%;
-  
-
   display: flex;
-  /* background-color: #ff0000; */
 }
+
 .extended-fab {
   display: flex;
   flex-direction: column;
@@ -83,6 +86,7 @@ button {
   border-radius: 16px;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
 }
+
 .state-layer {
   display: flex;
   align-items: center;
@@ -99,6 +103,7 @@ button {
   padding: 16px 16px 16px 16px;
   z-index: 90;
 }
+
 .label-text-en {
   flex-shrink: 0;
   flex-basis: auto;
@@ -114,6 +119,7 @@ button {
   letter-spacing: 0.1px;
   z-index: 91;
 }
+
 .frame {
   display: flex;
   align-items: flex-start;
@@ -128,17 +134,15 @@ button {
   transform: translate(-50%, -50%);
   z-index: 11;
 }
+
 .subtract {
   flex-shrink: 0;
   position: relative;
   width: 348px;
   height: 100%;
-  /* background: url(../assets/images/6b9eb27c-cda9-4819-a087-6e77d8944d2e.png)
-    no-repeat center;
-  background-size: cover; */
-  /* background-color: #f2ff00; */
   z-index: 12;
 }
+
 .frame-1 {
   display: flex;
   flex-direction: column;
@@ -153,15 +157,15 @@ button {
   left: 0;
   z-index: 17;
 }
+
 .component {
   flex-shrink: 0;
   position: relative;
   width: var(--sidebar-width);
   height: var(--button-radius);
   z-index: 18;
-
-
 }
+
 .group {
   position: absolute;
   width: var(--button-radius);
@@ -172,16 +176,16 @@ button {
   background: transparent;
   border: none;
   z-index: 19;
-
 }
+
 .group-2 {
   position: relative;
 
   width: 101px;
   height: 24px;
-  /* margin: 13px 0 0 66px; */
   z-index: 21;
 }
+
 .new-chat {
   display: flex;
   align-items: flex-start;
@@ -197,7 +201,6 @@ button {
   text-align: left;
   white-space: nowrap;
   z-index: 22;
-
 }
 
 .vuesax-linear-add {
@@ -207,8 +210,8 @@ button {
   top: 12.5%;
   left: 5%;
   z-index: 23;
-
 }
+
 .vuesax-linear-add-3 {
   position: absolute;
   width: 18px;
@@ -216,7 +219,6 @@ button {
   top: 0;
   left: 0;
   z-index: 24;
-
 }
 
 .add {
@@ -229,8 +231,8 @@ button {
     no-repeat center;
   background-size: 100% 100%;
   z-index: 25;
-
 }
+
 .rectangle {
   position: absolute;
   width: 100%;
@@ -243,6 +245,7 @@ button {
   z-index: 20;
   border-radius: 69px;
 }
+
 .group-4 {
   position: absolute;
   width: var(--button-radius);
@@ -253,7 +256,6 @@ button {
   border: none;
   cursor: pointer;
   background-color: transparent;
-
 }
 
 .vuesax-linear-search-normal {
@@ -261,15 +263,14 @@ button {
   justify-content: center;
   align-items: center;
   position: relative;
-  width: 100%; 
+  width: 100%;
   height: 100%;
   z-index: 28;
-
 }
 
 .vuesax-linear-search-normal-5 {
   position: relative;
-  width: 18px; 
+  width: 18px;
   height: 18px;
   z-index: 29;
 }
@@ -277,7 +278,8 @@ button {
 .search-normal {
   width: 100%;
   height: 100%;
-  background: url(../assets/images/01568d7a-7d17-4268-a1ba-b4029092e167.png) no-repeat center;
+  background: url(../assets/images/01568d7a-7d17-4268-a1ba-b4029092e167.png)
+    no-repeat center;
   background-size: contain;
   z-index: 30;
 }
@@ -293,36 +295,22 @@ button {
   border-radius: 50%;
 }
 
-
-
-
-
-
-
 .search-input {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: nowrap;
   position: absolute;
-
   width: 220px;
   height: var(--button-radius);
   top: 0;
-
   right: var(--element-side-gap);
-  /* transform: translateX(-50%); */
-  /* margin: 180px 0 0 40px; */
   padding: 6px 30px 6px 30px;
   background: #ffffff;
   overflow: hidden;
   border-radius: 30px;
   box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.08);
-
-    /* background-color: #000000; */
-
 }
-
 
 .search-type-input {
   flex-shrink: 0;
@@ -335,14 +323,7 @@ button {
   border: none;
   z-index: 10;
   outline: none;
-  
-  /* background-color: #000000; */
 }
-
-
-
-
-
 
 .frame-7 {
   display: flex;
@@ -355,6 +336,7 @@ button {
   width: 348px;
   z-index: 31;
 }
+
 .vector {
   flex-shrink: 0;
   position: relative;
@@ -365,6 +347,7 @@ button {
   background-size: cover;
   z-index: 32;
 }
+
 .group-8 {
   flex-shrink: 0;
   position: relative;
@@ -372,6 +355,7 @@ button {
   height: 20px;
   z-index: 33;
 }
+
 .clear-all {
   display: flex;
   align-items: center;
@@ -390,6 +374,7 @@ button {
   letter-spacing: -0.28px;
   z-index: 35;
 }
+
 .your-conversations {
   display: flex;
   align-items: center;
@@ -407,6 +392,7 @@ button {
   white-space: nowrap;
   z-index: 34;
 }
+
 .vector-9 {
   flex-shrink: 0;
   position: relative;
@@ -417,6 +403,7 @@ button {
   background-size: cover;
   z-index: 36;
 }
+
 .frame-a {
   display: flex;
   flex-direction: column;
@@ -431,6 +418,7 @@ button {
   left: 0;
   z-index: 59;
 }
+
 .vector-b {
   align-self: stretch;
   flex-shrink: 0;
@@ -442,6 +430,7 @@ button {
   background-size: cover;
   z-index: 60;
 }
+
 .frame-c {
   display: flex;
   align-items: center;
@@ -454,6 +443,7 @@ button {
   padding: 0 0 0 30px;
   z-index: 61;
 }
+
 .last-7-days {
   flex-grow: 1;
   flex-shrink: 0;
@@ -469,6 +459,7 @@ button {
   white-space: nowrap;
   z-index: 62;
 }
+
 .vector-d {
   align-self: stretch;
   flex-shrink: 0;
@@ -480,6 +471,7 @@ button {
   background-size: cover;
   z-index: 63;
 }
+
 .frame-e {
   display: flex;
   flex-direction: column;
@@ -494,6 +486,7 @@ button {
   left: 30px;
   z-index: 37;
 }
+
 .frame-f {
   display: flex;
   align-items: center;
@@ -505,6 +498,7 @@ button {
   padding: 15px 0 15px 0;
   z-index: 38;
 }
+
 .vuesax-linear-message {
   flex-shrink: 0;
   position: relative;
@@ -512,6 +506,7 @@ button {
   height: 16px;
   z-index: 39;
 }
+
 .vuesax-linear-message-10 {
   position: absolute;
   width: 16px;
@@ -520,6 +515,7 @@ button {
   left: 0;
   z-index: 40;
 }
+
 .message {
   position: absolute;
   width: 100%;
@@ -531,6 +527,7 @@ button {
   background-size: 100% 100%;
   z-index: 41;
 }
+
 .cities-in-2050 {
   display: flex;
   align-items: center;
@@ -551,6 +548,7 @@ button {
   z-index: 42;
   overflow: hidden;
 }
+
 .frame-11 {
   display: flex;
   align-items: center;
@@ -562,6 +560,7 @@ button {
   padding: 15px 0 15px 0;
   z-index: 43;
 }
+
 .vuesax-linear-message-12 {
   flex-shrink: 0;
   position: relative;
@@ -569,6 +568,7 @@ button {
   height: 16px;
   z-index: 44;
 }
+
 .vuesax-linear-message-13 {
   position: absolute;
   width: 16px;
@@ -577,6 +577,7 @@ button {
   left: 0;
   z-index: 45;
 }
+
 .message-14 {
   position: absolute;
   width: 100%;
@@ -588,6 +589,7 @@ button {
   background-size: 100% 100%;
   z-index: 46;
 }
+
 .sustainable-urban-planning-strategies {
   flex-shrink: 0;
   flex-basis: auto;
@@ -602,6 +604,7 @@ button {
   white-space: nowrap;
   z-index: 47;
 }
+
 .frame-15 {
   display: flex;
   align-items: center;
@@ -613,6 +616,7 @@ button {
   padding: 15px 0 15px 0;
   z-index: 48;
 }
+
 .vuesax-linear-message-16 {
   flex-shrink: 0;
   position: relative;
@@ -620,6 +624,7 @@ button {
   height: 16px;
   z-index: 49;
 }
+
 .vuesax-linear-message-17 {
   position: absolute;
   width: 16px;
@@ -628,6 +633,7 @@ button {
   left: 0;
   z-index: 50;
 }
+
 .message-18 {
   position: absolute;
   width: 100%;
@@ -639,6 +645,7 @@ button {
   background-size: 100% 100%;
   z-index: 51;
 }
+
 .effects-of-deforestation {
   flex-shrink: 0;
   flex-basis: auto;
@@ -653,6 +660,7 @@ button {
   white-space: nowrap;
   z-index: 52;
 }
+
 .frame-19 {
   display: flex;
   align-items: center;
@@ -664,6 +672,7 @@ button {
   padding: 15px 0 15px 0;
   z-index: 53;
 }
+
 .vuesax-linear-message-1a {
   flex-shrink: 0;
   position: relative;
@@ -671,6 +680,7 @@ button {
   height: 16px;
   z-index: 54;
 }
+
 .vuesax-linear-message-1b {
   position: absolute;
   width: 16px;
@@ -679,6 +689,7 @@ button {
   left: 0;
   z-index: 55;
 }
+
 .message-1c {
   position: absolute;
   width: 100%;
@@ -690,6 +701,7 @@ button {
   background-size: 100% 100%;
   z-index: 56;
 }
+
 .future-of-work {
   flex-shrink: 0;
   flex-basis: auto;
@@ -704,6 +716,7 @@ button {
   white-space: nowrap;
   z-index: 57;
 }
+
 .rectangle-1d {
   flex-shrink: 0;
   position: absolute;
@@ -716,6 +729,7 @@ button {
   background-size: cover;
   z-index: 58;
 }
+
 .frame-1e {
   display: flex;
   flex-direction: column;
@@ -730,6 +744,7 @@ button {
   left: 30px;
   z-index: 72;
 }
+
 .frame-1f {
   display: flex;
   flex-direction: column;
@@ -741,6 +756,7 @@ button {
   width: 301px;
   z-index: 73;
 }
+
 .frame-20 {
   display: flex;
   align-items: center;
@@ -752,6 +768,7 @@ button {
   padding: 15px 0 15px 0;
   z-index: 74;
 }
+
 .vuesax-linear-message-21 {
   flex-shrink: 0;
   position: relative;
@@ -759,6 +776,7 @@ button {
   height: 16px;
   z-index: 75;
 }
+
 .vuesax-linear-message-22 {
   position: absolute;
   width: 16px;
@@ -767,6 +785,7 @@ button {
   left: 0;
   z-index: 76;
 }
+
 .message-23 {
   position: absolute;
   width: 100%;
@@ -778,6 +797,7 @@ button {
   background-size: 100% 100%;
   z-index: 77;
 }
+
 .benefits-of-ai {
   display: flex;
   align-items: center;
@@ -798,6 +818,7 @@ button {
   z-index: 78;
   overflow: hidden;
 }
+
 .frame-24 {
   display: flex;
   align-items: center;
@@ -809,6 +830,7 @@ button {
   padding: 15px 0 15px 0;
   z-index: 79;
 }
+
 .vuesax-linear-message-25 {
   flex-shrink: 0;
   position: relative;
@@ -816,6 +838,7 @@ button {
   height: 16px;
   z-index: 80;
 }
+
 .vuesax-linear-message-26 {
   position: absolute;
   width: 16px;
@@ -824,6 +847,7 @@ button {
   left: 0;
   z-index: 81;
 }
+
 .message-27 {
   position: absolute;
   width: 100%;
@@ -835,6 +859,7 @@ button {
   background-size: 100% 100%;
   z-index: 82;
 }
+
 .if-humans-could-breathe {
   flex-shrink: 0;
   flex-basis: auto;
@@ -849,6 +874,7 @@ button {
   white-space: nowrap;
   z-index: 83;
 }
+
 .frame-28 {
   display: flex;
   align-items: center;
@@ -860,6 +886,7 @@ button {
   padding: 15px 0 15px 0;
   z-index: 84;
 }
+
 .vuesax-linear-message-29 {
   flex-shrink: 0;
   position: relative;
@@ -867,6 +894,7 @@ button {
   height: 16px;
   z-index: 85;
 }
+
 .vuesax-linear-message-2a {
   position: absolute;
   width: 16px;
@@ -875,6 +903,7 @@ button {
   left: 0;
   z-index: 86;
 }
+
 .message-2b {
   position: absolute;
   width: 100%;
@@ -886,6 +915,7 @@ button {
   background-size: 100% 100%;
   z-index: 87;
 }
+
 .climate-change-impacts {
   flex-shrink: 0;
   flex-basis: auto;
@@ -900,6 +930,7 @@ button {
   white-space: nowrap;
   z-index: 88;
 }
+
 .group-2c {
   flex-shrink: 0;
   position: absolute;
@@ -909,8 +940,8 @@ button {
   left: 50%;
   transform: translateX(-50%);
   z-index: 13;
-  /* background-color: #000000; */
 }
+
 .group-2d {
   position: absolute;
   width: 188px;
@@ -918,9 +949,8 @@ button {
   top: 0;
   left: 0;
   z-index: 14;
-  
-
 }
+
 .group-2e {
   position: absolute;
   width: 23.48%;
@@ -931,8 +961,8 @@ button {
     no-repeat center;
   background-size: 100% 100%;
   z-index: 15;
-
 }
+
 .swisp-gpt {
   display: flex;
   align-items: flex-start;
@@ -950,6 +980,7 @@ button {
   white-space: nowrap;
   z-index: 16;
 }
+
 .frame-2f {
   display: flex;
   flex-direction: column;
@@ -963,8 +994,8 @@ button {
   z-index: 64;
   bottom: 30px;
   right: 30px;
-  /* background: #d861bb; */
 }
+
 .frame-30 {
   display: flex;
   align-items: center;
@@ -981,6 +1012,7 @@ button {
   z-index: 65;
   border-radius: 25px;
 }
+
 .frame-31 {
   display: flex;
   align-items: center;
@@ -992,6 +1024,7 @@ button {
   position: relative;
   z-index: 66;
 }
+
 .frame-32 {
   display: flex;
   align-items: center;
@@ -1005,6 +1038,7 @@ button {
   z-index: 67;
   border-radius: 17px;
 }
+
 .vuesax-linear-setting {
   flex-shrink: 0;
   position: relative;
@@ -1012,6 +1046,7 @@ button {
   height: 16px;
   z-index: 68;
 }
+
 .vuesax-linear-setting-33 {
   position: absolute;
   width: 16px;
@@ -1020,6 +1055,7 @@ button {
   left: 0;
   z-index: 69;
 }
+
 .setting {
   position: absolute;
   width: 100%;
@@ -1030,8 +1066,8 @@ button {
     no-repeat center;
   background-size: 100% 100%;
   z-index: 70;
-  
 }
+
 .settings {
   flex-shrink: 0;
   flex-basis: auto;
@@ -1045,29 +1081,30 @@ button {
   text-align: left;
   white-space: nowrap;
   z-index: 71;
-  
 }
+
 .flex-column-acdd {
   position: absolute;
   width: calc(100% - var(--sidebar-width));
   height: 100%;
-  /* top: 207px;
-  right: 22px; */
   left: var(--sidebar-width);
   z-index: 92;
   overflow-y: hidden;
   padding-bottom: 80px;
-/* background-color: #000000; */
 }
+
 .frame-34 {
   position: relative;
   width: 833px;
-  height: 534px;
-  margin: 0 0 0 80px;
+  height: 434px;
+  margin: 0 0 0 0px;
   z-index: 92;
   overflow: hidden;
-
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
+
 .group-35 {
   position: relative;
   width: 100px;
@@ -1077,9 +1114,8 @@ button {
     no-repeat center;
   background-size: 100% 100%;
   z-index: 93;
-
-
 }
+
 .frame-36 {
   position: relative;
   width: 833px;
@@ -1088,6 +1124,7 @@ button {
   z-index: 94;
   overflow: hidden;
 }
+
 .frame-37 {
   position: absolute;
   width: 195px;
@@ -1100,6 +1137,7 @@ button {
   overflow: hidden;
   border-radius: 30px;
 }
+
 .clarity-plane-line {
   display: flex;
   align-items: flex-start;
@@ -1115,20 +1153,7 @@ button {
   z-index: 96;
   overflow: hidden;
 }
-.plan-a-relaxing-day {
-  display: block;
-  position: relative;
-  height: 27px;
-  margin: 1px 0 0 13px;
-  color: #000000;
-  font-family: Segoe UI, var(--default-font-family);
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 26.669px;
-  text-align: left;
-  white-space: nowrap;
-  z-index: 97;
-}
+
 .frame-38 {
   position: absolute;
   width: 195px;
@@ -1141,6 +1166,7 @@ button {
   overflow: hidden;
   border-radius: 30px;
 }
+
 .group-39 {
   position: relative;
   width: 34.743px;
@@ -1151,7 +1177,41 @@ button {
   background-size: 100% 100%;
   z-index: 100;
 }
-.nostalgia-kindergarden {
+
+.frame-3a {
+  position: absolute;
+  width: 195px;
+  height: 128px;
+  top: 0;
+  left: 425px;
+  background: #ffffff;
+  border: 1px solid #e7e7e7;
+  z-index: 101;
+  overflow: hidden;
+  border-radius: 30px;
+}
+
+.carbon-idea {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  margin: 13px 0 0 13px;
+  z-index: 102;
+  overflow: hidden;
+}
+
+.vector-3b {
+  position: relative;
+  width: 22.88px;
+  height: 32px;
+  margin: 0 0 0 5.795px;
+  background: url(../assets/images/ea22f177-abf9-4bc4-b5db-881eccbc8891.png)
+    no-repeat center;
+  background-size: 100% 100%;
+  z-index: 103;
+}
+
+.start-idea-text {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
@@ -1167,50 +1227,7 @@ button {
   text-align: left;
   z-index: 99;
 }
-.frame-3a {
-  position: absolute;
-  width: 195px;
-  height: 128px;
-  top: 0;
-  left: 425px;
-  background: #ffffff;
-  border: 1px solid #e7e7e7;
-  z-index: 101;
-  overflow: hidden;
-  border-radius: 30px;
-}
-.carbon-idea {
-  position: relative;
-  width: 32px;
-  height: 32px;
-  margin: 13px 0 0 13px;
-  z-index: 102;
-  overflow: hidden;
-}
-.vector-3b {
-  position: relative;
-  width: 22.88px;
-  height: 32px;
-  margin: 0 0 0 5.795px;
-  background: url(../assets/images/ea22f177-abf9-4bc4-b5db-881eccbc8891.png)
-    no-repeat center;
-  background-size: 100% 100%;
-  z-index: 103;
-}
-.activities-friends-new-city {
-  display: block;
-  position: relative;
-  height: 27px;
-  margin: 1px 0 0 13px;
-  color: #000000;
-  font-family: Segoe UI, var(--default-font-family);
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 26.669px;
-  text-align: left;
-  white-space: nowrap;
-  z-index: 104;
-}
+
 .frame-3c {
   position: absolute;
   width: 195px;
@@ -1223,6 +1240,7 @@ button {
   overflow: hidden;
   border-radius: 30px;
 }
+
 .projector-screen-light {
   position: relative;
   width: 32px;
@@ -1231,6 +1249,7 @@ button {
   z-index: 107;
   overflow: hidden;
 }
+
 .vector-3d {
   position: relative;
   width: 25.5px;
@@ -1241,22 +1260,7 @@ button {
   background-size: 100% 100%;
   z-index: 108;
 }
-.software-project {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  position: relative;
-  width: 170px;
-  height: 54px;
-  margin: 1px 0 0 13px;
-  color: #000000;
-  font-family: Segoe UI, var(--default-font-family);
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 26.669px;
-  text-align: left;
-  z-index: 106;
-}
+
 .type {
   display: flex;
   align-items: center;
@@ -1277,6 +1281,7 @@ button {
   border-radius: 30px;
   box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.08);
 }
+
 .type-input {
   flex-shrink: 0;
   position: absolute;
@@ -1289,6 +1294,7 @@ button {
   z-index: 10;
   outline: none;
 }
+
 .frame-3e {
   display: flex;
   align-items: center;
@@ -1301,6 +1307,7 @@ button {
   min-width: 0;
   z-index: 1;
 }
+
 .frame-3f {
   display: flex;
   align-items: center;
@@ -1311,6 +1318,7 @@ button {
   width: 276px;
   z-index: 2;
 }
+
 .group-40 {
   flex-shrink: 0;
   position: relative;
@@ -1318,6 +1326,7 @@ button {
   height: 34px;
   z-index: 3;
 }
+
 .group-41 {
   position: absolute;
   width: 23px;
@@ -1329,6 +1338,7 @@ button {
   background-size: cover;
   z-index: 4;
 }
+
 .whats-mind {
   flex-shrink: 0;
   flex-basis: auto;
@@ -1343,6 +1353,7 @@ button {
   white-space: nowrap;
   z-index: 5;
 }
+
 .frame-42 {
   display: flex;
   align-items: center;
@@ -1385,6 +1396,7 @@ button {
   border: none;
   cursor: pointer;
 }
+
 .vuesax-linear-send {
   flex-shrink: 0;
   position: relative;
@@ -1392,6 +1404,7 @@ button {
   height: 24px;
   z-index: 7;
 }
+
 .vuesax-linear-send-43 {
   position: absolute;
   width: 24px;
@@ -1400,6 +1413,7 @@ button {
   left: 0;
   z-index: 8;
 }
+
 .send {
   position: absolute;
   width: 100%;
@@ -1412,65 +1426,54 @@ button {
   z-index: 9;
 }
 
-
-/* 聊天气泡框的通用样式 */
 .message-box {
-  display: block; 
-  max-width: 70%; 
+  display: block;
+  max-width: 70%;
   padding: 10px;
   margin: 0px 0px;
   border-radius: 15px;
-  word-wrap: break-word; 
-  white-space: pre-wrap; 
+  word-wrap: break-word;
+  white-space: pre-wrap;
   line-height: 1.5;
-  clear: both; 
-
+  clear: both;
 }
 
-/* 用户输入的气泡框 */
 .message-box.user {
   background-color: #d1e6ff;
-  float: right; 
-  text-align: left; 
+  float: right;
+  text-align: left;
   margin-left: auto;
-  width: auto; 
-  height:var(--button-radius)+4;
+  width: auto;
+  height: var(--button-radius) + 4;
 }
 
-/* 机器人回复的气泡框 */
 .message-box.bot {
   background-color: #e0e0e0;
-  float: left; 
-  text-align: left; 
+  float: left;
+  text-align: left;
   width: auto;
-  height:var(--button-radius)+4; 
+  height: var(--button-radius) + 4;
 }
 
-
-/* 消息容器 */
 .message-container {
   display: flex;
   align-items: flex-start;
-  margin-top:10px;
+  margin-top: 10px;
   margin-bottom: 10px;
   clear: both;
 }
 
-/* 用户消息靠右对齐，包含头像 */
 .message-container.user {
   justify-content: flex-end;
   text-align: right;
-  flex-direction: row-reverse; /* 让头像和消息框交换位置 */
+  flex-direction: row-reverse;
 }
 
-
-/* 机器人消息靠左对齐，包含头像 */
 .message-container.bot {
   justify-content: flex-start;
   text-align: left;
 }
 
-/* 头像样式 */
 .avatar {
   width: var(--button-radius);
   height: var(--button-radius);
@@ -1487,26 +1490,19 @@ button {
   overflow-y: auto;
 }
 
-
-
-
-
 .creativity-level-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: absolute;
-  bottom: 3px; /* 调整位置 */
+  bottom: 3px;
   left: 50%;
   transform: translateX(-50%);
   padding: 15px;
-  /* border: 2px solid #e0e0e0; 更细的边框颜色 */
-  /* border-radius: 30px; 更加柔和的圆角 */
   background-color: transparent;
-  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 调整阴影效果 */
   z-index: 99;
-  width:299px;
+  width: 299px;
 }
 
 .creativity-level-header {
@@ -1519,15 +1515,14 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px; /* 控制按钮之间的间距 */
+  gap: 10px;
 }
 
 .creativity-level-button {
-  padding: 10px 20px; /* 调整按钮内边距，变得更大 */
-  border-radius: 10px; /* 圆角按钮 */
+  padding: 10px 20px;
+  border-radius: 10px;
   border: 1px solid #ccc;
   background-color: #f5f5f5;
-  /* font-weight: bold; */
   color: #333;
   transition: background-color 0.3s, box-shadow 0.3s;
   cursor: pointer;
@@ -1537,13 +1532,13 @@ button {
   background-color: #5661f6;
   color: white;
   border: none;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 选中时添加阴影 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .creativity-level-button:hover {
-  background-color: #e0e0e0; /* 按钮悬停时颜色变化 */
+  background-color: #e0e0e0;
 }
 
 .creativity-level-button.active:hover {
-  background-color: #3c49c0; /* 选中按钮悬停时的颜色变化 */
+  background-color: #3c49c0;
 }

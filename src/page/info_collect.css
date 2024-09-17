@@ -30,13 +30,10 @@ button {
   margin: 0 auto;
   background: #ffffff;
 
-
-  
   display: flex;
-  justify-content: center; /* 水平居中 */
-  align-items: center; /* 垂直居中，视需求可以保留 */
+  justify-content: center;
+  align-items: center;
 }
-
 
 .content {
   display: flex;
@@ -237,6 +234,15 @@ button {
 .optional {
   position: relative;
   color: #666666;
+  font-family: Poppins, var(--default-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+}
+.red-star {
+  position: relative;
+  color: #ee4949;
   font-family: Poppins, var(--default-font-family);
   font-size: 16px;
   font-weight: 400;
@@ -725,9 +731,7 @@ button {
   overflow: hidden;
   border-radius: 18px;
 
-
   padding-top: 20px;
-  
 }
 .not-a-robot-checkbox-input {
   position: absolute;
@@ -830,7 +834,6 @@ button {
   border-radius: 40px;
 }
 
-
 .button-turn_blue {
   position: absolute;
   width: 100%;
@@ -843,7 +846,6 @@ button {
   overflow: hidden;
   border-radius: 40px;
 }
-
 
 .frame-27 {
   display: flex;
@@ -908,7 +910,6 @@ button {
   text-decoration: underline;
   white-space: nowrap;
   z-index: 63;
-
 }
 .not-a-robot-checkbox-input {
   position: absolute;
@@ -938,7 +939,7 @@ button {
 }
 
 .check-box-24.checked::after {
-  content: '✓';
+  content: "✓";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -946,7 +947,6 @@ button {
   color: #fff;
   font-size: 14px;
 }
-
 
 .custom-checkbox-label {
   display: flex;
@@ -982,7 +982,7 @@ button {
 }
 
 .custom-checkbox-label input:checked ~ .checkmark {
-  background-color: #2196F3;
+  background-color: #2196f3;
 }
 
 .checkmark:after {
@@ -1005,20 +1005,20 @@ button {
   transform: rotate(45deg);
 }
 
-.receive-emails, .not-a-robot {
+.receive-emails,
+.not-a-robot {
   margin-left: 10px;
 }
-
 
 .country-select {
   width: 100%;
   height: 56px;
-  padding: 0 40px 0 16px; /* Space for the dropdown arrow */
+  padding: 0 40px 0 16px;
   font-size: 16px;
   border: 1px solid rgba(102, 102, 102, 0.35);
   border-radius: 12px;
   background-color: #ffffff;
-  appearance: none; /*  Remove default arrow */
+  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
   cursor: pointer;
@@ -1033,7 +1033,7 @@ button {
   right: 16px;
   top: 50%;
   transform: translateY(-50%);
-  pointer-events: none; /* Ensures the icon doesn't interfere with select clicks */
+  pointer-events: none;
 }
 
 .radio-button {
@@ -1058,7 +1058,7 @@ button {
 }
 
 .radio-button-input:checked + .radio-button-custom::after {
-  content: '';
+  content: "";
   width: 10px;
   height: 10px;
   background: #333;
@@ -1069,12 +1069,11 @@ button {
   border-radius: 50%;
 }
 
-.text-female, .text-male, .text-non-binary {
+.text-female,
+.text-male,
+.text-non-binary {
   font-size: 16px;
 }
-
-
-/* ... (previous styles remain unchanged) ... */
 
 .frame-7 {
   display: flex;
@@ -1103,7 +1102,7 @@ button {
 }
 
 .radio-button-input:checked + .radio-button-custom::after {
-  content: '';
+  content: "";
   width: 10px;
   height: 10px;
   background: #333;
@@ -1119,7 +1118,6 @@ button {
   color: #333;
 }
 
-
 .date-select {
   width: 100%;
   padding: 10px;
@@ -1132,7 +1130,7 @@ button {
 
 .date-select:focus {
   outline: none;
-  border-color: #2196F3;
+  border-color: #2196f3;
 }
 
 .welcome-container {
@@ -1155,5 +1153,5 @@ button {
 }
 
 .already-have-an-account:hover {
-  color: #2196F3;  
+  color: #2196f3;
 }
