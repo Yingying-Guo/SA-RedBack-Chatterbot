@@ -117,9 +117,9 @@ const getCompletion = async (userInput, creativityLevel, sessionId) => {
         console.log("Temperature:", temperature);  // Log the temperature used
         console.log("Assistant:", assistantReply);  // Log the assistant's response
         console.log("Response:", response);  // Log the full API response
-        // console.log("Timestamp:", moment.unix(timestamp).tz('Australia/Sydney').format('YYYY-MM-DD HH:mm:ss z')); // 添加时区简称 'z' 或完整偏移 'ZZ' // 使用 moment-timezone 将 Unix 时间戳转换为悉尼时间，并添加时区表示
+        // console.log("Timestamp:", moment.unix(timestamp).tz('Australia/Sydney').format('YYYY-MM-DD HH:mm:ss z')); // Add time zone abbreviation 'z' or full offset 'ZZ' // Use moment-timezone to convert Unix timestamps to Sydney time and add time zone representation
 
-        // 保存对话记录到数据库
+        // Save dialogue records to database
         await createOpenAIChat(chatID, timestamp, creativityLevel, userInput, assistantReply, sessionId);
 
         // Send the assistant's reply and the sessionId back to the client
