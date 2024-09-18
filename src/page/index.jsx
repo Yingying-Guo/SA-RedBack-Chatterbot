@@ -300,7 +300,7 @@ export default function Main() {
     if (message.trim()) {
       try {
         const response = await fetch(
-          "http://127.0.0.1:3001/openai/completion",
+          "https://saredback.onrender.com/openai/completion",
           {
             method: "POST",
             headers: {
@@ -361,7 +361,7 @@ export default function Main() {
     sessionId
   ) => {
     try {
-      const response = await fetch("http://127.0.0.1:3001/db/user-info", {
+      const response = await fetch("https://saredback.onrender.com/db/user-info", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

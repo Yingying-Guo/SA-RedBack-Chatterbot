@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "prestart": "npm install", 
-    "start": "npm install && npm install concurrently --save-dev  && concurrently --kill-others-on-fail \"npm run start:backend\" \"npm run start:frontend\"",
+    "start": "npm install && npm install concurrently --save-dev && concurrently --kill-others-on-fail \"npm run start:backend\" \"npm run start:frontend\"",
     "start:backend": "nodemon Server/server.js",
     "dev": "node Run/start.js",
     "start:frontend": "vite",
