@@ -12,16 +12,16 @@ const createUser = async (req, res) => {
       sessionId = Snowflake.nextId();  // Generate a unique sessionId using Snowflake
     }
 
-    // 创建并保存用户信息
+    // Create and save user information
     const user = new User({
-      userID: sessionId,  // 使用 sessionId 作为 userID
+      userID: sessionId,  // Use sessionId as userID
       location,
       gender,
       DoB,
     });
     
     // console.log('DoB:', DoB);
-    await user.save(); // 保存用户信息到数据库
+    await user.save(); // Save user information to the database
 
     res.status(201).json({ sessionId: sessionId, message: 'User information saved successfully.' });
   } catch (error) {
@@ -33,16 +33,16 @@ const createUser = async (req, res) => {
 // Get all Query by userID
 const getOpenAIChatByUser = async (req, res) => {
   try {
-    // 查询 User 表中的用户信息
+    // Querying user information in the User table
     const user = await User.findOne({ userID: req.params.userID }).exec();
     if (!user) {
       return res.status(400).json({ message: "User not found" });
     }
     
-    // 根据 userID 查询 OpenAIChat 表中的记录
+    // Querying records in the OpenAIChat table by userID
     const openAIChats = await OpenAIChat.find({ userID: user.userID }).exec();
 
-    // 返回用户信息和相关的聊天记录
+    // Returns user information and related chat logs
     res.status(200).json({ user, openAIChats });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -54,36 +54,36 @@ import moment from 'moment-timezone';
 
 /**
  * Create a Chat record
- * @param {string} chatID - 对话唯一标识
- * @param {number} timestamp - Unix 时间戳
- * @param {string} creativityLevel - 创造力级别
- * @param {string} userInput - 用户输入
- * @param {string} response - AI 回复
- * @param {string} userID - 用户 ID
+ * @param {string} chatID - Dialogue unique identifiers
+ * @param {number} timestamp - Unix timestamp
+ * @param {string} creativityLevel - Creativity level
+ * @param {string} userInput - user input
+ * @param {string} response - AI Replies
+ * @param {string} userID - User ID
  */
 const createOpenAIChat = async (chatID, timestamp, creativityLevel, userInput, response, userID) => {
   try {
-    // 判断 userID 是否存在
+    // Determine if userID exists
     if (!userID) {
       return res.status(400).json({ message: "userID is required." });
     }
 
-    // 判断 userID 是否为有效字符串（此处你可以加入其他格式校验逻辑，如UUID格式）
+    // Determine if userID is a valid string (here you can add other format checking logic, such as UUID format)
     if (typeof userID !== 'string' || userID.trim() === '') {
       return res.status(400).json({ message: "Invalid userID format." });
     }
 
-    // 创建新的聊天记录
+    // Creating a new chat
     const newChatRecord = new OpenAIChat({
       chatID: chatID,
       timestamp: moment.unix(timestamp).tz('Australia/Sydney').format('YYYY-MM-DD HH:mm:ss z'), // Unix 时间戳
       creativityLevel: creativityLevel,
-      userInput: userInput,  // 注意字段名应与模型定义一致
+      userInput: userInput,  // Note that field names should be consistent with model definitions
       response: response,
       userID: userID
     });
 
-    // 保存到数据库
+    // Save to database
     await newChatRecord.save();
     console.log('Chat record saved successfully.');
     // res.status(200).json(openAIChat);

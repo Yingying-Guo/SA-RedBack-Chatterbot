@@ -18,7 +18,7 @@ const OpenAIChatSchema = new mongoose.Schema({
   userInput: { type: String, required: true },
   response: { type: String, required: true },
   // userID: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
-  userID: { type: String, required: true } // userID 为字符串
+  userID: { type: String, required: true } // userID is a string
 });
 
 const OpenAIChat = mongoose.model('OpenAIChat', OpenAIChatSchema);

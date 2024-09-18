@@ -8,7 +8,7 @@ const connectDB = async () => {
     console.log("Connected to database!");
   } catch (error) {
     console.log("Connection failed!", error);
-    process.exit(1); // 在连接失败时终止程序
+    process.exit(1); // Terminate the programme when the connection fails
   }
 };
 
