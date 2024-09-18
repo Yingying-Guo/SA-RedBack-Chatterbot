@@ -55,29 +55,15 @@ export default function Main() {
   // Update DoB whenever selectedYear, selectedMonth, or selectedDate changes
   useEffect(() => {
     if (selectedYear && selectedMonth && selectedDate) {
-      const formattedDoB = `${selectedYear}-${
-        months.indexOf(selectedMonth) + 1
-      }-${selectedDate}`;
+      const formattedDoB = `${selectedYear}-${months.indexOf(selectedMonth) + 1
+        }-${selectedDate}`;
       setDoB(formattedDoB);
       console.log("DoB:", formattedDoB); // Output the DoB
     }
   }, [selectedYear, selectedMonth, selectedDate]);
 
   // State months, dates, years and countries
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
+  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   const dates = Array.from({ length: 31 }, (_, i) => i + 1);
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: 100 }, (_, i) => currentYear - i);
@@ -299,19 +285,17 @@ export default function Main() {
   const sendMessageToServer = async (message, creativityLevel, sessionId) => {
     if (message.trim()) {
       try {
-        const response = await fetch(
-          "https://saredback.onrender.com/openai/completion",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              message: message,
-              creativityLevel: creativityLevel,
-              sessionId: sessionId,
-            }),
-          }
+        const response = await fetch('https://saredback.onrender.com/openai/completion', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            message: message,
+            creativityLevel: creativityLevel,
+            sessionId: sessionId,
+          }),
+        }
         );
 
         const data = await response.json();
@@ -319,7 +303,7 @@ export default function Main() {
         setTimeout(() => {
           setConversation((prevConversation) => [
             ...prevConversation,
-            { type: "bot", text: data.reply },
+            { type: 'bot', text: data.reply }
           ]);
 
           if (!sessionId) {
@@ -465,25 +449,22 @@ export default function Main() {
               </div>
               <div className="creativity-level-buttons">
                 <button
-                  className={`creativity-level-button ${
-                    creativityLevel === "low" ? "active" : ""
-                  }`}
+                  className={`creativity-level-button ${creativityLevel === "low" ? "active" : ""
+                    }`}
                   onClick={() => setCreativityLevel("low")}
                 >
                   Low
                 </button>
                 <button
-                  className={`creativity-level-button ${
-                    creativityLevel === "medium" ? "active" : ""
-                  }`}
+                  className={`creativity-level-button ${creativityLevel === "medium" ? "active" : ""
+                    }`}
                   onClick={() => setCreativityLevel("medium")}
                 >
                   Medium
                 </button>
                 <button
-                  className={`creativity-level-button ${
-                    creativityLevel === "high" ? "active" : ""
-                  }`}
+                  className={`creativity-level-button ${creativityLevel === "high" ? "active" : ""
+                    }`}
                   onClick={() => setCreativityLevel("high")}
                 >
                   High
@@ -501,8 +482,8 @@ export default function Main() {
               <div key={index} className={`message-container ${message.type}`}>
                 <img
                   className="avatar"
-                  src={ message.type === "user" ? userAvatar : botAvatar }
-                  alt={ message.type === "user" ? "User Avatar" : "Bot Avatar" }
+                  src={message.type === "user" ? userAvatar : botAvatar}
+                  alt={message.type === "user" ? "User Avatar" : "Bot Avatar"}
                 />
 
                 <div className={`message-box ${message.type}`}>
@@ -584,9 +565,8 @@ export default function Main() {
           {/* Send button */}
 
           <button
-            className={`frame-42 ${
-              isWaitingForBotResponse ? "frame-42-grey" : ""
-            }`}
+            className={`frame-42 ${isWaitingForBotResponse ? "frame-42-grey" : ""
+              }`}
             onClick={() => {
               handleSend();
               setIsConvStart(true);
@@ -825,9 +805,8 @@ export default function Main() {
               disabled={!isButtonEnabled()}
             >
               <div
-                className={`button-26 ${
-                  isButtonEnabled() ? "button-turn_blue" : ""
-                }`}
+                className={`button-26 ${isButtonEnabled() ? "button-turn_blue" : ""
+                  }`}
               >
                 <div className="frame-27">
                   <span className="sign-up-28">Start</span>
