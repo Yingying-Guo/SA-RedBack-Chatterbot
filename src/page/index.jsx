@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./info_collect.css";
+// import images from assets
+import userAvatar from '../assets/images/5593d02b8cf746b1a827a90f620354ed.png';
+import botAvatar from '../assets/images/Group 1437252836.png';
 
 export default function Main() {
   // State control
@@ -498,12 +501,8 @@ export default function Main() {
               <div key={index} className={`message-container ${message.type}`}>
                 <img
                   className="avatar"
-                  src={
-                    message.type === "user"
-                      ? "src/assets/images/5593d02b8cf746b1a827a90f620354ed.jpeg"
-                      : "src/assets/images/Group 1437252836.png"
-                  }
-                  alt={message.type === "user" ? "User Avatar" : "Bot Avatar"}
+                  src={ message.type === "user" ? userAvatar : botAvatar }
+                  alt={ message.type === "user" ? "User Avatar" : "Bot Avatar" }
                 />
 
                 <div className={`message-box ${message.type}`}>
