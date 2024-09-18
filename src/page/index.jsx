@@ -63,7 +63,7 @@ export default function Main() {
   }, [selectedYear, selectedMonth, selectedDate]);
 
   // State months, dates, years and countries
-  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   const dates = Array.from({ length: 31 }, (_, i) => i + 1);
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: 100 }, (_, i) => currentYear - i);
@@ -285,10 +285,10 @@ export default function Main() {
   const sendMessageToServer = async (message, creativityLevel, sessionId) => {
     if (message.trim()) {
       try {
-        const response = await fetch('https://saredback.onrender.com/openai/completion', {
-          method: 'POST',
+        const response = await fetch("https://saredback.onrender.com/openai/completion", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             message: message,
@@ -345,7 +345,7 @@ export default function Main() {
     sessionId
   ) => {
     try {
-      const response = await fetch("https://saredback.onrender.com/db/user-info", {
+      const response = await fetch("https://saredback.onrender.com/db/user-info", { // 假设 API 路径为 /user-info
         method: "POST",
         headers: {
           "Content-Type": "application/json",
