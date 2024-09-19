@@ -16,7 +16,7 @@ app.use(cors(
 import connectDB from '../Database/connection/db.connection.js';
 connectDB();
 
-// routes
+// OpenAI API routes
 import DBRoute from "../Database/routes/db.route.js";
 app.use("/db", DBRoute);
 
@@ -24,7 +24,9 @@ app.use("/db", DBRoute);
 import OpenAIRoute from '../OpenAI/routes/openai.route.js';
 app.use("/openai", OpenAIRoute);
 
+// Import the heartbeat route
+import HeartbeatRoute from '../Heartbeat/routes/heartbeat.route.js'; 
+app.use("/heartbeat", HeartbeatRoute); // Use the heartbeat route
 
 // app.post('/completion', );
-
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
