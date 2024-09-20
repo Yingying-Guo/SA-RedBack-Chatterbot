@@ -160,13 +160,11 @@ For local development, ensure your server is running by following the setup inst
 
 ## API Endpoints
 
-| API                                          | Type               | Features                                                     | Role in Project                                              |
-| -------------------------------------------- | ------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| **OpenAI API (ChatGPT)**                     | Language Model API | Generates human-like text based on prompts                   | Provides creative "What If" questions to engage users and stimulate thinking. |
-| **Translation API** (e.g., Google Translate) | Translation API    | Supports multiple languages and text translation             | Enables multilingual support by translating chatbot responses. |
-| **MongoDB Atlas API**                        | NoSQL Database API | Flexible document model, high performance, scalable          | Manages and stores user data such as sessions and feedback efficiently. |
-| **Django REST Framework**                    | Web API Framework  | Builds web APIs quickly, handles serialization and authentication | Creates RESTful APIs for frontend-backend communication.     |
-| **React Library**                            | Frontend Library   | Component-based architecture, state management               | Fetches and displays data from APIs, and manages dynamic content. |
+| API                      | Type               | Features                                            | Role in Project                                              |
+| ------------------------ | ------------------ | --------------------------------------------------- | ------------------------------------------------------------ |
+| **OpenAI API (ChatGPT)** | Language Model API | Generates human-like text based on prompts          | Provides creative "What If" questions to engage users and stimulate thinking |
+| **React Library**        | Frontend Library   | Component-based architecture, state management      | Fetches and displays data from APIs, and manages dynamic content. |
+| **MongoDB Atlas API**    | NoSQL Database API | Flexible document model, high performance, scalable | Manages and stores user data such as sessions and feedback efficiently. |
 
 ## API Usage
 
@@ -306,3 +304,4 @@ All notable changes to this project will be documented in this section.
 - **Future Enhancements**: Plans include additional interaction features and data analysis improvements.
 
 ### [Sprint 3] - To be updated
+
