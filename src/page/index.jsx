@@ -345,7 +345,7 @@ export default function Main() {
     sessionId
   ) => {
     try {
-      const response = await fetch("https://ai-chatterbox.mb6.top/db/user-info", { // 假设 API 路径为 /user-info
+      const response = await fetch("https://ai-chatterbox.mb6.top/db/user-info", { 
         method: "POST",
         headers: {
           "Content-Type": "application/json",
