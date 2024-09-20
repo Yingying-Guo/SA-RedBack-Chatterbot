@@ -285,7 +285,7 @@ export default function Main() {
   const sendMessageToServer = async (message, creativityLevel, sessionId) => {
     if (message.trim()) {
       try {
-        const response = await fetch("https://saredback.onrender.com/openai/completion", {
+        const response = await fetch("https://ai-chatterbox.mb6.top/openai/completion", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -345,7 +345,7 @@ export default function Main() {
     sessionId
   ) => {
     try {
-      const response = await fetch("https://saredback.onrender.com/db/user-info", { // 假设 API 路径为 /user-info
+      const response = await fetch("https://ai-chatterbox.mb6.top/db/user-info", { // 假设 API 路径为 /user-info
         method: "POST",
         headers: {
           "Content-Type": "application/json",
