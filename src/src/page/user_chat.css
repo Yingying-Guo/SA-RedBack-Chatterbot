@@ -1542,3 +1542,13 @@ button {
 .creativity-level-button.active:hover {
   background-color: #3c49c0;
 }
+
+
+.topic-box {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.topic-box:hover {
+  background-color: #f0f0f0;
+}

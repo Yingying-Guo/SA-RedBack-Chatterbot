@@ -30,8 +30,10 @@ export default function Main() {
   const [DoB, setDoB] = useState("");
   const [showTermsOfUse, setShowTermsOfUse] = useState(false);
   const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
+  
 
 
+  
   // Load the chat page css
   useEffect(() => {
     if (showNewInterface) {
@@ -272,6 +274,12 @@ export default function Main() {
     "Zambia",
     "Zimbabwe",
   ];
+
+  const handleTopicClick = (topic) => {
+    setInputText(topic);
+    setIsInputFocused(true);
+    setIsConvStart(true);
+  };
 
   // Function to determine whether the "Start" button should be enabled
   const isButtonEnabled = () => {
@@ -528,25 +536,25 @@ if (showPrivacyPolicy) {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Conversation start topic */}
 
+          {/* Conversation start topic */}
           {conversation.length === 0 && !isConvStart && (
             <div className="frame-34">
               <div className="group-35" />
               <div className="frame-36">
-                <div className="frame-37">
+                <div className="frame-37 topic-box" onClick={() => handleTopicClick("Sustainability and Climate Change")}>
                   <div className="clarity-plane-line" />
                   <span className="start-idea-text">
                     Sustainability and Climate Change
                   </span>
                 </div>
-                <div className="frame-38">
+                <div className="frame-38 topic-box" onClick={() => handleTopicClick("University of Melbourne")}>
                   <div className="group-39" />
                   <span className="start-idea-text">
                     University of Melbourne
                   </span>
                 </div>
-                <div className="frame-3a">
+                <div className="frame-3a topic-box" onClick={() => handleTopicClick("AI and Machine Learning")}>
                   <div className="carbon-idea">
                     <div className="vector-3b" />
                   </div>
@@ -554,7 +562,7 @@ if (showPrivacyPolicy) {
                     AI and Machine Learning
                   </span>
                 </div>
-                <div className="frame-3c">
+                <div className="frame-3c topic-box" onClick={() => handleTopicClick("Diversity and Inclusion")}>
                   <div className="projector-screen-light">
                     <div className="vector-3d" />
                   </div>
@@ -567,13 +575,14 @@ if (showPrivacyPolicy) {
           )}
 
           {/* Message input */}
-
           <div className="type">
             <input
               className="type-input"
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               onFocus={() => setIsInputFocused(true)}
+              onBlur={() => setIsInputFocused(false)}
+              // placeholder="What's in your mind?..."
               onKeyPress={(e) => {
                 if (e.key === "Enter" && !isWaitingForBotResponse) {
                   handleSend();
