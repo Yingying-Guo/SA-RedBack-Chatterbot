@@ -63,17 +63,17 @@ export default function Main() {
 
   // Update DoB whenever selectedYear, selectedMonth, or selectedDate changes
   useEffect(() => {
-    if (selectedYear && selectedMonth && selectedDate) {
+    if (selectedYear && selectedMonth) {
       const formattedDoB = `${selectedYear}-${months.indexOf(selectedMonth) + 1
-        }-${selectedDate}`;
+        }`;
       setDoB(formattedDoB);
       console.log("DoB:", formattedDoB); // Output the DoB
     }
-  }, [selectedYear, selectedMonth, selectedDate]);
+  }, [selectedYear, selectedMonth]);
 
   // State months, dates, years and countries
   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  const dates = Array.from({ length: 31 }, (_, i) => i + 1);
+  // const dates = Array.from({ length: 31 }, (_, i) => i + 1);
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: 100 }, (_, i) => currentYear - i);
   const countries = [
@@ -291,7 +291,7 @@ export default function Main() {
       selectedCountry &&
       selectedGender &&
       selectedMonth &&
-      selectedDate &&
+      // selectedDate &&
       selectedYear
     );
   };
@@ -745,7 +745,7 @@ if (showPrivacyPolicy) {
                     ))}
                   </select>
                 </div>
-                <div className="text-field-13">
+                {/* <div className="text-field-13">
                   <div className="frame-14">
                     <span className="label-15">Date</span>
                   </div>
@@ -761,7 +761,7 @@ if (showPrivacyPolicy) {
                       </option>
                     ))}
                   </select>
-                </div>
+                </div> */}
                 <div className="text-field-18">
                   <div className="frame-19">
                     <span className="label-1a">Year</span>
@@ -808,7 +808,7 @@ if (showPrivacyPolicy) {
             <div className="link-text">
               <div className="terms-privacy-policy">
                 <span className="create-account">
-                  By creating an account, you agree to the
+                  By creating an account, you agree to the&nbsp;
                 </span>
                 <span className="terms-of-use" onClick={() => setShowTermsOfUse(true)}>Terms of use</span>
                 <span className="empty"> </span>

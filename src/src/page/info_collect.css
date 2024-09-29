@@ -21,6 +21,16 @@ button {
   outline: 0;
 }
 
+.terms-of-use:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.terms-of-use-21:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
 .main-container {
   overflow: hidden;
   box-sizing: border-box;
