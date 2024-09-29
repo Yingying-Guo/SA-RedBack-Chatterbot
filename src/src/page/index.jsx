@@ -6,6 +6,8 @@ import botAvatar from '../assets/images/Group 1437252836.png';
 import TermsOfUse from './TermsOfUse';
 import PrivacyPolicy from './PrivacyPolicy';
 import LandingPage from './LandingPage';
+import TopicBoxes from './suggestions'; 
+
 
 export default function Main() {
   // State control
@@ -537,41 +539,12 @@ export default function Main() {
 
 
           {/* Conversation start topic */}
+
           {conversation.length === 0 && !isConvStart && (
-            <div className="frame-34">
-              <div className="group-35" />
-              <div className="frame-36">
-                <div className="frame-37 topic-box" onClick={() => handleTopicClick("Sustainability and Climate Change")}>
-                  <div className="clarity-plane-line" />
-                  <span className="start-idea-text">
-                    Sustainability and Climate Change
-                  </span>
-                </div>
-                <div className="frame-38 topic-box" onClick={() => handleTopicClick("University of Melbourne")}>
-                  <div className="group-39" />
-                  <span className="start-idea-text">
-                    University of Melbourne
-                  </span>
-                </div>
-                <div className="frame-3a topic-box" onClick={() => handleTopicClick("AI and Machine Learning")}>
-                  <div className="carbon-idea">
-                    <div className="vector-3b" />
-                  </div>
-                  <span className="start-idea-text">
-                    AI and Machine Learning
-                  </span>
-                </div>
-                <div className="frame-3c topic-box" onClick={() => handleTopicClick("Diversity and Inclusion")}>
-                  <div className="projector-screen-light">
-                    <div className="vector-3d" />
-                  </div>
-                  <span className="start-idea-text">
-                    Diversity and Inclusion
-                  </span>
-                </div>
-              </div>
-            </div>
-          )}
+            <TopicBoxes onTopicClick={handleTopicClick} />
+            )}
+          
+          
 
           {/* Message input */}
           <div className="type">

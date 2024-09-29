@@ -1093,7 +1093,7 @@ button {
   padding-bottom: 80px;
 }
 
-.frame-34 {
+/* .frame-34 {
   position: relative;
   width: 833px;
   height: 434px;
@@ -1103,9 +1103,9 @@ button {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
+} */
 
-.group-35 {
+/* .group-35 {
   position: relative;
   width: 100px;
   height: 95px;
@@ -1136,7 +1136,7 @@ button {
   z-index: 95;
   overflow: hidden;
   border-radius: 30px;
-}
+} */
 
 .clarity-plane-line {
   display: flex;
@@ -1154,7 +1154,7 @@ button {
   overflow: hidden;
 }
 
-.frame-38 {
+/* .frame-38 {
   position: absolute;
   width: 195px;
   height: 128px;
@@ -1189,7 +1189,7 @@ button {
   z-index: 101;
   overflow: hidden;
   border-radius: 30px;
-}
+} */
 
 .carbon-idea {
   position: relative;
@@ -1200,7 +1200,7 @@ button {
   overflow: hidden;
 }
 
-.vector-3b {
+/* .vector-3b {
   position: relative;
   width: 22.88px;
   height: 32px;
@@ -1209,9 +1209,9 @@ button {
     no-repeat center;
   background-size: 100% 100%;
   z-index: 103;
-}
+} */
 
-.start-idea-text {
+/* .start-idea-text {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
@@ -1226,9 +1226,9 @@ button {
   line-height: 26.669px;
   text-align: left;
   z-index: 99;
-}
+} */
 
-.frame-3c {
+/* .frame-3c {
   position: absolute;
   width: 195px;
   height: 128px;
@@ -1239,7 +1239,7 @@ button {
   z-index: 105;
   overflow: hidden;
   border-radius: 30px;
-}
+} */
 
 .projector-screen-light {
   position: relative;
@@ -1250,7 +1250,7 @@ button {
   overflow: hidden;
 }
 
-.vector-3d {
+/* .vector-3d {
   position: relative;
   width: 25.5px;
   height: 27.501px;
@@ -1259,7 +1259,7 @@ button {
     no-repeat center;
   background-size: 100% 100%;
   z-index: 108;
-}
+} */
 
 .type {
   display: flex;
@@ -1551,4 +1551,92 @@ button {
 
 .topic-box:hover {
   background-color: #f0f0f0;
+}
+
+/* 在 user_chat.css 文件中修改以下样式 */
+
+.suggestions-container {
+  position: absolute;
+  width: 100%; /* 使用100%宽度 */
+  height: 434px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 92;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.suggestions-icon {
+  width: 100px;
+  height: 95px;
+  margin-bottom: 20px; /* 添加一些底部边距 */
+  background: url(../assets/images/7a34207c-b9f5-4735-85b7-d2aa5ffe4ea2.png) no-repeat center;
+  background-size: 100% 100%;
+}
+
+.suggestions-grid {
+  width: 100%;
+  max-width: 833px; /* 设置最大宽度 */
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* 添加间隔 */
+  padding: 0 20px; /* 添加一些水平内边距 */
+}
+
+.suggestion-box {
+  flex: 1;
+  max-width: 195px; /* 设置最大宽度 */
+  height: 128px;
+  background: #ffffff;
+  border: 1px solid #e7e7e7;
+  border-radius: 30px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 13px;
+}
+
+.suggestion-box:hover {
+  background-color: #f0f0f0;
+}
+
+.suggestion-icon {
+  width: 32px;
+  height: 32px;
+  background-size: cover;
+  margin-bottom: 10px;
+}
+
+.suggestion-text {
+  width: 100%;
+  color: #000000;
+  font-family: Segoe UI, var(--default-font-family);
+  font-size: 16px; /* 稍微减小字体大小 */
+  font-weight: 400;
+  line-height: 1.2;
+  text-align: left;
+}
+
+/* 保持特定图标样式不变 */
+.clarity-plane-line {
+  background-image: url(../assets/images/62f0e23d-b486-4bb1-900c-5ba487f6bef7.png);
+}
+
+.group-39 {
+  background-image: url(../assets/images/2319c189-c6d4-499a-890c-7534a9a9c5b3.png);
+}
+
+.carbon-idea {
+  background-image: url(../assets/images/ea22f177-abf9-4bc4-b5db-881eccbc8891.png);
+}
+
+.projector-screen-light {
+  background-image: url(../assets/images/3bf801d5-c55d-4953-95b0-22b4cb8e69c9.png);
 }
