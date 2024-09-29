@@ -1,11 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./info_collect.css";
-// import images from assets
+import "./landing_page.css";
 import userAvatar from '../assets/images/5593d02b8cf746b1a827a90f620354ed.png';
 import botAvatar from '../assets/images/Group 1437252836.png';
+import TermsOfUse from './TermsOfUse';
+import PrivacyPolicy from './PrivacyPolicy';
+import LandingPage from './LandingPage';
 
 export default function Main() {
   // State control
+  const [currentPage, setCurrentPage] = useState('landing');
   const [showNewInterface, setShowNewInterface] = useState(false);
   const [isRobotChecked, setIsRobotChecked] = useState(false);
   const [isDataShared, setIsDataShared] = useState(false);
@@ -24,6 +28,9 @@ export default function Main() {
   const [creativityLevel, setCreativityLevel] = useState("medium");
   const [sessionId, setSessionId] = useState("");
   const [DoB, setDoB] = useState("");
+  const [showTermsOfUse, setShowTermsOfUse] = useState(false);
+  const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
+
 
   // Load the chat page css
   useEffect(() => {
@@ -375,6 +382,7 @@ export default function Main() {
     }
   };
 
+  
   // Handle information collection page
   const handleStartChat = async () => {
     // console.log('DoB:', DoB);
@@ -384,8 +392,34 @@ export default function Main() {
       DoB,
       sessionId
     );
+    // setShowNewInterface(true);
   };
+  
 
+const handleTermsAccept = () => {
+  setShowTermsOfUse(false);
+};
+
+const handlePrivacyPolicyAccept = () => {
+  setShowPrivacyPolicy(false);
+};
+
+const handleGetStarted = () => {
+  setCurrentPage('info');
+};
+
+if (currentPage === 'landing') {
+  return <LandingPage onGetStarted={handleGetStarted} />;
+}
+
+if (showTermsOfUse) {
+  return <TermsOfUse onAccept={handleTermsAccept} />;
+}
+
+
+if (showPrivacyPolicy) {
+  return <PrivacyPolicy onAccept={handlePrivacyPolicyAccept} />;
+}
   {
     /* Main chat page */
   }
@@ -767,11 +801,12 @@ export default function Main() {
                 <span className="create-account">
                   By creating an account, you agree to the
                 </span>
-                <span className="terms-of-use">Terms of use</span>
+                <span className="terms-of-use" onClick={() => setShowTermsOfUse(true)}>Terms of use</span>
                 <span className="empty"> </span>
                 <span className="create-account-1f">and</span>
                 <span className="empty-20"> </span>
-                <span className="terms-of-use-21">Privacy Policy.</span>
+                <span className="terms-of-use-21" onClick={() => setShowPrivacyPolicy(true)}>Privacy Policy.</span>
+
                 <span className="empty-22"> </span>
               </div>
             </div>
