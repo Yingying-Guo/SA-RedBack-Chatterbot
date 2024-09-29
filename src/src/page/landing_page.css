@@ -1,145 +1,172 @@
 .landing-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #f4f4f4;
-    font-family: var(--default-font-family);
-  }
-  
-  .landing-content {
-    text-align: center;
-    padding: 2rem;
-    background-color: white;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
-    width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f4f4f4;
+  font-family: var(--default-font-family);
+}
+
+.landing-content {
+  text-align: center;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  width: 90%;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.landing-content.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.logo {
+  width: 100px;
+  margin-bottom: 1rem;
+}
+
+.landing-content h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.landing-content h2 {
+  font-size: 1.5rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+}
+
+.main-image-container {
+  margin: 1.5rem 0;
+}
+
+.main-image {
+  max-width: 100%;
+  height: auto;
+  max-height: 300px;
+  border-radius: 10px;
+}
+
+.landing-content p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.get-started-btn {
+  background-color: #5661f6;
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.get-started-btn:hover {
+  background-color: #4550e6;
+  box-shadow: 0 5px 15px rgba(86, 97, 246, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
   }
-  
-  .landing-content.visible {
+
+  to {
     opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
-  
-  .logo {
-    width: 100px;
-    margin-bottom: 1rem;
+
+  50% {
+    transform: translateY(-10px);
   }
-  
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s ease-out forwards;
+}
+
+.animate-fade-in-delay {
+  animation: fadeIn 1s ease-out 0.5s forwards;
+  opacity: 0;
+}
+
+.animate-fade-in-delay-2 {
+  animation: fadeIn 1s ease-out 1s forwards;
+  opacity: 0;
+}
+
+.animate-scale-in {
+  animation: scaleIn 1s ease-out forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s infinite;
+}
+
+@media (max-width: 768px) {
   .landing-content h1 {
-    font-size: 2.5rem;
-    color: #333;
-    margin-bottom: 0.5rem;
-    font-weight: 700;
+    font-size: 2rem;
   }
-  
+
   .landing-content h2 {
-    font-size: 1.5rem;
-    color: #666;
-    margin-bottom: 1.5rem;
-    font-weight: 400;
+    font-size: 1.2rem;
   }
-  
-  .main-image-container {
-    margin: 1.5rem 0;
-  }
-  
-  .main-image {
-    max-width: 100%;
-    height: auto;
-    max-height: 300px;
-    border-radius: 10px;
-  }
-  
-  .landing-content p {
-    font-size: 1rem;
-    color: #666;
-    margin-bottom: 1.5rem;
-  }
-  
+
   .get-started-btn {
-    background-color: #5661f6;
-    color: white;
-    border: none;
-    padding: 0.8rem 2rem;
-    font-size: 1rem;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    padding: 0.6rem 1.5rem;
+    font-size: 0.9rem;
   }
-  
-  .get-started-btn:hover {
-    background-color: #4550e6;
-    box-shadow: 0 5px 15px rgba(86, 97, 246, 0.4);
-    transform: translateY(-2px);
-  }
-  
-  /* Animations */
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  
-  @keyframes scaleIn {
-    from { transform: scale(0.9); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-  }
-  
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-  
-  @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-  }
-  
-  .animate-fade-in {
-    animation: fadeIn 1s ease-out forwards;
-  }
-  
-  .animate-fade-in-delay {
-    animation: fadeIn 1s ease-out 0.5s forwards;
-    opacity: 0;
-  }
-  
-  .animate-fade-in-delay-2 {
-    animation: fadeIn 1s ease-out 1s forwards;
-    opacity: 0;
-  }
-  
-  .animate-scale-in {
-    animation: scaleIn 1s ease-out forwards;
-  }
-  
-  .animate-float {
-    animation: float 3s ease-in-out infinite;
-  }
-  
-  .animate-pulse {
-    animation: pulse 2s infinite;
-  }
-  
-  @media (max-width: 768px) {
-    .landing-content h1 {
-      font-size: 2rem;
-    }
-  
-    .landing-content h2 {
-      font-size: 1.2rem;
-    }
-  
-    .get-started-btn {
-      padding: 0.6rem 1.5rem;
-      font-size: 0.9rem;
-    }
-  }
+}

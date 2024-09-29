@@ -16,7 +16,6 @@ export default function Main() {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedGender, setSelectedGender] = useState("");
   const [selectedMonth, setSelectedMonth] = useState("");
-  const [selectedDate, setSelectedDate] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
   const [inputText, setInputText] = useState("");
   const [searchInputText, setSearchInputText] = useState("");
@@ -30,10 +29,10 @@ export default function Main() {
   const [DoB, setDoB] = useState("");
   const [showTermsOfUse, setShowTermsOfUse] = useState(false);
   const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
-  
 
 
-  
+
+
   // Load the chat page css
   useEffect(() => {
     if (showNewInterface) {
@@ -360,7 +359,7 @@ export default function Main() {
     sessionId
   ) => {
     try {
-      const response = await fetch("https://ai-chatterbox.mb6.top/db/user-info", { 
+      const response = await fetch("https://ai-chatterbox.mb6.top/db/user-info", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -390,7 +389,7 @@ export default function Main() {
     }
   };
 
-  
+
   // Handle information collection page
   const handleStartChat = async () => {
     // console.log('DoB:', DoB);
@@ -402,32 +401,32 @@ export default function Main() {
     );
     // setShowNewInterface(true);
   };
-  
-
-const handleTermsAccept = () => {
-  setShowTermsOfUse(false);
-};
-
-const handlePrivacyPolicyAccept = () => {
-  setShowPrivacyPolicy(false);
-};
-
-const handleGetStarted = () => {
-  setCurrentPage('info');
-};
-
-if (currentPage === 'landing') {
-  return <LandingPage onGetStarted={handleGetStarted} />;
-}
-
-if (showTermsOfUse) {
-  return <TermsOfUse onAccept={handleTermsAccept} />;
-}
 
 
-if (showPrivacyPolicy) {
-  return <PrivacyPolicy onAccept={handlePrivacyPolicyAccept} />;
-}
+  const handleTermsAccept = () => {
+    setShowTermsOfUse(false);
+  };
+
+  const handlePrivacyPolicyAccept = () => {
+    setShowPrivacyPolicy(false);
+  };
+
+  const handleGetStarted = () => {
+    setCurrentPage('info');
+  };
+
+  if (currentPage === 'landing') {
+    return <LandingPage onGetStarted={handleGetStarted} />;
+  }
+
+  if (showTermsOfUse) {
+    return <TermsOfUse onAccept={handleTermsAccept} />;
+  }
+
+
+  if (showPrivacyPolicy) {
+    return <PrivacyPolicy onAccept={handlePrivacyPolicyAccept} />;
+  }
   {
     /* Main chat page */
   }
