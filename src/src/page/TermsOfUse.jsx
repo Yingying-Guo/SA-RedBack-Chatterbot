@@ -1,5 +1,5 @@
 import React from 'react';
-import './TermsOfUse.css';
+import './LegalStyles.css';
 
 const TermsOfUse = ({ onAccept }) => {
     return (

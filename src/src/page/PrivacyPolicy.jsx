@@ -1,5 +1,5 @@
 import React from 'react';
-import './PrivacyPolicy.css';
+import './LegalStyles.css';
 
 const PrivacyPolicy = ({ onAccept }) => {
     return (
