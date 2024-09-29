@@ -1553,13 +1553,13 @@ button {
   background-color: #f0f0f0;
 }
 
-/* 在 user_chat.css 文件中修改以下样式 */
+
 
 .suggestions-container {
   position: absolute;
-  width: 100%; /* 使用100%宽度 */
+  width: 100%;
   height: 434px;
-  top: 50%;
+  top: 45%; 
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 92;
@@ -1573,23 +1573,25 @@ button {
 .suggestions-icon {
   width: 100px;
   height: 95px;
-  margin-bottom: 20px; /* 添加一些底部边距 */
+  margin-bottom: 30px; 
   background: url(../assets/images/7a34207c-b9f5-4735-85b7-d2aa5ffe4ea2.png) no-repeat center;
   background-size: 100% 100%;
 }
 
 .suggestions-grid {
   width: 100%;
-  max-width: 833px; /* 设置最大宽度 */
+  max-width: 833px;
   display: flex;
   justify-content: center;
-  gap: 20px; /* 添加间隔 */
-  padding: 0 20px; /* 添加一些水平内边距 */
+  gap: 20px;
+  padding: 0 20px;
 }
+
+/* 其他样式保持不变 */
 
 .suggestion-box {
   flex: 1;
-  max-width: 195px; /* 设置最大宽度 */
+  max-width: 195px;
   height: 128px;
   background: #ffffff;
   border: 1px solid #e7e7e7;
@@ -1618,13 +1620,15 @@ button {
   width: 100%;
   color: #000000;
   font-family: Segoe UI, var(--default-font-family);
-  font-size: 16px; /* 稍微减小字体大小 */
+  font-size: 16px;
   font-weight: 400;
   line-height: 1.2;
   text-align: left;
 }
 
-/* 保持特定图标样式不变 */
+
+
+
 .clarity-plane-line {
   background-image: url(../assets/images/62f0e23d-b486-4bb1-900c-5ba487f6bef7.png);
 }
