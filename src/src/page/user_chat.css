@@ -1648,3 +1648,21 @@ button {
 .projector-screen-light {
   background-image: url(../assets/images/3bf801d5-c55d-4953-95b0-22b4cb8e69c9.png);
 }
+
+
+.loading-indicator {
+  background-color: #e0e0e0;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}

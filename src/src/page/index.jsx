@@ -31,6 +31,7 @@ export default function Main() {
   const [DoB, setDoB] = useState("");
   const [showTermsOfUse, setShowTermsOfUse] = useState(false);
   const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
+  
 
 
 
@@ -344,14 +345,25 @@ export default function Main() {
     }
   };
 
-  // Function to handle sending a user message
+  // // Function to handle sending a user message
+  // const handleSend = async () => {
+  //   if (inputText.trim()) {
+  //     setConversation([...conversation, { type: "user", text: inputText }]);
+  //     setInputText("");
+  //     await sendMessageToServer(inputText, creativityLevel, sessionId);
+  //   }
+  // };
+
   const handleSend = async () => {
     if (inputText.trim()) {
       setConversation([...conversation, { type: "user", text: inputText }]);
       setInputText("");
+      setIsWaitingForBotResponse(true);
       await sendMessageToServer(inputText, creativityLevel, sessionId);
+      setIsWaitingForBotResponse(false);
     }
   };
+
 
   // Function to handle sending the user information to server
   const sendUserInformationToServer = async (
@@ -522,21 +534,30 @@ export default function Main() {
         {/* Conversation side content */}
 
         <div className="flex-column-acdd">
-          <div className="message-column">
-            {conversation.map((message, index) => (
-              <div key={index} className={`message-container ${message.type}`}>
-                <img
-                  className="avatar"
-                  src={message.type === "user" ? userAvatar : botAvatar}
-                  alt={message.type === "user" ? "User Avatar" : "Bot Avatar"}
-                />
-
-                <div className={`message-box ${message.type}`}>
-                  <span>{message.text}</span>
-                </div>
-              </div>
-            ))}
-            <div ref={messagesEndRef} />
+        <div className="message-column">
+      {conversation.map((message, index) => (
+        <div key={index} className={`message-container ${message.type}`}>
+          <img
+            className="avatar"
+            src={message.type === "user" ? userAvatar : botAvatar}
+            alt={message.type === "user" ? "User Avatar" : "Bot Avatar"}
+          />
+          <div className={`message-box ${message.type}`}>
+            <span>{message.text}</span>
+          </div>
+        </div>
+      ))}
+      
+      {isWaitingForBotResponse && (
+        <div className="message-container bot">
+          <img className="avatar" src={botAvatar} alt="Bot Avatar" />
+          <div className="message-box bot loading-indicator">
+            <span>I am thinking...</span>
+          </div>
+        </div>
+      )}
+      
+      <div ref={messagesEndRef} />
           </div>
 
 
