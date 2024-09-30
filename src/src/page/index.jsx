@@ -435,6 +435,7 @@ export default function Main() {
   if (showNewInterface) {
     return (
       <div className="main-container">
+
         {/* Sidebar */}
 
         <div className="flex-column-c">
@@ -442,6 +443,7 @@ export default function Main() {
             <div className="subtract" />
             <div className="frame-1">
               <div className="component">
+
                 {/* New conversation button */}
 
                 <button className="group" onClick={() => setConversation([])}>
@@ -544,9 +546,8 @@ export default function Main() {
             <TopicBoxes onTopicClick={handleTopicClick} />
             )}
           
-          
-
           {/* Message input */}
+
           <div className="type">
             <input
               className="type-input"

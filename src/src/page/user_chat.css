@@ -1602,7 +1602,9 @@ button {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 13px;
+  justify-content: flex-start; 
+  padding: 15px;
+  box-sizing: border-box;
 }
 
 .suggestion-box:hover {
@@ -1612,8 +1614,10 @@ button {
 .suggestion-icon {
   width: 32px;
   height: 32px;
-  background-size: cover;
   margin-bottom: 10px;
+  background-size: contain; 
+  background-position: center; 
+  background-repeat: no-repeat;
 }
 
 .suggestion-text {

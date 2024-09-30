@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import logo from '../assets/images/7a34207c-b9f5-4735-85b7-d2aa5ffe4ea2.png';
+import logo from '../assets/images/ebbecad5-4964-4733-97e7-b2a0085ae42f.png';
 import image from '../assets/images/image_landing_page.png';
 
 const LandingPage = ({ onGetStarted }) => {
