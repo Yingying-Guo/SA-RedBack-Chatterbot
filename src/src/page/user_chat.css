@@ -1666,3 +1666,14 @@ button {
     opacity: 0.6;
   }
 }
+
+
+.user-chat-container {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.user-chat-container.fade-in {
+  opacity: 1;
+}
+

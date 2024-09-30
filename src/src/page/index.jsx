@@ -31,6 +31,8 @@ export default function Main() {
   const [DoB, setDoB] = useState("");
   const [showTermsOfUse, setShowTermsOfUse] = useState(false);
   const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
+  const [isCSSLoaded, setIsCSSLoaded] = useState(false);
+  const [isInfoCollectCSSLoaded, setIsInfoCollectCSSLoaded] = useState(false);
   
 
 
@@ -72,6 +74,26 @@ export default function Main() {
       console.log("DoB:", formattedDoB); // Output the DoB
     }
   }, [selectedYear, selectedMonth]);
+
+
+  useEffect(() => {
+    if (showNewInterface) {
+      import("./user_chat.css").then(() => {
+        setTimeout(() => setIsCSSLoaded(true), 100);
+      });
+    }
+  }, [showNewInterface]);
+
+
+useEffect(() => {
+  if (currentPage === 'info') {
+    import("./info_collect.css").then(() => {
+      setTimeout(() => setIsInfoCollectCSSLoaded(true), 100);
+    });
+  }
+}, [currentPage]);
+
+
 
   // State months, dates, years and countries
   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -444,8 +466,12 @@ export default function Main() {
   {
     /* Main chat page */
   }
+  
   if (showNewInterface) {
     return (
+      <>
+      {isCSSLoaded && (
+      <div className={`user-chat-container ${isCSSLoaded ? 'fade-in' : ''}`}>
       <div className="main-container">
 
         {/* Sidebar */}
@@ -618,6 +644,9 @@ export default function Main() {
           </button>
         </div>
       </div>
+      </div>
+      )}
+      </>
     );
   }
 
@@ -625,8 +654,12 @@ export default function Main() {
     /* Information collection page */
   }
 
+if (currentPage === 'info') {
   return (
-    <div className="main-container">
+    <>
+    {isInfoCollectCSSLoaded && (
+      <div className={`info-collect-container ${isInfoCollectCSSLoaded ? 'fade-in' : ''}`}>
+      <div className="main-container">
       {/* Logo and title */}
 
       <div className="content">
@@ -872,5 +905,9 @@ export default function Main() {
         </div>
       </div>
     </div>
+    </div>
+    )}
+    </>
   );
+}
 }
