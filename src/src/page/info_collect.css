@@ -294,7 +294,7 @@ button {
   flex-shrink: 0;
   gap: 8px;
   position: relative;
-  /* width: 100px; */
+  width: auto;
   padding: 0 8px 0 8px;
   z-index: 17;
 }
@@ -478,6 +478,7 @@ button {
   text-align: left;
   white-space: nowrap;
   z-index: 31;
+  
 }
 
 .text-field-11 {
@@ -602,6 +603,7 @@ button {
   text-align: left;
   white-space: nowrap;
   z-index: 41;
+  
 }
 
 .text-field-1b {
@@ -646,7 +648,7 @@ button {
   flex-shrink: 0;
   gap: 8px;
   position: relative;
-  width: 499px;
+  width: 600px;
   padding: 8px 8px 8px 0;
   z-index: 45;
 }
@@ -668,15 +670,15 @@ button {
   justify-content: flex-start;
   flex-shrink: 0;
   position: relative;
-  width: 459px;
-  height: 48px;
+  width: 600px;
+  height: auto;
   color: #333333;
   font-family: Poppins, var(--default-font-family);
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
   text-align: left;
-  text-overflow: initial;
+  /* text-overflow: ellipsis; */
   z-index: 47;
   overflow: hidden;
 }
@@ -792,6 +794,7 @@ button {
   border-radius: 18px;
 
   padding-top: 20px;
+  
 }
 
 .not-a-robot-checkbox-input {
@@ -830,6 +833,9 @@ button {
   top: 21px;
   left: 23px;
   z-index: 51;
+
+
+  
 }
 
 .check-box-24 {
@@ -841,6 +847,7 @@ button {
   background-size: cover;
   z-index: 52;
   overflow: hidden;
+  
 }
 
 .not-a-robot {
@@ -873,6 +880,7 @@ button {
   position: relative;
   width: 578px;
   z-index: 56;
+  
 }
 
 .button {
@@ -916,11 +924,8 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: nowrap;
-  gap: 8px;
-  position: relative;
-  width: 54px;
-  margin: 15px 0 0 262px;
+  width: 100%;
+  height: 100%;
   z-index: 59;
 }
 
@@ -1224,4 +1229,107 @@ button {
 
 .already-have-an-account:hover {
   color: #2196f3;
+}
+
+.info-collect-container {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.info-collect-container.fade-in {
+  opacity: 1;
+}
+
+
+
+
+/* for phone responsive design */
+
+
+/* .content {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+} */
+
+@media (max-width: 768px) {
+  .content {
+    width: 100%;
+    margin-right: 0;
+    padding: 0 16px;
+  }
+
+  /* .start-chat {
+    font-size: 24px;
+  } */
+
+  .frame-7 {
+    flex-direction: column;
+  }
+
+  .radio-button {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  
+  /* .sign-up-28 {
+    font-size: 18px;
+  } */
+
+  .frame {
+    flex-direction: column;
+  }
+
+  .frame-e {
+    display: block;
+  }
+
+  .text-field-f {
+    margin-bottom: 16px;
+  }
+  
+  .receive-emails {
+    white-space: normal;
+    word-wrap: break-word;
+    flex-wrap: wrap;
+    width: 100%;
+    height: auto;
+  }
+
+  .check-box {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 8px 8px 8px 0;
+  }
+
+  .terms-privacy-policy {
+    white-space: normal;
+    word-wrap: break-word;
+    flex-wrap: wrap;
+    width: 100%;
+    height: auto;
+  }
+
+  .button {
+    flex-shrink: 0;
+    position: relative;
+    width: 90%;
+    height: 64px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    z-index: 57;
+    
+  }
+
+  .sign-up-28 {
+    width: 200px;
+  }
+  
+  .main-container, .text-field, .country-select, .content, .frame, .frame-1, .basic-info, .frame-2, .frame-3, .frame-5, .frame-d, .frame-e, .frame-1d, .link-text, .not-a-robot-checkbox, .frame-25 {
+    width: 100%;
+  }
+
 }

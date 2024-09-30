@@ -823,9 +823,7 @@ if (currentPage === 'info') {
                 />
                 <span className="checkmark"></span>
                 <span className="receive-emails">
-                  Share my registration data with our content providers for{" "}
-                  <br />
-                  research purposes.
+                  Share my registration data with our content providers for research purposes.
                 </span>
               </label>
             </div>
@@ -835,7 +833,7 @@ if (currentPage === 'info') {
             <div className="link-text">
               <div className="terms-privacy-policy">
                 <span className="create-account">
-                  By creating an account, you agree to the&nbsp;
+                  By creating a chat, you agree to the&nbsp;
                 </span>
                 <span className="terms-of-use" onClick={() => setShowTermsOfUse(true)}>Terms of use</span>
                 <span className="empty"> </span>
