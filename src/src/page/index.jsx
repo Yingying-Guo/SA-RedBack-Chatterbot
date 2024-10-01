@@ -95,6 +95,13 @@ useEffect(() => {
   }
 }, [currentPage]);
 
+
+const handleNewConversation = () => {
+  setConversation([]);
+  setInputText(""); 
+  setIsConvStart(false); 
+};
+
 // useEffect(() => {
 //   if (!isMobile) {
 //     document.documentElement.style.setProperty('--sidebar-width', '300px');
@@ -545,7 +552,7 @@ useEffect(() => {
 
 
 
-                <button className="group" onClick={() => setConversation([])}>
+            <button className="group" onClick={handleNewConversation}>
                   {/* <div className="group-2"> */}
                     {/* <div className="vuesax-linear-add"> */}
                       <div className="vuesax-linear-add-3">
