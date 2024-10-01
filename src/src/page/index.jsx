@@ -100,6 +100,29 @@ useEffect(() => {
 }, [currentPage]);
 
 
+useEffect(() => {
+  const handleResize = () => {
+    setIsMobile(window.innerWidth <= 768);
+  };
+
+  window.addEventListener('resize', handleResize);
+
+  return () => {
+    window.removeEventListener('resize', handleResize);
+  };
+}, []);
+
+
+useEffect(() => {
+  if (isMobile) {
+    document.documentElement.style.setProperty('--sidebar-width', `0px`);
+    setIsSidebarOpen(false);
+  } else {
+    document.documentElement.style.setProperty('--sidebar-width', `320px`);
+    setIsSidebarOpen(true);
+  }
+}, [])
+
 const handleNewConversation = () => {
   setConversation([]);
   setInputText(""); 
@@ -326,17 +349,6 @@ const handleNewConversation = () => {
 
 
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -668,7 +680,7 @@ const handleNewConversation = () => {
 
             <div className="creativity-level-container">
               <div className="creativity-level-header">
-                Choose a creativity level
+                Pick a creativity level
               </div>
               <div className="creativity-level-buttons">
                 <button
@@ -841,7 +853,7 @@ if (currentPage === 'info') {
         <div className="frame">
           <div className="logo" />
           <div className="group" />
-          <span className="start-chat">Start a Chat</span>
+          <span className="start-chat">Do you want to play?</span>
         </div>
 
         {/* Ask choose region */}
@@ -850,7 +862,7 @@ if (currentPage === 'info') {
           <div className="basic-info">
             <div className="frame-2">
               <span className="choose-country">
-                Choose your region or country
+              Where in the world do you call home? (region / country)
                 <span className="red-star"> *</span>
               </span>
               <div className="frame-3">
@@ -878,7 +890,7 @@ if (currentPage === 'info') {
             <div className="gender">
               <div className="whats-your-gender">
                 <span className="whats-your-gender-6">
-                  What's your gender?
+                What's your superpower? (gender)
                   <span className="red-star"> *</span>
                 </span>
               </div>
@@ -926,7 +938,7 @@ if (currentPage === 'info') {
 
             <div className="frame-d">
               <span className="date-of-birth">
-                What's your date of birth?
+              How many times have you circled the sun? (date of birth)
                 <span className="red-star"> *</span>
               </span>
               <div className="frame-e">
@@ -1043,7 +1055,7 @@ if (currentPage === 'info') {
                   }`}
               >
                 <div className="frame-27">
-                  <span className="sign-up-28">Start</span>
+                  <span className="sign-up-28">Let's Play</span>
                 </div>
               </div>
             </button>

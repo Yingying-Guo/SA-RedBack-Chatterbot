@@ -1259,12 +1259,13 @@ button {
     padding: 0 16px;
   }
 
-  /* .start-chat {
-    font-size: 24px;
-  } */
+  .start-chat {
+    font-size: 28px;
+  }
 
   .frame-7 {
     flex-direction: column;
+    flex-wrap: wrap;
   }
 
   .radio-button {
@@ -1288,7 +1289,7 @@ button {
     margin-bottom: 16px;
   }
   
-  .receive-emails {
+  .receive-emails, .terms-privacy-policy, .choose-country, .whats-your-gender-6, .whats-your-gender, .gender, .date-of-birth {
     white-space: normal;
     word-wrap: break-word;
     flex-wrap: wrap;
@@ -1302,14 +1303,6 @@ button {
     flex-wrap: wrap;
     width: 100%;
     padding: 8px 8px 8px 0;
-  }
-
-  .terms-privacy-policy {
-    white-space: normal;
-    word-wrap: break-word;
-    flex-wrap: wrap;
-    width: 100%;
-    height: auto;
   }
 
   .button {
@@ -1327,6 +1320,7 @@ button {
   .sign-up-28 {
     width: 200px;
   }
+
   
   .main-container, .text-field, .country-select, .content, .frame, .frame-1, .basic-info, .frame-2, .frame-3, .frame-5, .frame-d, .frame-e, .frame-1d, .link-text, .not-a-robot-checkbox, .frame-25 {
     width: 100%;
