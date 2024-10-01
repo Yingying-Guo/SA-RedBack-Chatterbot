@@ -4,7 +4,7 @@
     Ubuntu, "Helvetica Neue", Helvetica, Arial, "PingFang SC",
     "Hiragino Sans GB", "Microsoft Yahei UI", "Microsoft Yahei",
     "Source Han Sans CN", sans-serif;
-  --sidebar-width: 300px;
+  --sidebar-width: 320px;
   --button-radius: 40px;
   --element-side-gap: 10px;
 }
@@ -44,6 +44,23 @@ button {
   outline: 0;
 }
 
+
+.menu-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 40px; 
+  height: 40px;
+  background: url(../assets/images/sidebar-2.png) no-repeat center center;
+  background-size: contain;
+  border: none;
+  cursor: pointer;
+  z-index: 100;
+  padding: 0;
+  display: inline-block;
+
+}
+
 .main-container {
   position: absolute;
   display: flex;
@@ -59,7 +76,7 @@ button {
   position: absolute;
   width: var(--sidebar-width);
   height: 100%;
-  z-index: 89;
+  z-index: 11;
   left: 0%;
   display: flex;
 }
@@ -132,18 +149,21 @@ button {
   left: 50%;
   background: #ffffff;
   transform: translate(-50%, -50%);
-  z-index: 11;
+  z-index: 12;
+
+
 }
 
-.subtract {
+/* .subtract {
   flex-shrink: 0;
   position: relative;
   width: 348px;
   height: 100%;
   z-index: 12;
-}
 
-.frame-1 {
+} */
+
+/* .frame-1 {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -156,35 +176,42 @@ button {
   top: 38px;
   left: 0;
   z-index: 17;
-}
+
+
+} */
 
 .component {
-  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
-  width: var(--sidebar-width);
-  height: var(--button-radius);
+  height: calc(var(--button-radius) + 20px);
+  width: 100%;
   z-index: 18;
 }
 
 .group {
-  position: absolute;
-  width: var(--button-radius);
-  height: 100%;
-  top: 0px;
-  left: var(--element-side-gap);
+  width: calc(var(--button-radius) - 5px);
+  height: calc(var(--button-radius) - 5px);
   cursor: pointer;
   background: transparent;
   border: none;
   z-index: 19;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  right: 13px;
 }
 
-.group-2 {
+/* .group-2 {
   position: relative;
 
   width: 101px;
   height: 24px;
   z-index: 21;
-}
+  background-color: #000000;
+} */
 
 .new-chat {
   display: flex;
@@ -201,34 +228,33 @@ button {
   text-align: left;
   white-space: nowrap;
   z-index: 22;
+
 }
 
-.vuesax-linear-add {
+/* .vuesax-linear-add {
   position: absolute;
   width: 17.82%;
   height: 75%;
   top: 12.5%;
   left: 5%;
   z-index: 23;
-}
+
+} */
 
 .vuesax-linear-add-3 {
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  top: 0;
-  left: 0;
-  z-index: 24;
-}
-
-.add {
-  position: absolute;
   width: 100%;
   height: 100%;
-  top: 0;
-  left: 0;
-  background: url(../assets/images/3d07ffdb-595e-4d00-b4ee-c7ee4d4bb09d.png)
-    no-repeat center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+
+.add {
+  width: 18px;
+  height: 18px;
+  background: url(../assets/images/3d07ffdb-595e-4d00-b4ee-c7ee4d4bb09d.png) no-repeat center;
   background-size: 100% 100%;
   z-index: 25;
 }
@@ -932,54 +958,52 @@ button {
 }
 
 .group-2c {
-  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
-  width: 198px;
-  height: 40px;
-  top: 10px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 13;
+
 }
 
-.group-2d {
-  position: absolute;
-  width: 188px;
-  height: 40.472px;
-  top: 0;
-  left: 0;
+/* .group-2d {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%; 
+  height: 100%; 
   z-index: 14;
-}
+
+} */
 
 .group-2e {
-  position: absolute;
-  width: 23.48%;
-  height: 100%;
-  top: 0;
-  left: 0%;
-  background: url(../assets/images/ebbecad5-4964-4733-97e7-b2a0085ae42f.png)
-    no-repeat center;
-  background-size: 100% 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: url(../assets/images/ebbecad5-4964-4733-97e7-b2a0085ae42f.png) no-repeat center;
+  background-size: contain;
+  margin-right: 10px;
   z-index: 15;
+
 }
 
 .swisp-gpt {
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  position: absolute;
-  height: 54.36%;
-  top: 22.65%;
-  left: calc(50% - 39px);
-  color: #313f53;
+  align-items: center;
+  justify-content: center;
   font-family: Inter, var(--default-font-family);
   font-size: 24px;
   font-weight: 600;
-  line-height: 22.002px;
-  text-align: left;
+  color: #313f53;
   white-space: nowrap;
   z-index: 16;
+
 }
+
 
 .frame-2f {
   display: flex;
@@ -1088,10 +1112,12 @@ button {
   width: calc(100% - var(--sidebar-width));
   height: 100%;
   left: var(--sidebar-width);
-  z-index: 92;
+  z-index: 9;
   overflow-y: hidden;
   padding-bottom: 80px;
+  
 }
+
 
 /* .frame-34 {
   position: relative;
@@ -1280,6 +1306,7 @@ button {
   overflow: hidden;
   border-radius: 30px;
   box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.08);
+  
 }
 
 .type-input {
@@ -1305,7 +1332,7 @@ button {
   gap: 8px;
   position: relative;
   min-width: 0;
-  z-index: 1;
+  z-index: 5;
 }
 
 .frame-3f {
@@ -1316,7 +1343,7 @@ button {
   gap: 42px;
   position: relative;
   width: 276px;
-  z-index: 2;
+  z-index: 3;
 }
 
 .group-40 {
@@ -1351,7 +1378,7 @@ button {
   line-height: 17px;
   text-align: left;
   white-space: nowrap;
-  z-index: 5;
+  z-index: 4;
 }
 
 .frame-42 {
@@ -1362,17 +1389,17 @@ button {
   flex-shrink: 0;
   gap: 10px;
   position: fixed;
-  bottom: 31px;
+  bottom: 30px;
   right: 4%;
   width: var(--button-radius);
   height: var(--button-radius);
-  padding: 10px 10px 10px 10px;
   background: #5661f6;
-  z-index: 6;
+  z-index: 1;
   border-radius: 60px;
   box-shadow: 0 4px 8px 0 rgba(86, 97, 246, 0.25);
   border: none;
   cursor: pointer;
+
 }
 
 .frame-42-grey {
@@ -1387,14 +1414,26 @@ button {
   right: 4%;
   width: var(--button-radius);
   height: var(--button-radius);
-  padding: 10px 10px 10px 10px;
   background: #e0e0e0;
-
-  z-index: 6;
+  z-index: 1;
   border-radius: 60px;
   box-shadow: 0 4px 8px 0 rgba(86, 97, 246, 0.25);
   border: none;
   cursor: pointer;
+
+}
+
+.input-send-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; 
+  top: 500px; 
+  left: 0;
+  width: 100%;
+  height: calc(var(--button-radius) + 60px);
+  z-index: 1;
+  background-color: #000000;
 }
 
 .vuesax-linear-send {
@@ -1402,7 +1441,7 @@ button {
   position: relative;
   width: 24px;
   height: 24px;
-  z-index: 7;
+  z-index: 3;
 }
 
 .vuesax-linear-send-43 {
@@ -1411,19 +1450,19 @@ button {
   height: 24px;
   top: 0;
   left: 0;
-  z-index: 8;
+  z-index: 3;
 }
 
 .send {
   position: absolute;
   width: 100%;
   height: 100%;
-  top: 0;
-  left: 0;
+  /* top: 0;
+  left: 0; */
   background: url(../assets/images/5b4765b1-11d2-433d-aa56-69086e0cdc3b.png)
     no-repeat center;
   background-size: 100% 100%;
-  z-index: 9;
+  z-index: 3;
 }
 
 .message-box {
@@ -1677,3 +1716,10 @@ button {
   opacity: 1;
 }
 
+
+@media (max-width: 768px) {
+  :root {
+    --sidebar-width: 100%;
+  }
+
+}

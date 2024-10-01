@@ -33,7 +33,9 @@ export default function Main() {
   const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
   const [isCSSLoaded, setIsCSSLoaded] = useState(false);
   const [isInfoCollectCSSLoaded, setIsInfoCollectCSSLoaded] = useState(false);
-  
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
 
 
 
@@ -93,6 +95,12 @@ useEffect(() => {
   }
 }, [currentPage]);
 
+// useEffect(() => {
+//   if (!isMobile) {
+//     document.documentElement.style.setProperty('--sidebar-width', '300px');
+//     setIsSidebarOpen(true);
+//   }
+// }, []);
 
 
   // State months, dates, years and countries
@@ -305,6 +313,45 @@ useEffect(() => {
     setIsConvStart(true);
   };
 
+
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+
+    if (!isMobile) {
+      if (!isSidebarOpen) {
+        document.documentElement.style.setProperty('--sidebar-width', `320px`);
+      } else {
+        document.documentElement.style.setProperty('--sidebar-width', '0px');
+      }
+    }
+    else {
+      if (!isSidebarOpen) {
+        document.documentElement.style.setProperty('--sidebar-width', `${window.innerWidth}px`);
+      } else {
+        document.documentElement.style.setProperty('--sidebar-width', '0px');
+      }
+    }
+
+
+  };
+
+
+
+
+
   // Function to determine whether the "Start" button should be enabled
   const isButtonEnabled = () => {
     // Enable button if robot checkbox is checked, data sharing is agreed,
@@ -476,28 +523,42 @@ useEffect(() => {
 
         {/* Sidebar */}
 
+  <button className="menu-button" onClick={toggleSidebar} />
+
+        {isSidebarOpen && (
         <div className="flex-column-c">
           <div className="frame">
-            <div className="subtract" />
-            <div className="frame-1">
-              <div className="component">
+            {/* <div className="subtract" /> */}
+            {/* <div className="frame-1"> */}
+            <div className="component">
 
                 {/* New conversation button */}
 
+            {/* SWISP GPT logo */}
+
+            <div className="group-2c">
+              {/* <div className="group-2d"> */}
+                <div className="group-2e" />
+                <span className="swisp-gpt">SWISP GPT</span>
+              {/* </div> */}
+            </div>
+
+
+
                 <button className="group" onClick={() => setConversation([])}>
-                  <div className="group-2">
-                    <div className="vuesax-linear-add">
+                  {/* <div className="group-2"> */}
+                    {/* <div className="vuesax-linear-add"> */}
                       <div className="vuesax-linear-add-3">
                         <div className="add" />
                       </div>
-                    </div>
-                  </div>
+                    {/* </div> */}
+                  {/* </div> */}
                   <div className="rectangle" />
                 </button>
 
                 {/* Search function */}
 
-                <div className="search-input">
+                {/* <div className="search-input">
                   <input
                     className="search-type-input"
                     value={searchInputText}
@@ -511,18 +572,15 @@ useEffect(() => {
                     </div>
                   </div>
                   <div className="rectangle-6" />
-                </button>
-              </div>
-            </div>
+                </button> */}
 
-            {/* Top left logo */}
 
-            <div className="group-2c">
-              <div className="group-2d">
-                <div className="group-2e" />
-                <span className="swisp-gpt">SWISP GPT</span>
-              </div>
-            </div>
+              {/* </div> */}
+
+
+
+          </div>
+
 
             {/* Creativity level selection */}
 
@@ -556,6 +614,13 @@ useEffect(() => {
             </div>
           </div>
         </div>
+        )}
+
+
+
+
+
+
 
         {/* Conversation side content */}
 
@@ -595,7 +660,15 @@ useEffect(() => {
           
           {/* Message input */}
 
-          <div className="type">
+
+
+
+
+
+            {/* <div className="input-send-group"> */}
+
+
+            <div className="type">
             <input
               className="type-input"
               value={inputText}
@@ -642,7 +715,27 @@ useEffect(() => {
               </div>
             </div>
           </button>
+
+
+
+
+            {/* </div> */}
+
+
+
+
+          
+
+
+
+
+
+
+
         </div>
+
+
+
       </div>
       </div>
       )}
