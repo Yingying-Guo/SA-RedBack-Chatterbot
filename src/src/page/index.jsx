@@ -94,6 +94,12 @@ useEffect(() => {
 }, [currentPage]);
 
 
+const handleNewConversation = () => {
+  setConversation([]);
+  setInputText(""); 
+  setIsConvStart(false); 
+};
+
 
   // State months, dates, years and countries
   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -320,6 +326,8 @@ useEffect(() => {
     );
   };
 
+
+
   // Function to handle sending the message to server
   const sendMessageToServer = async (message, creativityLevel, sessionId) => {
     if (message.trim()) {
@@ -484,7 +492,8 @@ useEffect(() => {
 
                 {/* New conversation button */}
 
-                <button className="group" onClick={() => setConversation([])}>
+                
+                <button className="group" onClick={handleNewConversation}>
                   <div className="group-2">
                     <div className="vuesax-linear-add">
                       <div className="vuesax-linear-add-3">
