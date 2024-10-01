@@ -7,13 +7,16 @@ import TermsOfUse from './TermsOfUse';
 import PrivacyPolicy from './PrivacyPolicy';
 import LandingPage from './LandingPage';
 import TopicBoxes from './suggestions'; 
+import ReCAPTCHA from "react-google-recaptcha";
+import FingerprintJS from '@fingerprintjs/fingerprintjs';
+import Modal from './Modal';
 
 
 export default function Main() {
   // State control
   const [currentPage, setCurrentPage] = useState('landing');
   const [showNewInterface, setShowNewInterface] = useState(false);
-  const [isRobotChecked, setIsRobotChecked] = useState(false);
+  const [isRobotChecked, setIsRobotChecked] = useState(null);
   const [isDataShared, setIsDataShared] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedGender, setSelectedGender] = useState("");
@@ -35,6 +38,7 @@ export default function Main() {
   const [isInfoCollectCSSLoaded, setIsInfoCollectCSSLoaded] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isRateLimitExceeded, setIsRateLimitExceeded] = useState(false);
 
 
 
@@ -374,9 +378,89 @@ const handleNewConversation = () => {
     );
   };
 
+  async function getIpAddress() {
+    try {
+      const response = await fetch('https://api.ipify.org?format=json');
+      const data = await response.json();
+      return data.ip;  // Returns the user's IP address
+    } catch (error) {
+      console.error('Error fetching IP address:', error);
+    }
+  }
+  
+  async function getBrowserFingerprint() {
+    // Initialize the agent at application startup.
+    const fp = await FingerprintJS.load();
+    
+    // Get the visitor identifier when you need it.
+    const result = await fp.get();
+    
+    return result.visitorId;  // Return to Browser Fingerprint
+  }
+
+  async function generateHash(ipAddress, fingerprint) {
+    const data = ipAddress + fingerprint;  // Splicing IP addresses and fingerprints
+    const encoder = new TextEncoder();
+    const dataBuffer = encoder.encode(data);
+    
+    const hashBuffer = await crypto.subtle.digest('SHA-256', dataBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    return hashHex;  // Returns the generated hash
+  }
+
+  const sendFingerprintAndIp = async () => {
+    try {
+      // Get an IP address
+      const ipAddress = await getIpAddress();
+      
+      // Get Browser Fingerprint
+      const fingerprint = await getBrowserFingerprint();
+      
+      // Generate a hash
+      const hash = await generateHash(ipAddress, fingerprint);
+      
+      // Send hash to backend
+      const response = await fetch('https://ai-chatterbox.mb6.top/rate_limit/submitFingerprint', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ hash })
+      });
+      
+      const result = await response.json();
+
+      if (result.status === 500) {
+        setIsRateLimitExceeded(true);
+
+        //     ------------------TODO------------------弹窗
+        alert('Rate limit exceeded, displaying alert.'); // 添加调试信息
+        // 显示弹窗提示
+        setModalMessage('Rate limit exceeded. You have reached the maximum number of requests for today.');
+        setIsModalOpen(true);
+        return false;
+      } else {
+        setIsRateLimitExceeded(false);
+      }
+
+      console.log('Server response:', result);
+      return true;
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+
   // Function to handle sending the message to server
   const sendMessageToServer = async (message, creativityLevel, sessionId) => {
-    if (message.trim()) {
+    // Send fingerprint and IP address first
+    const fingerprintSent = await sendFingerprintAndIp();
+    const rateLimitExceeded = isRateLimitExceeded; // Save the current state as a local variable
+    if (!fingerprintSent && rateLimitExceeded) {
+      console.log('Fingerprint sent successfully.'); // 添加调试信息
+    }
+    if (!fingerprintSent && !rateLimitExceeded && message.trim()) {
       try {
         const response = await fetch("https://ai-chatterbox.mb6.top/openai/completion", {
           method: "POST",
@@ -420,15 +504,6 @@ const handleNewConversation = () => {
       }
     }
   };
-
-  // // Function to handle sending a user message
-  // const handleSend = async () => {
-  //   if (inputText.trim()) {
-  //     setConversation([...conversation, { type: "user", text: inputText }]);
-  //     setInputText("");
-  //     await sendMessageToServer(inputText, creativityLevel, sessionId);
-  //   }
-  // };
 
   const handleSend = async () => {
     if (inputText.trim()) {
@@ -946,20 +1021,10 @@ if (currentPage === 'info') {
             </div>
 
             {/* Robot and reCAPTCHA */}
-
-            <div className="not-a-robot-checkbox">
-              <label className="custom-checkbox-label">
-                <input
-                  type="checkbox"
-                  className="custom-checkbox-input"
-                  checked={isRobotChecked}
-                  onChange={() => setIsRobotChecked(!isRobotChecked)}
-                />
-                <span className="checkmark"></span>
-                <span className="not-a-robot">I'm not a robot</span>
-              </label>
-              <div className="google-recaptcha-official" />
-            </div>
+            <ReCAPTCHA 
+              sitekey="6LdqcFMqAAAAANBohbXUMNY915AhO1XPupzMjR-4"
+              onChange={(val) => setIsRobotChecked(val)}
+            />
           </div>
 
           {/* Start button */}

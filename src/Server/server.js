@@ -28,7 +28,10 @@ app.use("/openai", OpenAIRoute);
 import HeartbeatRoute from '../Heartbeat/routes/heartbeat.route.js'; 
 app.use("/heartbeat", HeartbeatRoute); // Use the heartbeat route
 
-// app.post('/completion', );
+// Import the rate limit route
+import RateLimitRoute from '../RateLimit/routes/rl.route.js';
+app.use("/rate_limit", RateLimitRoute); // Use the rate limit route
+
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
 
 export default app;

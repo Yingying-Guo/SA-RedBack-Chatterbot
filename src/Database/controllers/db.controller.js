@@ -23,7 +23,7 @@ const createUser = async (req, res) => {
     // console.log('DoB:', DoB);
     await user.save(); // Save user information to the database
 
-    res.status(201).json({ sessionId: sessionId, message: 'User information saved successfully.' });
+    res.status(200).json({ sessionId: sessionId, message: 'User information saved successfully.' });
   } catch (error) {
     console.error('Error saving user information:', error);
     res.status(500).json({ error: 'Internal Server Error' });
