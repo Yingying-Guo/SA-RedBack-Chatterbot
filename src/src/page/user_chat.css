@@ -631,6 +631,13 @@ button {
   z-index: 47;
 }
 
+.conversation-history {
+  padding: 10px;
+  width: 100%;
+  height:calc(100% - 230px);
+  overflow-y: scroll;
+}
+
 .frame-15 {
   display: flex;
   align-items: center;
@@ -638,10 +645,24 @@ button {
   flex-shrink: 0;
   gap: 10px;
   position: relative;
-  width: 205px;
-  padding: 15px 0 15px 0;
+  width:100%;
+  padding: 15px 0 15px var(--element-side-gap);
+  background-color: #ffffff;
+  border: none; 
+  box-shadow: none;
   z-index: 48;
+  cursor: pointer;
+  text-align: left; 
 }
+
+.frame-15:hover {
+  background-color: #d1e6ff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+
 
 .vuesax-linear-message-16 {
   flex-shrink: 0;
@@ -649,6 +670,7 @@ button {
   width: 16px;
   height: 16px;
   z-index: 49;
+
 }
 
 .vuesax-linear-message-17 {
@@ -658,6 +680,8 @@ button {
   top: 0;
   left: 0;
   z-index: 50;
+
+
 }
 
 .message-18 {
@@ -666,11 +690,37 @@ button {
   height: 100%;
   top: 0;
   left: 0;
-  background: url(../assets/images/760ab508-3156-4802-9032-5a8319c4e58d.png)
-    no-repeat center;
+  background: url(../assets/images/760ab508-3156-4802-9032-5a8319c4e58d.png) no-repeat center;
   background-size: 100% 100%;
   z-index: 51;
+
 }
+
+.conversation-title {
+  color: #475569;
+  flex-grow: 1;
+}
+
+.conversations-heading-group {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: calc(var(--element-side-gap) + 10px);
+  position: relative;
+  border-top: 1px solid #d3d3d395;
+  border-bottom: 1px solid #d3d3d395;
+}
+
+.conversations-heading {
+  font-size: 14px;
+  color: #808080;
+  background-color: transparent;
+}
+
+
+
 
 .effects-of-deforestation {
   flex-shrink: 0;

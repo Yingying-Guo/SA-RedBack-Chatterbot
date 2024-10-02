@@ -676,6 +676,75 @@ const handleNewConversation = () => {
           </div>
 
 
+
+
+          <div class="conversations-heading-group"> 
+    <div class="conversations-heading">Your conversations</div>
+  </div>
+
+          <div class="conversation-history">
+
+          <button class="frame-15">
+    <div class="vuesax-linear-message-16">
+      <div class="vuesax-linear-message-17">
+        <div class="message-18"></div>
+      </div>
+    </div>
+    <div class="conversation-title">Sustainable urban planning</div>
+  </button>
+
+          <button class="frame-15">
+    <div class="vuesax-linear-message-16">
+      <div class="vuesax-linear-message-17">
+        <div class="message-18"></div>
+      </div>
+    </div>
+    <div class="conversation-title">Cities in 2050</div>
+  </button>
+
+  <button class="frame-15">
+    <div class="vuesax-linear-message-16">
+      <div class="vuesax-linear-message-17">
+        <div class="message-18"></div>
+      </div>
+    </div>
+    <div class="conversation-title">Sustainable urban planning</div>
+  </button>
+
+  <button class="frame-15">
+    <div class="vuesax-linear-message-16">
+      <div class="vuesax-linear-message-17">
+        <div class="message-18"></div>
+      </div>
+    </div>
+    <div class="conversation-title">Cities in 2050</div>
+  </button>
+
+  <button class="frame-15">
+    <div class="vuesax-linear-message-16">
+      <div class="vuesax-linear-message-17">
+        <div class="message-18"></div>
+      </div>
+    </div>
+    <div class="conversation-title">Sustainable urban planning</div>
+  </button>
+
+
+
+  
+
+
+
+  </div>
+
+
+
+
+
+
+          
+
+
             {/* Creativity level selection */}
 
             <div className="creativity-level-container">
