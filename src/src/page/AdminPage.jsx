@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from "react";
 import CryptoJS from "crypto-js";  // Import CryptoJS for encryption
 
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'F12' || 
+      (event.ctrlKey && event.shiftKey && event.key === 'I') || 
+      (event.ctrlKey && event.shiftKey && event.key === 'C') || 
+      (event.ctrlKey && event.shiftKey && event.key === 'J') || 
+      (event.ctrlKey && event.key === 'U')) {
+      event.preventDefault();  // 阻止默认行为
+  }
+});
+
 const AdminPage = () => {
   const [authenticated, setAuthenticated] = useState(false); // Whether authentication is successful
   const [password, setPassword] = useState(''); // Password input
