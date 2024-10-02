@@ -1,6 +1,86 @@
 import { User, OpenAIChat } from '../models/db.model.js';
-// sessionId
+import { Parser } from 'json2csv';
 import { Snowflake } from 'node-snowflake';  // Import Snowflake from node-snowflake
+
+
+// 导出用户数据为 CSV
+const exportUserData = async (req, res) => {
+  try {
+    // 从查询参数中获取 limit 参数，转换为整数
+    const limit = parseInt(req.query.limit) || 0; // 如果没有提供 limit，则默认为 0（不限制）
+
+    // 获取指定数量的用户数据，使用 limit 方法来限制返回的数量
+    const users = await User.find().limit(limit).exec();
+
+    if (!users.length) {
+      return res.status(404).json({ message: "No user data found." });
+    }
+
+    const userFields = ['userID', 'location', 'gender', 'DoB'];
+    const userParser = new Parser({ fields: userFields });
+    const userCsv = userParser.parse(users);
+
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+    res.setHeader('Content-Disposition', 'attachment; filename="user_data.csv"');
+    res.status(200).send(Buffer.from(userCsv, 'utf-8'));
+  } catch (error) {
+    console.error('Error exporting user data:', error.message);
+    res.status(500).json({ message: 'Error exporting user data' });
+  }
+};
+
+// 导出聊天记录数据为 CSV
+const exportChatData = async (req, res) => {
+  try {
+    // 从查询参数中获取 limit 参数，转换为整数
+    const limit = parseInt(req.query.limit) || 0; // 如果没有提供 limit，则默认为 0（不限制）
+
+    // 获取指定数量的聊天记录，使用 limit 方法来限制返回的数量
+    const chats = await OpenAIChat.find().limit(limit).exec();
+
+    if (!chats.length) {
+      return res.status(404).json({ message: "No chat data found." });
+    }
+
+    const chatFields = ['chatID', 'timestamp', 'creativityLevel', 'userInput', 'response', 'userID'];
+    const chatParser = new Parser({ fields: chatFields });
+    const chatCsv = chatParser.parse(chats);
+
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+    res.setHeader('Content-Disposition', 'attachment; filename="chat_data.csv"');
+    res.status(200).send(Buffer.from(chatCsv, 'utf-8'));
+  } catch (error) {
+    console.error('Error exporting chat data:', error.message);
+    res.status(500).json({ message: 'Error exporting chat data' });
+  }
+};
+
+export { exportUserData, exportChatData };
+
+// 获取用户数据总条数
+const getUserDataCount = async (req, res) => {
+  try {
+    const userCount = await User.countDocuments(); // 统计用户数据总数
+    res.status(200).json({ count: userCount });
+  } catch (error) {
+    console.error('Error fetching user data count:', error.message);
+    res.status(500).json({ message: 'Error fetching user data count' });
+  }
+};
+
+// 获取聊天记录数据总条数
+const getChatDataCount = async (req, res) => {
+  try {
+    const chatCount = await OpenAIChat.countDocuments(); // 统计聊天记录数据总数
+    res.status(200).json({ count: chatCount });
+  } catch (error) {
+    console.error('Error fetching chat data count:', error.message);
+    res.status(500).json({ message: 'Error fetching chat data count' });
+  }
+};
+
+export { getUserDataCount, getChatDataCount };
+
 
 // Create a user record
 const createUser = async (req, res) => {
@@ -19,7 +99,7 @@ const createUser = async (req, res) => {
       gender,
       DoB,
     });
-    
+
     // console.log('DoB:', DoB);
     await user.save(); // Save user information to the database
 
@@ -38,7 +118,7 @@ const getOpenAIChatByUser = async (req, res) => {
     if (!user) {
       return res.status(400).json({ message: "User not found" });
     }
-    
+
     // Querying records in the OpenAIChat table by userID
     const openAIChats = await OpenAIChat.find({ userID: user.userID }).exec();
 
