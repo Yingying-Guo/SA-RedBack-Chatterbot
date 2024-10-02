@@ -2,14 +2,13 @@ import { User, OpenAIChat } from '../models/db.model.js';
 import { Parser } from 'json2csv';
 import { Snowflake } from 'node-snowflake';  // Import Snowflake from node-snowflake
 
-
-// 导出用户数据为 CSV
+// Export user data as CSV
 const exportUserData = async (req, res) => {
   try {
-    // 从查询参数中获取 limit 参数，转换为整数
-    const limit = parseInt(req.query.limit) || 0; // 如果没有提供 limit，则默认为 0（不限制）
+    // Get the limit parameter from the query, converting it to an integer
+    const limit = parseInt(req.query.limit) || 0; // Default to 0 (no limit) if limit is not provided
 
-    // 获取指定数量的用户数据，使用 limit 方法来限制返回的数量
+    // Fetch the specified number of users, using limit to restrict the result count
     const users = await User.find().limit(limit).exec();
 
     if (!users.length) {
@@ -29,13 +28,13 @@ const exportUserData = async (req, res) => {
   }
 };
 
-// 导出聊天记录数据为 CSV
+// Export chat data as CSV
 const exportChatData = async (req, res) => {
   try {
-    // 从查询参数中获取 limit 参数，转换为整数
-    const limit = parseInt(req.query.limit) || 0; // 如果没有提供 limit，则默认为 0（不限制）
+    // Get the limit parameter from the query, converting it to an integer
+    const limit = parseInt(req.query.limit) || 0; // Default to 0 (no limit) if limit is not provided
 
-    // 获取指定数量的聊天记录，使用 limit 方法来限制返回的数量
+    // Fetch the specified number of chat records, using limit to restrict the result count
     const chats = await OpenAIChat.find().limit(limit).exec();
 
     if (!chats.length) {
@@ -57,10 +56,10 @@ const exportChatData = async (req, res) => {
 
 export { exportUserData, exportChatData };
 
-// 获取用户数据总条数
+// Get the total count of user data
 const getUserDataCount = async (req, res) => {
   try {
-    const userCount = await User.countDocuments(); // 统计用户数据总数
+    const userCount = await User.countDocuments(); // Count the total number of users
     res.status(200).json({ count: userCount });
   } catch (error) {
     console.error('Error fetching user data count:', error.message);
@@ -68,10 +67,10 @@ const getUserDataCount = async (req, res) => {
   }
 };
 
-// 获取聊天记录数据总条数
+// Get the total count of chat data
 const getChatDataCount = async (req, res) => {
   try {
-    const chatCount = await OpenAIChat.countDocuments(); // 统计聊天记录数据总数
+    const chatCount = await OpenAIChat.countDocuments(); // Count the total number of chat records
     res.status(200).json({ count: chatCount });
   } catch (error) {
     console.error('Error fetching chat data count:', error.message);
@@ -80,7 +79,6 @@ const getChatDataCount = async (req, res) => {
 };
 
 export { getUserDataCount, getChatDataCount };
-
 
 // Create a user record
 const createUser = async (req, res) => {
@@ -113,57 +111,56 @@ const createUser = async (req, res) => {
 // Get all Query by userID
 const getOpenAIChatByUser = async (req, res) => {
   try {
-    // Querying user information in the User table
+    // Query user information in the User table
     const user = await User.findOne({ userID: req.params.userID }).exec();
     if (!user) {
       return res.status(400).json({ message: "User not found" });
     }
 
-    // Querying records in the OpenAIChat table by userID
+    // Query records in the OpenAIChat table by userID
     const openAIChats = await OpenAIChat.find({ userID: user.userID }).exec();
 
-    // Returns user information and related chat logs
+    // Return user information and related chat logs
     res.status(200).json({ user, openAIChats });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-
 import moment from 'moment-timezone';
 
 /**
  * Create a Chat record
- * @param {string} chatID - Dialogue unique identifiers
+ * @param {string} chatID - Dialogue unique identifier
  * @param {number} timestamp - Unix timestamp
  * @param {string} creativityLevel - Creativity level
- * @param {string} userInput - user input
- * @param {string} response - AI Replies
+ * @param {string} userInput - User input
+ * @param {string} response - AI response
  * @param {string} userID - User ID
  */
 const createOpenAIChat = async (chatID, timestamp, creativityLevel, userInput, response, userID) => {
   try {
-    // Determine if userID exists
+    // Ensure userID is provided
     if (!userID) {
       return res.status(400).json({ message: "userID is required." });
     }
 
-    // Determine if userID is a valid string (here you can add other format checking logic, such as UUID format)
+    // Ensure userID is a valid string (you can add additional checks, e.g., UUID format)
     if (typeof userID !== 'string' || userID.trim() === '') {
       return res.status(400).json({ message: "Invalid userID format." });
     }
 
-    // Creating a new chat
+    // Create a new chat record
     const newChatRecord = new OpenAIChat({
       chatID: chatID,
-      timestamp: moment.unix(timestamp).tz('Australia/Sydney').format('YYYY-MM-DD HH:mm:ss z'), // Unix 时间戳
+      timestamp: moment.unix(timestamp).tz('Australia/Sydney').format('YYYY-MM-DD HH:mm:ss z'), // Unix timestamp
       creativityLevel: creativityLevel,
-      userInput: userInput,  // Note that field names should be consistent with model definitions
+      userInput: userInput,  // Ensure field names are consistent with model definitions
       response: response,
       userID: userID
     });
 
-    // Save to database
+    // Save to the database
     await newChatRecord.save();
     console.log('Chat record saved successfully.');
     // res.status(200).json(openAIChat);
@@ -175,5 +172,3 @@ const createOpenAIChat = async (chatID, timestamp, creativityLevel, userInput, r
 };
 
 export { createUser, createOpenAIChat, getOpenAIChatByUser };
-
-

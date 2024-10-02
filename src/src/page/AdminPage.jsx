@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
-import CryptoJS from "crypto-js";  // 引入 CryptoJS 用于加密
+import CryptoJS from "crypto-js";  // Import CryptoJS for encryption
 
 const AdminPage = () => {
-  const [authenticated, setAuthenticated] = useState(false); // 是否认证通过
-  const [password, setPassword] = useState(''); // 密码输入
-  const [loading, setLoading] = useState(false); // 加载状态
-  const [errorMessage, setErrorMessage] = useState(''); // 错误信息
-  const [dataLoading, setDataLoading] = useState(true); // 数据加载状态
+  const [authenticated, setAuthenticated] = useState(false); // Whether authentication is successful
+  const [password, setPassword] = useState(''); // Password input
+  const [loading, setLoading] = useState(false); // Loading state
+  const [errorMessage, setErrorMessage] = useState(''); // Error message
+  const [dataLoading, setDataLoading] = useState(true); // Data loading state
 
-  const [userCount, setUserCount] = useState(0); // 用户数据总条数
-  const [userLimit, setUserLimit] = useState(''); // 用户选择导出的数量
-  const [chatCount, setChatCount] = useState(0); // 聊天记录总条数
-  const [chatLimit, setChatLimit] = useState(''); // 用户选择导出的聊天记录数量
+  const [userCount, setUserCount] = useState(0); // Total number of user records
+  const [userLimit, setUserLimit] = useState(''); // Number of user records to export
+  const [chatCount, setChatCount] = useState(0); // Total number of chat records
+  const [chatLimit, setChatLimit] = useState(''); // Number of chat records to export
 
-  // 获取用户数据总条数
+  // Fetch total user count
   const fetchUserCount = async () => {
     try {
       const response = await fetch("http://localhost:3001/api/admin/export/users/count");
@@ -24,7 +24,7 @@ const AdminPage = () => {
     }
   };
 
-  // 获取聊天记录数据总条数
+  // Fetch total chat count
   const fetchChatCount = async () => {
     try {
       const response = await fetch("http://localhost:3001/api/admin/export/chats/count");
@@ -35,7 +35,7 @@ const AdminPage = () => {
     }
   };
 
-  // 使用 useEffect 在组件加载时获取数据
+  // Use useEffect to fetch data when the component loads
   useEffect(() => {
     const fetchData = async () => {
       setDataLoading(true);
@@ -45,17 +45,17 @@ const AdminPage = () => {
     fetchData();
   }, []);
 
-  // 处理密码输入
+  // Handle password submission
   const handlePasswordSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setErrorMessage('');
 
     try {
-      // 使用 CryptoJS 进行加密，使用 SHA-256 哈希算法
+      // Encrypt the password using CryptoJS and SHA-256 hashing
       const hashedPassword = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
 
-      // 将加密后的密码发送到后端进行验证
+      // Send the encrypted password to the backend for verification
       const response = await fetch("http://localhost:3001/api/verify-password", {
         method: "POST",
         headers: {
@@ -67,7 +67,7 @@ const AdminPage = () => {
       if (response.ok) {
         const result = await response.json();
         if (result.success) {
-          setAuthenticated(true); // 验证通过
+          setAuthenticated(true); // Authentication successful
         } else {
           setErrorMessage("Incorrect password!");
         }
@@ -83,7 +83,7 @@ const AdminPage = () => {
   };
 
   const exportUserCSV = async () => {
-    // 使用 fetch 来导出用户数据
+    // Use fetch to export user data
     const limit = userLimit || userCount;
     try {
       const response = await fetch(`http://localhost:3001/api/admin/export/users?limit=${limit}`);
@@ -101,7 +101,7 @@ const AdminPage = () => {
   };
 
   const exportChatCSV = async () => {
-    // 使用 fetch 来导出聊天记录
+    // Use fetch to export chat data
     const limit = chatLimit || chatCount;
     try {
       const response = await fetch(`http://localhost:3001/api/admin/export/chats?limit=${limit}`);
@@ -147,7 +147,7 @@ const AdminPage = () => {
     <div style={styles.container}>
       <h1 style={styles.header}>Admin Panel</h1>
 
-      {/* 显示用户数据总条数 */}
+      {/* Display total user record count */}
       <div style={styles.section}>
         <h2 style={styles.sectionHeader}>User Data</h2>
         <p>Total user records: {userCount}</p>
@@ -165,7 +165,7 @@ const AdminPage = () => {
         </button>
       </div>
 
-      {/* 显示聊天记录数据总条数 */}
+      {/* Display total chat record count */}
       <div style={styles.section}>
         <h2 style={styles.sectionHeader}>Chat Data</h2>
         <p>Total chat records: {chatCount}</p>
@@ -186,7 +186,7 @@ const AdminPage = () => {
   );
 };
 
-// 样式
+// Styles
 const styles = {
   container: {
     display: 'flex',
