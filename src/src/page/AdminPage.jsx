@@ -26,7 +26,7 @@ const AdminPage = () => {
   // Fetch total user count
   const fetchUserCount = async () => {
     try {
-      const response = await fetch("https://ai-chatterbox.mb6.top/api/admin/export/users/count");
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/export/users/count`);
       const result = await response.json();
       setUserCount(result.count);
     } catch (error) {
@@ -37,7 +37,7 @@ const AdminPage = () => {
   // Fetch total chat count
   const fetchChatCount = async () => {
     try {
-      const response = await fetch("https://ai-chatterbox.mb6.top/api/admin/export/chats/count");
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/export/chats/count`);
       const result = await response.json();
       setChatCount(result.count);
     } catch (error) {
@@ -66,7 +66,7 @@ const AdminPage = () => {
       const hashedPassword = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
 
       // Send the encrypted password to the backend for verification
-      const response = await fetch("https://ai-chatterbox.mb6.top/api/verify-password", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/verify-password`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -96,7 +96,7 @@ const AdminPage = () => {
     // Use fetch to export user data
     const limit = userLimit || userCount;
     try {
-      const response = await fetch(`https://ai-chatterbox.mb6.top/api/admin/export/users?limit=${limit}`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/export/users?limit=${limit}`);
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement("a");
@@ -114,7 +114,7 @@ const AdminPage = () => {
     // Use fetch to export chat data
     const limit = chatLimit || chatCount;
     try {
-      const response = await fetch(`https://ai-chatterbox.mb6.top/admin/export/chats?limit=${limit}`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/export/chats?limit=${limit}`);
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement("a");
