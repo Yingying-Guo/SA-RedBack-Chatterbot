@@ -16,12 +16,12 @@ const PORT = 3001;
 
 // Middleware
 app.use(json());
+app.use(cors()); // allow all origins
 app.use(urlencoded({ extended: false }));
 
-// Allow cross-origin requests
-app.use(cors({
-    origin: ['http://127.0.0.1:5173', 'http://localhost:5173'] // Allow requests from the frontend port
-}));
+// app.use(cors({
+//     origin: ['http://127.0.0.1:5173', 'http://localhost:5173'] // Allow requests from the frontend port
+// }));
 
 // Database connection
 connectDB();

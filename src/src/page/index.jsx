@@ -9,7 +9,6 @@ import LandingPage from './LandingPage';
 import TopicBoxes from './suggestions'; 
 import ReCAPTCHA from "react-google-recaptcha";
 import FingerprintJS from '@fingerprintjs/fingerprintjs';
-import Modal from './Modal';
 
 
 export default function Main() {
