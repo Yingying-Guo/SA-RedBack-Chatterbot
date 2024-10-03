@@ -7,6 +7,7 @@ import DBRoute from "../Database/routes/db.route.js";
 import OpenAIRoute from '../OpenAI/routes/openai.route.js';
 import HeartbeatRoute from '../Heartbeat/routes/heartbeat.route.js';
 import RateLimitRoute from '../RateLimit/routes/rl.route.js';
+import Admin from '../Admin/routes/admin.route.js';
 
 // Create an Express application
 const app = express();
@@ -25,6 +26,7 @@ app.use("/db", DBRoute);          // Database-related API
 app.use("/openai", OpenAIRoute);  // OpenAI-related API
 app.use("/heartbeat", HeartbeatRoute); // Heartbeat check API
 app.use("/rate_limit", RateLimitRoute); // Rate limit API
+app.use("/admin", Admin); // Admin API
 
 // Server listening
 app.listen(PORT, () => {
