@@ -40,6 +40,11 @@ export default function Main() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [isRateLimitExceeded, setIsRateLimitExceeded] = useState(false);
+  const [storedConversations, setStoredConversations] = useState([]);
+  const [currentConversationId, setCurrentConversationId] = useState(null);
+
+
+ 
 
   
   
@@ -127,11 +132,19 @@ export default function Main() {
     }
   }, [])
 
+  useEffect(() => {
+    const savedConversations = localStorage.getItem("storedConversations");
+    if (savedConversations) {
+      setStoredConversations(JSON.parse(savedConversations));
+    }
+  }, []);
 
   const handleNewConversation = () => {
+    saveConversation();
     setConversation([]);
     setInputText("");
     setIsConvStart(false);
+    setCurrentConversationId(null);
   };
 
   // State months, dates, years and countries
@@ -516,14 +529,18 @@ export default function Main() {
 
   const handleSend = async () => {
     if (inputText.trim()) {
-      setConversation([...conversation, { type: "user", text: inputText }]);
+      const newMessage = { type: "user", text: inputText };
+      setConversation(prev => [...prev, newMessage]);
       setInputText("");
       setIsWaitingForBotResponse(true);
+      
       await sendMessageToServer(inputText, creativityLevel, sessionId);
       setIsWaitingForBotResponse(false);
+      
+      // 在发送消息后保存对话
+      saveConversation();
     }
   };
-
 
   // Function to handle sending the user information to server
   const sendUserInformationToServer = async (
@@ -590,6 +607,57 @@ export default function Main() {
   };
 
 
+  const saveConversation = useCallback(() => {
+    if (conversation.length > 0) {
+      const conversationTitle = conversation[0].text.substring(0, 30) + "...";
+      
+      setStoredConversations(prevConversations => {
+        let updatedConversations;
+        if (currentConversationId) {
+          // 更新现有对话
+          updatedConversations = prevConversations.map(conv =>
+            conv.id === currentConversationId
+              ? { ...conv, title: conversationTitle, messages: conversation }
+              : conv
+          );
+        } else {
+          // 添加新对话
+          const newConversation = {
+            id: Date.now(),
+            title: conversationTitle,
+            messages: conversation
+          };
+          updatedConversations = [newConversation, ...prevConversations];
+          setCurrentConversationId(newConversation.id);
+        }
+        localStorage.setItem("storedConversations", JSON.stringify(updatedConversations));
+        return updatedConversations;
+      });
+    }
+  }, [conversation, currentConversationId]);
+
+  // 加载对话
+  const loadConversation = useCallback((id) => {
+    const selectedConversation = storedConversations.find(conv => conv.id === id);
+    if (selectedConversation) {
+      setConversation(selectedConversation.messages);
+      setCurrentConversationId(id);
+    }
+  }, [storedConversations]);
+
+  // 删除对话
+  const deleteConversation = useCallback((id) => {
+    setStoredConversations(prevConversations => {
+      const updatedConversations = prevConversations.filter(conv => conv.id !== id);
+      localStorage.setItem("storedConversations", JSON.stringify(updatedConversations));
+      return updatedConversations;
+    });
+    if (id === currentConversationId) {
+      setConversation([]);
+      setCurrentConversationId(null);
+    }
+  }, [currentConversationId]);
+
   const handleRandomQuestion = useCallback(() => {
     const hiddenMessage = "Give me an random and interesting what if question. Response formate: RANDOM: question";
     
@@ -635,121 +703,53 @@ export default function Main() {
               {isSidebarOpen && (
                 <div className="flex-column-c">
                   <div className="frame">
-                    {/* <div className="subtract" /> */}
-                    {/* <div className="frame-1"> */}
                     <div className="component">
-
-                      {/* New conversation button */}
-
                       {/* SWISP GPT logo */}
-
                       <div className="group-2c">
-                        {/* <div className="group-2d"> */}
                         <div className="group-2e" />
                         <span className="swisp-gpt">SWISP GPT</span>
-                        {/* </div> */}
                       </div>
 
 
 
                       <button className="group" onClick={handleNewConversation}>
-                        {/* <div className="group-2"> */}
-                        {/* <div className="vuesax-linear-add"> */}
                         <div className="vuesax-linear-add-3">
                           <div className="add" />
                         </div>
-                        {/* </div> */}
-                        {/* </div> */}
                         <div className="rectangle" />
                       </button>
-
-                      {/* Search function */}
-
-                      {/* <div className="search-input">
-                  <input
-                    className="search-type-input"
-                    value={searchInputText}
-                    onChange={(e) => setSearchInputText(e.target.value)}
-                  />
-                </div>
-                <button className="group-4">
-                  <div className="vuesax-linear-search-normal">
-                    <div className="vuesax-linear-search-normal-5">
-                      <div className="search-normal" />
-                    </div>
-                  </div>
-                  <div className="rectangle-6" />
-                </button> */}
-
-
-                      {/* </div> */}
-
-
-
                     </div>
 
 
-
-
-                    <div class="conversations-heading-group">
-                      <div class="conversations-heading">Your conversations</div>
+                    <div className="conversations-heading-group">
+                      <div className="conversations-heading">Your conversations</div>
                     </div>
 
-                    <div class="conversation-history">
-
-                      <button class="frame-15">
-                        <div class="vuesax-linear-message-16">
-                          <div class="vuesax-linear-message-17">
-                            <div class="message-18"></div>
+                    <div className="conversation-history">
+                      {storedConversations.map((conv) => (
+                        <button 
+                          key={conv.id} 
+                          className={`frame-15 ${conv.id === currentConversationId ? 'active' : ''}`}
+                          onClick={() => loadConversation(conv.id)}
+                        >
+                          <div className="vuesax-linear-message-16">
+                            <div className="vuesax-linear-message-17">
+                              <div className="message-18"></div>
+                            </div>
                           </div>
-                        </div>
-                        <div class="conversation-title">Sustainable urban planning</div>
-                      </button>
-
-                      <button class="frame-15">
-                        <div class="vuesax-linear-message-16">
-                          <div class="vuesax-linear-message-17">
-                            <div class="message-18"></div>
-                          </div>
-                        </div>
-                        <div class="conversation-title">Cities in 2050</div>
-                      </button>
-
-                      <button class="frame-15">
-                        <div class="vuesax-linear-message-16">
-                          <div class="vuesax-linear-message-17">
-                            <div class="message-18"></div>
-                          </div>
-                        </div>
-                        <div class="conversation-title">Sustainable urban planning</div>
-                      </button>
-
-                      <button class="frame-15">
-                        <div class="vuesax-linear-message-16">
-                          <div class="vuesax-linear-message-17">
-                            <div class="message-18"></div>
-                          </div>
-                        </div>
-                        <div class="conversation-title">Cities in 2050</div>
-                      </button>
-
-                      <button class="frame-15">
-                        <div class="vuesax-linear-message-16">
-                          <div class="vuesax-linear-message-17">
-                            <div class="message-18"></div>
-                          </div>
-                        </div>
-                        <div class="conversation-title">Sustainable urban planning</div>
-                      </button>
-
-
-
-
-
-
-
+                          <div className="conversation-title">{conv.title}</div>
+                          <button 
+                            className="delete-button" 
+                            onClick={(e) => { 
+                              e.stopPropagation(); 
+                              deleteConversation(conv.id); 
+                            }}
+                          >
+                            Delete
+                          </button>
+                        </button>
+                      ))}
                     </div>
-
 
 
 

@@ -1934,3 +1934,23 @@ button {
   display: flex;
   align-items: center;
 }
+
+.delete-button {
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 12px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.delete-button:hover {
+  background-color: #ff7875;
+}
+
+.frame-15.active {
+  background-color: #f0f0f0;
+  border-left: 3px solid #5661f6;
+}
