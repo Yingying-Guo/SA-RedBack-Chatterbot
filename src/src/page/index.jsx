@@ -854,26 +854,34 @@ export default function Main() {
                 {/* Message input */}
                 {/* <div className="input-send-group"> */}
 
-
                 <div className="type">
-                  <input
-                    className="type-input"
-                    value={inputText}
-                    onChange={(e) => setInputText(e.target.value)}
-                    onFocus={() => setIsInputFocused(true)}
-                    onBlur={() => setIsInputFocused(false)}
-                    // placeholder="What's in your mind?..."
-                    onKeyPress={(e) => {
-                      if (e.key === "Enter" && !isWaitingForBotResponse) {
-                        handleSend();
-                        setIsConvStart(true);
-                      }
-                    }}
-                  />
+                  <div className="input-container">
+                    <div className="brain-icon"></div>
+                    <input
+                      className="type-input"
+                      value={inputText}
+                      onChange={(e) => setInputText(e.target.value)}
+                      onFocus={() => setIsInputFocused(true)}
+                      onBlur={() => setIsInputFocused(false)}
+                      placeholder=""
+                      onKeyPress={(e) => {
+                        if (e.key === "Enter" && !isWaitingForBotResponse) {
+                          handleSend();
+                          setIsConvStart(true);
+                        }
+                      }}
+                    />
+                    {!isInputFocused && !inputText && (
+                      <div className="placeholder">What's in your mind?...</div>
+                    )}
+                </div>
+
+
+                
 
                   {/* Input background */}
 
-                  {!isInputFocused && (
+                  {/* {!isInputFocused && (
                     <div className="frame-3e">
                       <div className="frame-3f">
                         <div className="group-40">
@@ -882,7 +890,7 @@ export default function Main() {
                         <span className="whats-mind">What's in your mind?...</span>
                       </div>
                     </div>
-                  )}
+                  )} */}
                 </div>
 
                 {/* Send button */}
