@@ -1773,3 +1773,129 @@ button {
   }
 
 }
+
+/* ... (previous CSS code remains unchanged) ... */
+
+/* 在文件末尾添加以下新样式 */
+
+.new-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 0 20px;
+  position: absolute;
+  bottom: 80px;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.new-button {
+  padding: 10px 15px;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  color: #333;
+  flex: 1;
+  margin: 0 5px;
+  text-align: center;
+  position: relative;
+  z-index: 101;
+}
+
+.new-button:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.new-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.random-question {
+  background-color: #d1e6ff;
+}
+
+.random-question:hover {
+  background-color: #b0d4ff;
+}
+
+.im-stuck {
+  background-color: #ffe0d1;
+}
+
+.im-stuck:hover {
+  background-color: #ffd0b8;
+}
+
+/* Tooltip styles */
+.new-button::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  pointer-events: none;
+}
+
+.new-button:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Adjust existing styles to accommodate new buttons */
+.flex-column-acdd {
+  padding-bottom: 140px;
+}
+
+.type {
+  bottom: 20px;
+}
+
+.frame-42 {
+  bottom: 30px;
+}
+
+/* Ensure buttons display correctly on mobile devices */
+@media (max-width: 768px) {
+  .new-buttons-container {
+    flex-direction: column;
+    align-items: stretch;
+    bottom: 100px;
+  }
+
+  .new-button {
+    margin-bottom: 10px;
+  }
+
+  .flex-column-acdd {
+    padding-bottom: 180px;
+  }
+
+  .type {
+    bottom: 70px;
+  }
+
+  .frame-42 {
+    bottom: 80px;
+  }
+}
+
+/* Adjust message list to prevent overlap with new buttons */
+.message-column {
+  padding-bottom: 160px;
+}

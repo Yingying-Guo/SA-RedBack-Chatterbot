@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import "./info_collect.css";
 import "./landing_page.css";
 import userAvatar from '../assets/images/5593d02b8cf746b1a827a90f620354ed.png';
@@ -39,6 +39,9 @@ export default function Main() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [isRateLimitExceeded, setIsRateLimitExceeded] = useState(false);
+
+  
+  
 
 
 
@@ -123,19 +126,12 @@ export default function Main() {
     }
   }, [])
 
+
   const handleNewConversation = () => {
     setConversation([]);
     setInputText("");
     setIsConvStart(false);
   };
-
-  // useEffect(() => {
-  //   if (!isMobile) {
-  //     document.documentElement.style.setProperty('--sidebar-width', '300px');
-  //     setIsSidebarOpen(true);
-  //   }
-  // }, []);
-
 
   // State months, dates, years and countries
   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -592,6 +588,22 @@ export default function Main() {
     setCurrentPage('info');
   };
 
+
+  const handleRandomQuestion = useCallback(() => {
+    const hiddenMessage = "Give me an random and interesting what if question. Response formate: RANDOM: question";
+    
+    setIsWaitingForBotResponse(true);
+    sendMessageToServer(hiddenMessage, creativityLevel, sessionId);
+  }, [creativityLevel, sessionId, sendMessageToServer]);
+
+
+  const handleImStuck = useCallback(() => {
+    const hiddenMessage = "Randomly and Directly select ONE 'What If' question from the list that starts with 'Based on'. Include the original number of the question. IMPORTANCE: Your response should start with 'Based on [topic], the selected 'What If' question is:' followed by a line break, then provide only one numbered question as your response.";
+    
+    setIsWaitingForBotResponse(true);
+    sendMessageToServer(hiddenMessage, creativityLevel, sessionId);
+  }, [creativityLevel, sessionId, sendMessageToServer]);
+
   if (currentPage === 'landing') {
     return <LandingPage onGetStarted={handleGetStarted} />;
   }
@@ -814,6 +826,24 @@ export default function Main() {
                   <div ref={messagesEndRef} />
                 </div>
 
+                {/* New buttons */}
+                {/* New buttons */}
+                <div className="new-buttons-container">
+                  <button 
+                    className="new-button random-question" 
+                    onClick={handleRandomQuestion}
+                    data-tooltip="Generate a random interesting 'What If' question"
+                  >
+                    Random 'What If' Question
+                  </button>
+                  <button 
+                    className="new-button im-stuck" 
+                    onClick={handleImStuck}
+                    data-tooltip="Randomly select one from previous 'What If' questions"
+                  >
+                    I'm Stuck
+                  </button>
+                </div>
 
                 {/* Conversation start topic */}
 
@@ -822,12 +852,6 @@ export default function Main() {
                 )}
 
                 {/* Message input */}
-
-
-
-
-
-
                 {/* <div className="input-send-group"> */}
 
 
@@ -881,18 +905,7 @@ export default function Main() {
 
 
 
-
-                {/* </div> */}
-
-
-
-
-
-
-
-
-
-
+               {/* </div> */}
 
 
               </div>
