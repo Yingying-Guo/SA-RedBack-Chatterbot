@@ -174,13 +174,14 @@ export default function Main() {
   }, [conversation, currentConversationId]);
 
   const handleNewConversation = () => {
-    saveCurrentConversation();
-    setConversation([]);
-    setInputText("");
-    setIsConvStart(false);
-    setCurrentConversationId(null);
+    if (!isWaitingForBotResponse) {
+      saveCurrentConversation();
+      setConversation([]);
+      setInputText("");
+      setIsConvStart(false);
+      setCurrentConversationId(null);
+    }
   };
-
   const loadConversation = (conversationId) => {
     saveCurrentConversation();
     const selectedConversation = conversations.find(
@@ -693,30 +694,29 @@ export default function Main() {
       <>
         {isCSSLoaded && (
           <div className={`user-chat-container ${isCSSLoaded ? 'fade-in' : ''}`}>
-          <div className="main-container">
-            <button className="menu-button" onClick={toggleSidebar} />
-
-
-              {/* Sidebar */}
-
+            <div className="main-container">
               <button className="menu-button" onClick={toggleSidebar} />
 
               {isSidebarOpen && (
-              <div className="flex-column-c">
-                <div className="frame">
-                  <div className="component">
-                    <div className="group-2c">
-                      <div className="group-2e" />
-                      <span className="swisp-gpt">SWISP GPT</span>
-                    </div>
-
-                    <button className="group" onClick={handleNewConversation}>
-                      <div className="vuesax-linear-add-3">
-                        <div className="add" />
+                <div className="flex-column-c">
+                  <div className="frame">
+                    <div className="component">
+                      <div className="group-2c">
+                        <div className="group-2e" />
+                        <span className="swisp-gpt">SWISP GPT</span>
                       </div>
-                      <div className="rectangle" />
-                    </button>
-                  </div>
+
+                      <button 
+                        className={`group ${isWaitingForBotResponse ? 'disabled' : ''}`} 
+                        onClick={handleNewConversation}
+                        disabled={isWaitingForBotResponse}
+                      >
+                        <div className="vuesax-linear-add-3">
+                          <div className="add" />
+                        </div>
+                        <div className="rectangle" />
+                      </button>
+                    </div>
 
                   <div className="conversations-heading-group">
                     <div className="conversations-heading">Your conversations</div>

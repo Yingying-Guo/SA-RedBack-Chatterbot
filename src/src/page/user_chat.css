@@ -202,6 +202,19 @@ button {
   align-items: center;
   margin-left: auto;
   right: 13px;
+  transition: opacity 0.3s ease;
+}
+.group.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.group.disabled:hover {
+  background-color: transparent;
+}
+
+.group.disabled .add {
+  opacity: 0.5;
 }
 
 /* .group-2 {
