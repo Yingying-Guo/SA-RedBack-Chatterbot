@@ -204,6 +204,18 @@ button {
   right: 13px;
 }
 
+.group.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #cccccc; /* Light gray color */
+}
+
+.group.disabled .vuesax-linear-add-3 .add {
+  /* Adjust the color of the "+" icon when disabled */
+  background-color: #999999; /* Darker gray for the icon */
+}
+
+
 /* .group-2 {
   position: relative;
 

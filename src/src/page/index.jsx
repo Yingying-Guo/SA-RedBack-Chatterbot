@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import "./info_collect.css";
 import "./landing_page.css";
+import "./user_chat.css"; 
 import userAvatar from '../assets/images/5593d02b8cf746b1a827a90f620354ed.png';
 import botAvatar from '../assets/images/Group 1437252836.png';
 import TermsOfUse from './TermsOfUse';
@@ -42,6 +43,7 @@ export default function Main() {
   const [isRateLimitExceeded, setIsRateLimitExceeded] = useState(false);
   const [storedConversations, setStoredConversations] = useState([]);
   const [currentConversationId, setCurrentConversationId] = useState(null);
+  
 
 
  
@@ -140,11 +142,13 @@ export default function Main() {
   }, []);
 
   const handleNewConversation = () => {
-    saveConversation();
-    setConversation([]);
-    setInputText("");
-    setIsConvStart(false);
-    setCurrentConversationId(null);
+    if (!isWaitingForBotResponse) {
+      saveConversation();
+      setConversation([]);
+      setInputText("");
+      setIsConvStart(false);
+      setCurrentConversationId(null);
+    }
   };
 
   // State months, dates, years and countries
@@ -689,17 +693,20 @@ export default function Main() {
     /* Main chat page */
   }
 
+
   if (showNewInterface) {
     return (
       <>
         {isCSSLoaded && (
           <div className={`user-chat-container ${isCSSLoaded ? 'fade-in' : ''}`}>
             <div className="main-container">
-
               {/* Sidebar */}
-
-              <button className="menu-button" onClick={toggleSidebar} />
-
+              <button 
+                className="menu-button" 
+                onClick={toggleSidebar}
+                disabled={isWaitingForBotResponse}
+              />
+  
               {isSidebarOpen && (
                 <div className="flex-column-c">
                   <div className="frame">
@@ -709,22 +716,23 @@ export default function Main() {
                         <div className="group-2e" />
                         <span className="swisp-gpt">SWISP GPT</span>
                       </div>
-
-
-
-                      <button className="group" onClick={handleNewConversation}>
+  
+                      <button 
+                        className={`group ${isWaitingForBotResponse ? 'frame-42-grey' : ''}`} 
+                        onClick={handleNewConversation}
+                        disabled={isWaitingForBotResponse}
+                      >
                         <div className="vuesax-linear-add-3">
                           <div className="add" />
                         </div>
                         <div className="rectangle" />
                       </button>
                     </div>
-
-
+  
                     <div className="conversations-heading-group">
                       <div className="conversations-heading">Your conversations</div>
                     </div>
-
+  
                     <div className="conversation-history">
                       {storedConversations.map((conv) => (
                         <button 
@@ -750,7 +758,7 @@ export default function Main() {
                         </button>
                       ))}
                     </div>
-
+  
 
 
 
@@ -858,27 +866,28 @@ export default function Main() {
                 {/* <div className="input-send-group"> */}
 
                 <div className="type">
-                  <div className="input-container">
-                    <div className="brain-icon"></div>
-                    <input
-                      className="type-input"
-                      value={inputText}
-                      onChange={(e) => setInputText(e.target.value)}
-                      onFocus={() => setIsInputFocused(true)}
-                      onBlur={() => setIsInputFocused(false)}
-                      placeholder=""
-                      onKeyPress={(e) => {
-                        if (e.key === "Enter" && !isWaitingForBotResponse) {
-                          handleSend();
-                          setIsConvStart(true);
-                        }
-                      }}
-                    />
-                    {!isInputFocused && !inputText && (
-                      <div className="placeholder">What's in your mind?...</div>
-                    )}
+                <div className="input-container">
+                  <div className="brain-icon"></div>
+                  <input
+                    className="type-input"
+                    value={inputText}
+                    onChange={(e) => setInputText(e.target.value)}
+                    onFocus={() => setIsInputFocused(true)}
+                    onBlur={() => setIsInputFocused(false)}
+                    placeholder=""
+                    onKeyPress={(e) => {
+                      if (e.key === "Enter" && !isWaitingForBotResponse) {
+                        handleSend();
+                        setIsConvStart(true);
+                      }
+                    }}
+                    disabled={isWaitingForBotResponse}
+                  />
+                  {!isInputFocused && !inputText && (
+                    <div className="placeholder">What's in your mind?...</div>
+                  )}
                 </div>
-
+            
 
                 
 
@@ -899,21 +908,21 @@ export default function Main() {
                 {/* Send button */}
 
                 <button
-                  className={`frame-42 ${isWaitingForBotResponse ? "frame-42-grey" : ""
-                    }`}
-                  onClick={() => {
+                className={`frame-42 ${isWaitingForBotResponse ? "frame-42-grey" : ""}`}
+                onClick={() => {
+                  if (!isWaitingForBotResponse) {
                     handleSend();
                     setIsConvStart(true);
-                  }}
-                  disabled={isWaitingForBotResponse}
-                >
-                  <div className="vuesax-linear-send">
-                    <div className="vuesax-linear-send-43">
-                      <div className="send" />
-                    </div>
+                  }
+                }}
+                disabled={isWaitingForBotResponse}
+              >
+                <div className="vuesax-linear-send">
+                  <div className="vuesax-linear-send-43">
+                    <div className="send" />
                   </div>
-                </button>
-
+                </div>
+              </button>
 
 
                {/* </div> */}
