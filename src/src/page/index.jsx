@@ -10,6 +10,7 @@ import TopicBoxes from './suggestions';
 import ReCAPTCHA from "react-google-recaptcha";
 import FingerprintJS from '@fingerprintjs/fingerprintjs';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
+import thinkingGif from '../assets/images/Chatterbox-GIF.gif';
 
 
 export default function Main() {
@@ -598,7 +599,7 @@ export default function Main() {
 
 
   const handleImStuck = useCallback(() => {
-    const hiddenMessage = "Randomly and Directly select ONE 'What If' question from the list that starts with 'Based on'. Include the original number of the question. IMPORTANCE: Your response should start with 'Based on [topic], the selected 'What If' question is:' followed by a line break, then provide only one numbered question as your response.";
+    const hiddenMessage = "Randomly and Directly select ONE 'What If' question from the list that starts with 'Based on'. Include the original number of the question. IMPORTANCE: Your response should start with 'Based on [topic], the selected 'What If' question is:' followed by a line break, then provide only one numbered question as your response. Importance: the language for this response shoulf be the same as the question you choose";
     
     setIsWaitingForBotResponse(true);
     sendMessageToServer(hiddenMessage, creativityLevel, sessionId);
@@ -814,10 +815,12 @@ export default function Main() {
                     </div>
                   ))}
 
+                  
                   {isWaitingForBotResponse && (
                     <div className="message-container bot">
                       <img className="avatar" src={botAvatar} alt="Bot Avatar" />
                       <div className="message-box bot loading-indicator">
+                        <img src={thinkingGif} alt="Thinking" className="thinking-gif" />
                         <span>I am thinking...</span>
                       </div>
                     </div>
