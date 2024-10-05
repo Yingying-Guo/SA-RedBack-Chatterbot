@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
+
 import "./info_collect.css";
 import "./landing_page.css";
-import "./user_chat.css"; 
 import userAvatar from '../assets/images/5593d02b8cf746b1a827a90f620354ed.png';
 import botAvatar from '../assets/images/Group 1437252836.png';
 import TermsOfUse from './TermsOfUse';
@@ -41,18 +41,24 @@ export default function Main() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [isRateLimitExceeded, setIsRateLimitExceeded] = useState(false);
-  const [storedConversations, setStoredConversations] = useState([]);
+
+  
+  const [conversations, setConversations] = useState([]);
   const [currentConversationId, setCurrentConversationId] = useState(null);
-  
 
 
- 
+  useEffect(() => {
+    // Load conversations from localStorage
+    const savedConversations = localStorage.getItem("conversations");
+    if (savedConversations) {
+      setConversations(JSON.parse(savedConversations));
+    }
+  }, []);
 
-  
-  
-
-
-
+  useEffect(() => {
+    // Save conversations to localStorage whenever it changes
+    localStorage.setItem("conversations", JSON.stringify(conversations));
+  }, [conversations]);
 
 
   // Load the chat page css
@@ -69,18 +75,18 @@ export default function Main() {
     }
   }, [conversation]);
 
-  // Read from localStorage to get conversation data
-  useEffect(() => {
-    const savedConversation = localStorage.getItem("conversation");
-    if (savedConversation) {
-      setConversation(JSON.parse(savedConversation));
-    }
-  }, []);
+  // // Read from localStorage to get conversation data
+  // useEffect(() => {
+  //   const savedConversation = localStorage.getItem("conversation");
+  //   if (savedConversation) {
+  //     setConversation(JSON.parse(savedConversation));
+  //   }
+  // }, []);
 
-  // Once conversation change，save it to localStorage
-  useEffect(() => {
-    localStorage.setItem("conversation", JSON.stringify(conversation));
-  }, [conversation]);
+  // // Once conversation change，save it to localStorage
+  // useEffect(() => {
+  //   localStorage.setItem("conversation", JSON.stringify(conversation));
+  // }, [conversation]);
 
   // Update DoB whenever selectedYear, selectedMonth, or selectedDate changes
   useEffect(() => {
@@ -134,22 +140,60 @@ export default function Main() {
     }
   }, [])
 
-  useEffect(() => {
-    const savedConversations = localStorage.getItem("storedConversations");
-    if (savedConversations) {
-      setStoredConversations(JSON.parse(savedConversations));
+  const deleteConversation = useCallback((id, event) => {
+    event.stopPropagation(); // 确保阻止事件冒泡
+    setConversations((prevConversations) => 
+      prevConversations.filter((conv) => conv.id !== id)
+    );
+    if (currentConversationId === id) {
+      setConversation([]);
+      setCurrentConversationId(null);
+      setIsConvStart(false);
     }
-  }, []);
+  }, [currentConversationId]);
+
+  const saveCurrentConversation = useCallback(() => {
+    if (conversation.length > 0) {
+      const newConversation = {
+        id: currentConversationId || Date.now(),
+        title: conversation[0].text.substring(0, 30) + "...",
+        messages: conversation,
+      };
+
+      setConversations((prevConversations) => {
+        const updatedConversations = currentConversationId
+          ? prevConversations.map((conv) =>
+              conv.id === currentConversationId ? newConversation : conv
+            )
+          : [newConversation, ...prevConversations];
+        return updatedConversations;
+      });
+
+      setCurrentConversationId(newConversation.id);
+    }
+  }, [conversation, currentConversationId]);
 
   const handleNewConversation = () => {
-    if (!isWaitingForBotResponse) {
-      saveConversation();
-      setConversation([]);
-      setInputText("");
-      setIsConvStart(false);
-      setCurrentConversationId(null);
+    saveCurrentConversation();
+    setConversation([]);
+    setInputText("");
+    setIsConvStart(false);
+    setCurrentConversationId(null);
+  };
+
+  const loadConversation = (conversationId) => {
+    saveCurrentConversation();
+    const selectedConversation = conversations.find(
+      (conv) => conv.id === conversationId
+    );
+    if (selectedConversation) {
+      setConversation(selectedConversation.messages);
+      setCurrentConversationId(selectedConversation.id);
+      setIsConvStart(true);
     }
   };
+
+ 
 
   // State months, dates, years and countries
   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -534,17 +578,19 @@ export default function Main() {
   const handleSend = async () => {
     if (inputText.trim()) {
       const newMessage = { type: "user", text: inputText };
-      setConversation(prev => [...prev, newMessage]);
+      setConversation((prev) => [...prev, newMessage]);
       setInputText("");
       setIsWaitingForBotResponse(true);
-      
+      setIsConvStart(true);
+
       await sendMessageToServer(inputText, creativityLevel, sessionId);
       setIsWaitingForBotResponse(false);
-      
-      // 在发送消息后保存对话
-      saveConversation();
+
+      // Save the conversation after sending a message
+      saveCurrentConversation();
     }
   };
+
 
   // Function to handle sending the user information to server
   const sendUserInformationToServer = async (
@@ -611,57 +657,6 @@ export default function Main() {
   };
 
 
-  const saveConversation = useCallback(() => {
-    if (conversation.length > 0) {
-      const conversationTitle = conversation[0].text.substring(0, 30) + "...";
-      
-      setStoredConversations(prevConversations => {
-        let updatedConversations;
-        if (currentConversationId) {
-          // 更新现有对话
-          updatedConversations = prevConversations.map(conv =>
-            conv.id === currentConversationId
-              ? { ...conv, title: conversationTitle, messages: conversation }
-              : conv
-          );
-        } else {
-          // 添加新对话
-          const newConversation = {
-            id: Date.now(),
-            title: conversationTitle,
-            messages: conversation
-          };
-          updatedConversations = [newConversation, ...prevConversations];
-          setCurrentConversationId(newConversation.id);
-        }
-        localStorage.setItem("storedConversations", JSON.stringify(updatedConversations));
-        return updatedConversations;
-      });
-    }
-  }, [conversation, currentConversationId]);
-
-  // 加载对话
-  const loadConversation = useCallback((id) => {
-    const selectedConversation = storedConversations.find(conv => conv.id === id);
-    if (selectedConversation) {
-      setConversation(selectedConversation.messages);
-      setCurrentConversationId(id);
-    }
-  }, [storedConversations]);
-
-  // 删除对话
-  const deleteConversation = useCallback((id) => {
-    setStoredConversations(prevConversations => {
-      const updatedConversations = prevConversations.filter(conv => conv.id !== id);
-      localStorage.setItem("storedConversations", JSON.stringify(updatedConversations));
-      return updatedConversations;
-    });
-    if (id === currentConversationId) {
-      setConversation([]);
-      setCurrentConversationId(null);
-    }
-  }, [currentConversationId]);
-
   const handleRandomQuestion = useCallback(() => {
     const hiddenMessage = "Give me an random and interesting what if question. Response formate: RANDOM: question";
     
@@ -693,72 +688,64 @@ export default function Main() {
     /* Main chat page */
   }
 
-
   if (showNewInterface) {
     return (
       <>
         {isCSSLoaded && (
           <div className={`user-chat-container ${isCSSLoaded ? 'fade-in' : ''}`}>
-            <div className="main-container">
+          <div className="main-container">
+            <button className="menu-button" onClick={toggleSidebar} />
+
+
               {/* Sidebar */}
-              <button 
-                className="menu-button" 
-                onClick={toggleSidebar}
-                disabled={isWaitingForBotResponse}
-              />
-  
+
+              <button className="menu-button" onClick={toggleSidebar} />
+
               {isSidebarOpen && (
-                <div className="flex-column-c">
-                  <div className="frame">
-                    <div className="component">
-                      {/* SWISP GPT logo */}
-                      <div className="group-2c">
-                        <div className="group-2e" />
-                        <span className="swisp-gpt">SWISP GPT</span>
+              <div className="flex-column-c">
+                <div className="frame">
+                  <div className="component">
+                    <div className="group-2c">
+                      <div className="group-2e" />
+                      <span className="swisp-gpt">SWISP GPT</span>
+                    </div>
+
+                    <button className="group" onClick={handleNewConversation}>
+                      <div className="vuesax-linear-add-3">
+                        <div className="add" />
                       </div>
-  
-                      <button 
-                        className={`group ${isWaitingForBotResponse ? 'frame-42-grey' : ''}`} 
-                        onClick={handleNewConversation}
-                        disabled={isWaitingForBotResponse}
-                      >
-                        <div className="vuesax-linear-add-3">
-                          <div className="add" />
-                        </div>
-                        <div className="rectangle" />
-                      </button>
-                    </div>
-  
-                    <div className="conversations-heading-group">
-                      <div className="conversations-heading">Your conversations</div>
-                    </div>
-  
-                    <div className="conversation-history">
-                      {storedConversations.map((conv) => (
-                        <button 
-                          key={conv.id} 
-                          className={`frame-15 ${conv.id === currentConversationId ? 'active' : ''}`}
-                          onClick={() => loadConversation(conv.id)}
-                        >
-                          <div className="vuesax-linear-message-16">
-                            <div className="vuesax-linear-message-17">
-                              <div className="message-18"></div>
-                            </div>
-                          </div>
-                          <div className="conversation-title">{conv.title}</div>
-                          <button 
-                            className="delete-button" 
-                            onClick={(e) => { 
-                              e.stopPropagation(); 
-                              deleteConversation(conv.id); 
-                            }}
+                      <div className="rectangle" />
+                    </button>
+                  </div>
+
+                  <div className="conversations-heading-group">
+                    <div className="conversations-heading">Your conversations</div>
+                  </div>
+
+                  <div className="conversation-history">
+                      {conversations.map((conv) => (
+                        <div key={conv.id} className="conversation-item">
+                          <button
+                            className={`frame-15 ${currentConversationId === conv.id ? 'active' : ''}`}
+                            onClick={() => loadConversation(conv.id)}
                           >
-                            Delete
+                            <div className="vuesax-linear-message-16">
+                              <div className="vuesax-linear-message-17">
+                                <div className="message-18"></div>
+                              </div>
+                            </div>
+                            <div className="conversation-title">{conv.title}</div>
                           </button>
-                        </button>
+                          <button 
+                            className="delete-button"
+                            onClick={(event) => deleteConversation(conv.id, event)}
+                          >
+                            delete
+                          </button>
+                        </div>
                       ))}
                     </div>
-  
+
 
 
 
@@ -866,28 +853,27 @@ export default function Main() {
                 {/* <div className="input-send-group"> */}
 
                 <div className="type">
-                <div className="input-container">
-                  <div className="brain-icon"></div>
-                  <input
-                    className="type-input"
-                    value={inputText}
-                    onChange={(e) => setInputText(e.target.value)}
-                    onFocus={() => setIsInputFocused(true)}
-                    onBlur={() => setIsInputFocused(false)}
-                    placeholder=""
-                    onKeyPress={(e) => {
-                      if (e.key === "Enter" && !isWaitingForBotResponse) {
-                        handleSend();
-                        setIsConvStart(true);
-                      }
-                    }}
-                    disabled={isWaitingForBotResponse}
-                  />
-                  {!isInputFocused && !inputText && (
-                    <div className="placeholder">What's in your mind?...</div>
-                  )}
+                  <div className="input-container">
+                    <div className="brain-icon"></div>
+                    <input
+                      className="type-input"
+                      value={inputText}
+                      onChange={(e) => setInputText(e.target.value)}
+                      onFocus={() => setIsInputFocused(true)}
+                      onBlur={() => setIsInputFocused(false)}
+                      placeholder=""
+                      onKeyPress={(e) => {
+                        if (e.key === "Enter" && !isWaitingForBotResponse) {
+                          handleSend();
+                          setIsConvStart(true);
+                        }
+                      }}
+                    />
+                    {!isInputFocused && !inputText && (
+                      <div className="placeholder">What's in your mind?...</div>
+                    )}
                 </div>
-            
+
 
                 
 
@@ -908,21 +894,21 @@ export default function Main() {
                 {/* Send button */}
 
                 <button
-                className={`frame-42 ${isWaitingForBotResponse ? "frame-42-grey" : ""}`}
-                onClick={() => {
-                  if (!isWaitingForBotResponse) {
+                  className={`frame-42 ${isWaitingForBotResponse ? "frame-42-grey" : ""
+                    }`}
+                  onClick={() => {
                     handleSend();
                     setIsConvStart(true);
-                  }
-                }}
-                disabled={isWaitingForBotResponse}
-              >
-                <div className="vuesax-linear-send">
-                  <div className="vuesax-linear-send-43">
-                    <div className="send" />
+                  }}
+                  disabled={isWaitingForBotResponse}
+                >
+                  <div className="vuesax-linear-send">
+                    <div className="vuesax-linear-send-43">
+                      <div className="send" />
+                    </div>
                   </div>
-                </div>
-              </button>
+                </button>
+
 
 
                {/* </div> */}
