@@ -7,7 +7,7 @@ document.addEventListener('keydown', (event) => {
       (event.ctrlKey && event.shiftKey && event.key === 'C') || 
       (event.ctrlKey && event.shiftKey && event.key === 'J') || 
       (event.ctrlKey && event.key === 'U')) {
-      event.preventDefault();  // 阻止默认行为
+      event.preventDefault(); 
   }
 });
 

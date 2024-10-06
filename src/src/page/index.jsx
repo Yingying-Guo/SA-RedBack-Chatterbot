@@ -42,7 +42,7 @@ export default function Main() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [isRateLimitExceeded, setIsRateLimitExceeded] = useState(false);
 
-  
+
   const [conversations, setConversations] = useState([]);
   const [currentConversationId, setCurrentConversationId] = useState(null);
 
@@ -74,19 +74,6 @@ export default function Main() {
       messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [conversation]);
-
-  // // Read from localStorage to get conversation data
-  // useEffect(() => {
-  //   const savedConversation = localStorage.getItem("conversation");
-  //   if (savedConversation) {
-  //     setConversation(JSON.parse(savedConversation));
-  //   }
-  // }, []);
-
-  // // Once conversation change，save it to localStorage
-  // useEffect(() => {
-  //   localStorage.setItem("conversation", JSON.stringify(conversation));
-  // }, [conversation]);
 
   // Update DoB whenever selectedYear, selectedMonth, or selectedDate changes
   useEffect(() => {
@@ -141,8 +128,8 @@ export default function Main() {
   }, [])
 
   const deleteConversation = useCallback((id, event) => {
-    event.stopPropagation(); // 确保阻止事件冒泡
-    setConversations((prevConversations) => 
+    event.stopPropagation();
+    setConversations((prevConversations) =>
       prevConversations.filter((conv) => conv.id !== id)
     );
     if (currentConversationId === id) {
@@ -163,8 +150,8 @@ export default function Main() {
       setConversations((prevConversations) => {
         const updatedConversations = currentConversationId
           ? prevConversations.map((conv) =>
-              conv.id === currentConversationId ? newConversation : conv
-            )
+            conv.id === currentConversationId ? newConversation : conv
+          )
           : [newConversation, ...prevConversations];
         return updatedConversations;
       });
@@ -194,11 +181,10 @@ export default function Main() {
     }
   };
 
- 
+
 
   // State months, dates, years and countries
   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  // const dates = Array.from({ length: 31 }, (_, i) => i + 1);
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: 100 }, (_, i) => currentYear - i);
   const countries = [
@@ -660,7 +646,7 @@ export default function Main() {
 
   const handleRandomQuestion = useCallback(() => {
     const hiddenMessage = "Give me an random and interesting what if question. Response formate: RANDOM: question";
-    
+
     setIsWaitingForBotResponse(true);
     sendMessageToServer(hiddenMessage, creativityLevel, sessionId);
   }, [creativityLevel, sessionId, sendMessageToServer]);
@@ -668,7 +654,7 @@ export default function Main() {
 
   const handleImStuck = useCallback(() => {
     const hiddenMessage = "Randomly and Directly select ONE 'What If' question from the list that starts with 'Based on'. Include the original number of the question. IMPORTANCE: Your response should start with 'Based on [topic], the selected 'What If' question is:' followed by a line break, then provide only one numbered question as your response. Importance: the language for this response shoulf be the same as the question you choose";
-    
+
     setIsWaitingForBotResponse(true);
     sendMessageToServer(hiddenMessage, creativityLevel, sessionId);
   }, [creativityLevel, sessionId, sendMessageToServer]);
@@ -706,8 +692,8 @@ export default function Main() {
                         <span className="swisp-gpt">SWISP GPT</span>
                       </div>
 
-                      <button 
-                        className={`group ${isWaitingForBotResponse ? 'disabled' : ''}`} 
+                      <button
+                        className={`group ${isWaitingForBotResponse ? 'disabled' : ''}`}
                         onClick={handleNewConversation}
                         disabled={isWaitingForBotResponse}
                       >
@@ -718,11 +704,11 @@ export default function Main() {
                       </button>
                     </div>
 
-                  <div className="conversations-heading-group">
-                    <div className="conversations-heading">Your conversations</div>
-                  </div>
+                    <div className="conversations-heading-group">
+                      <div className="conversations-heading">Your conversations</div>
+                    </div>
 
-                  <div className="conversation-history">
+                    <div className="conversation-history">
                       {conversations.map((conv) => (
                         <div key={conv.id} className="conversation-item">
                           <button
@@ -736,11 +722,11 @@ export default function Main() {
                             </div>
                             <div className="conversation-title">{conv.title}</div>
                           </button>
-                          <button 
+                          <button
                             className="delete-button"
                             onClick={(event) => deleteConversation(conv.id, event)}
                           >
-                            delete
+                            Delete
                           </button>
                         </div>
                       ))}
@@ -810,7 +796,7 @@ export default function Main() {
                     </div>
                   ))}
 
-                  
+
                   {isWaitingForBotResponse && (
                     <div className="message-container bot">
                       <img className="avatar" src={botAvatar} alt="Bot Avatar" />
@@ -827,15 +813,15 @@ export default function Main() {
                 {/* New buttons */}
                 {/* New buttons */}
                 <div className="new-buttons-container">
-                  <button 
-                    className="new-button random-question" 
+                  <button
+                    className="new-button random-question"
                     onClick={handleRandomQuestion}
                     data-tooltip="Generate a random interesting 'What If' question"
                   >
                     Random 'What If' Question
                   </button>
-                  <button 
-                    className="new-button im-stuck" 
+                  <button
+                    className="new-button im-stuck"
                     onClick={handleImStuck}
                     data-tooltip="Randomly select one from previous 'What If' questions"
                   >
@@ -872,10 +858,10 @@ export default function Main() {
                     {!isInputFocused && !inputText && (
                       <div className="placeholder">What's in your mind?...</div>
                     )}
-                </div>
+                  </div>
 
 
-                
+
 
                   {/* Input background */}
 
@@ -911,7 +897,7 @@ export default function Main() {
 
 
 
-               {/* </div> */}
+                {/* </div> */}
 
 
               </div>
@@ -1047,7 +1033,7 @@ export default function Main() {
                             ))}
                           </select>
                         </div>
-    
+
                         <div className="text-field-18">
                           <div className="frame-19">
                             <span className="label-1a">Year</span>
@@ -1148,7 +1134,7 @@ export default function Main() {
                           }}
                           style={{ cursor: "pointer" }}
                         >
-                          skip
+                          Skip
                         </span>
                       </div>
                     </div>
