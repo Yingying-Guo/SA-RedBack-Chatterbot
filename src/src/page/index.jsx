@@ -392,26 +392,52 @@ export default function Main() {
     setIsConvStart(true);
   };
 
+  // const toggleSidebar = () => {
+  //   setIsSidebarOpen(!isSidebarOpen);
+
+  //   if (!isMobile) {
+  //     if (!isSidebarOpen) {
+  //       document.documentElement.style.setProperty('--sidebar-width', `320px`);
+  //     } else {
+  //       document.documentElement.style.setProperty('--sidebar-width', '0px');
+  //     }
+  //   }
+  //   else {
+  //     if (!isSidebarOpen) {
+  //       document.documentElement.style.setProperty('--sidebar-width', `${window.innerWidth}px`);
+  //     } else {
+  //       document.documentElement.style.setProperty('--sidebar-width', '0px');
+  //     }
+  //   }
+  // };
+
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
-
+  
     if (!isMobile) {
       if (!isSidebarOpen) {
-        document.documentElement.style.setProperty('--sidebar-width', `320px`);
+        document.documentElement.style.setProperty('--sidebar-width', '320px');
+        document.documentElement.style.setProperty('--content-padding', '320px');
+        document.documentElement.style.setProperty('--content-padding-top', '0px'); // Reset when sidebar is open
       } else {
-        document.documentElement.style.setProperty('--sidebar-width', '0px');
+        document.documentElement.style.setProperty('--sidebar-width', '50px'); // Small width when collapsed
+        document.documentElement.style.setProperty('--content-padding', '50px'); // Ensure content is aligned with the collapsed sidebar
+        document.documentElement.style.setProperty('--content-padding-top', '60px'); // Push content down below the icon
       }
-    }
-    else {
+    } else {
       if (!isSidebarOpen) {
         document.documentElement.style.setProperty('--sidebar-width', `${window.innerWidth}px`);
+        document.documentElement.style.setProperty('--content-padding', '0px');
+        document.documentElement.style.setProperty('--content-padding-top', '0px'); // No push down on mobile
       } else {
         document.documentElement.style.setProperty('--sidebar-width', '0px');
+        document.documentElement.style.setProperty('--content-padding', '0px');
+        document.documentElement.style.setProperty('--content-padding-top', '0px');
       }
     }
-
-
   };
+  
+  
 
   // Function to determine whether the "Start" button should be enabled
   const isButtonEnabled = () => {
