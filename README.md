@@ -126,7 +126,7 @@ Follow these steps to set up the project locally:
    - To run tests, navigate to the `backend` directory and execute:
 
    ```bash
-   npm test
+   npm run test
    ```
 
 ## Project Links
