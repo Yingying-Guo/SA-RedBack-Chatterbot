@@ -732,9 +732,9 @@ export default function Main() {
                         disabled={isWaitingForBotResponse}
                         data-tooltip="Save current conversation and start new conversation"
                       >
-                        {/* <div className="vuesax-linear-add-3"> */}
+                        <div className="vuesax-linear-add-3">
                           <div className="add" />
-                        {/* </div> */}
+                        </div>
                         <div className="rectangle" />
                       </button>
                     </div>
