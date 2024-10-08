@@ -169,6 +169,8 @@ export default function Main() {
       setCurrentConversationId(null);
     }
   };
+
+
   const loadConversation = (conversationId) => {
     saveCurrentConversation();
     const selectedConversation = conversations.find(
@@ -392,50 +394,50 @@ export default function Main() {
     setIsConvStart(true);
   };
 
-  // const toggleSidebar = () => {
-  //   setIsSidebarOpen(!isSidebarOpen);
-
-  //   if (!isMobile) {
-  //     if (!isSidebarOpen) {
-  //       document.documentElement.style.setProperty('--sidebar-width', `320px`);
-  //     } else {
-  //       document.documentElement.style.setProperty('--sidebar-width', '0px');
-  //     }
-  //   }
-  //   else {
-  //     if (!isSidebarOpen) {
-  //       document.documentElement.style.setProperty('--sidebar-width', `${window.innerWidth}px`);
-  //     } else {
-  //       document.documentElement.style.setProperty('--sidebar-width', '0px');
-  //     }
-  //   }
-  // };
-
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
-  
+
     if (!isMobile) {
       if (!isSidebarOpen) {
-        document.documentElement.style.setProperty('--sidebar-width', '320px');
-        document.documentElement.style.setProperty('--content-padding', '320px');
-        document.documentElement.style.setProperty('--content-padding-top', '0px'); // Reset when sidebar is open
-      } else {
-        document.documentElement.style.setProperty('--sidebar-width', '50px'); // Small width when collapsed
-        document.documentElement.style.setProperty('--content-padding', '50px'); // Ensure content is aligned with the collapsed sidebar
-        document.documentElement.style.setProperty('--content-padding-top', '60px'); // Push content down below the icon
-      }
-    } else {
-      if (!isSidebarOpen) {
-        document.documentElement.style.setProperty('--sidebar-width', `${window.innerWidth}px`);
-        document.documentElement.style.setProperty('--content-padding', '0px');
-        document.documentElement.style.setProperty('--content-padding-top', '0px'); // No push down on mobile
+        document.documentElement.style.setProperty('--sidebar-width', `320px`);
       } else {
         document.documentElement.style.setProperty('--sidebar-width', '0px');
-        document.documentElement.style.setProperty('--content-padding', '0px');
-        document.documentElement.style.setProperty('--content-padding-top', '0px');
+      }
+    }
+    else {
+      if (!isSidebarOpen) {
+        document.documentElement.style.setProperty('--sidebar-width', `${window.innerWidth}px`);
+      } else {
+        document.documentElement.style.setProperty('--sidebar-width', '0px');
       }
     }
   };
+
+  // const toggleSidebar = () => {
+  //   setIsSidebarOpen(!isSidebarOpen);
+  
+  //   if (!isMobile) {
+  //     if (!isSidebarOpen) {
+  //       document.documentElement.style.setProperty('--sidebar-width', '320px');
+  //       document.documentElement.style.setProperty('--content-padding', '320px');
+  //       document.documentElement.style.setProperty('--content-padding-top', '0px'); // Reset when sidebar is open
+  //     } else {
+  //       document.documentElement.style.setProperty('--sidebar-width', '50px'); // Small width when collapsed
+  //       document.documentElement.style.setProperty('--content-padding', '50px'); // Ensure content is aligned with the collapsed sidebar
+  //       document.documentElement.style.setProperty('--content-padding-top', '60px'); // Push content down below the icon
+  //     }
+  //   } else {
+  //     if (!isSidebarOpen) {
+  //       document.documentElement.style.setProperty('--sidebar-width', `${window.innerWidth}px`);
+  //       document.documentElement.style.setProperty('--content-padding', '0px');
+  //       document.documentElement.style.setProperty('--content-padding-top', '0px'); // No push down on mobile
+  //     } else {
+  //       document.documentElement.style.setProperty('--sidebar-width', '0px');
+  //       document.documentElement.style.setProperty('--content-padding', '0px');
+  //       document.documentElement.style.setProperty('--content-padding-top', '0px');
+  //     }
+  //   }
+  // };
   
   
 
@@ -720,15 +722,25 @@ export default function Main() {
 
                       <button
                         className={`group ${isWaitingForBotResponse ? 'disabled' : ''}`}
-                        onClick={handleNewConversation}
+                        // onClick={handleNewConversation}
+                        onClick={() => {
+                          handleNewConversation();
+                          if (isMobile) {
+                            toggleSidebar();
+                          }
+                        }}
                         disabled={isWaitingForBotResponse}
+                        data-tooltip="Save current conversation and start new conversation"
                       >
-                        <div className="vuesax-linear-add-3">
+                        {/* <div className="vuesax-linear-add-3"> */}
                           <div className="add" />
-                        </div>
+                        {/* </div> */}
                         <div className="rectangle" />
                       </button>
                     </div>
+
+
+
 
                     <div className="conversations-heading-group">
                       <div className="conversations-heading">Your conversations</div>
@@ -739,7 +751,13 @@ export default function Main() {
                         <div key={conv.id} className="conversation-item">
                           <button
                             className={`frame-15 ${currentConversationId === conv.id ? 'active' : ''}`}
-                            onClick={() => loadConversation(conv.id)}
+                            // onClick={() => loadConversation(conv.id)}
+                            onClick={() => {
+                              loadConversation(conv.id);
+                              if (isMobile) {
+                                toggleSidebar();
+                              }
+                            }}
                           >
                             <div className="vuesax-linear-message-16">
                               <div className="vuesax-linear-message-17">
@@ -757,14 +775,6 @@ export default function Main() {
                         </div>
                       ))}
                     </div>
-
-
-
-
-
-
-
-
                     {/* Creativity level selection */}
 
                     <div className="creativity-level-container">
@@ -795,16 +805,11 @@ export default function Main() {
                         </button>
                       </div>
                     </div>
+                  
+                  
                   </div>
                 </div>
               )}
-
-
-
-
-
-
-
               {/* Conversation side content */}
 
               <div className="flex-column-acdd">
@@ -837,15 +842,14 @@ export default function Main() {
                 </div>
 
                 {/* New buttons */}
-                {/* New buttons */}
                 <div className="new-buttons-container">
                   <button
                     className="new-button random-question"
                     onClick={handleRandomQuestion}
                     data-tooltip="Generate a random interesting 'What If' question"
                   >
-                    Random 'What If' Question
-                  </button>
+  {window.innerWidth <= 768 ? "Random Question" : "Random 'What If' Question"}
+  </button>
                   <button
                     className="new-button im-stuck"
                     onClick={handleImStuck}
@@ -862,7 +866,7 @@ export default function Main() {
                 )}
 
                 {/* Message input */}
-                {/* <div className="input-send-group"> */}
+                <div className="input-send-group">
 
                 <div className="type">
                   <div className="input-container">
@@ -923,7 +927,7 @@ export default function Main() {
 
 
 
-                {/* </div> */}
+                </div>
 
 
               </div>
