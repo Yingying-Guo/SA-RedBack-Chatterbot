@@ -191,7 +191,7 @@ button {
 }
 
 .group {
-  width: calc(var(--button-radius) - 5px);
+  width: calc(var(--button-radius) + 5px);
   height: calc(var(--button-radius) - 5px);
   cursor: pointer;
   background: transparent;
@@ -279,14 +279,15 @@ button {
 
 } */
 
-/* .vuesax-linear-add-3 {
+.vuesax-linear-add-3 {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-} */
+}
+
 
 
 .add {
@@ -307,7 +308,7 @@ button {
     no-repeat center;
   background-size: 100% 100%;
   z-index: 20;
-  border-radius: 69px;
+  border-radius: 50px;
 
 }
 
@@ -1054,9 +1055,8 @@ button {
   justify-content: center;
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-55%);
   z-index: 13;
-
 }
 
 /* .group-2d {
