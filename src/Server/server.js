@@ -1,34 +1,36 @@
-// server.js
-const PORT = 3001;
 import express, { json, urlencoded } from 'express';
 import cors from 'cors';
-const app = express();
-
-
-// middleware
-app.use(json());
-app.use(urlencoded({ extended: false }));
-app.use(cors(
-    // {origin: ['http://127.0.0.1:3000', 'http://127.0.0.1:3001']}
-));
-
-// connect to database
 import connectDB from '../Database/connection/db.connection.js';
+
+// Importing routes
+import DBRoute from "../Database/routes/db.route.js";
+import OpenAIRoute from '../OpenAI/routes/openai.route.js';
+import HeartbeatRoute from '../Heartbeat/routes/heartbeat.route.js';
+import RateLimitRoute from '../RateLimit/routes/rl.route.js';
+import Admin from '../Admin/routes/admin.route.js';
+
+// Create an Express application
+const app = express();
+const PORT = 3001;
+
+// Middleware
+app.use(json());
+app.use(cors()); // allow all origins
+app.use(urlencoded({ extended: false }));
+
+// Database connection
 connectDB();
 
-// OpenAI API routes
-import DBRoute from "../Database/routes/db.route.js";
-app.use("/db", DBRoute);
+// Define routes
+app.use("/db", DBRoute);          // Database-related API
+app.use("/openai", OpenAIRoute);  // OpenAI-related API
+app.use("/heartbeat", HeartbeatRoute); // Heartbeat check API
+app.use("/rate_limit", RateLimitRoute); // Rate limit API
+app.use("/admin", Admin); // Admin API
 
-// OpenAI API
-import OpenAIRoute from '../OpenAI/routes/openai.route.js';
-app.use("/openai", OpenAIRoute);
-
-// Import the heartbeat route
-import HeartbeatRoute from '../Heartbeat/routes/heartbeat.route.js'; 
-app.use("/heartbeat", HeartbeatRoute); // Use the heartbeat route
-
-// app.post('/completion', );
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+// Server listening
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
 
 export default app;

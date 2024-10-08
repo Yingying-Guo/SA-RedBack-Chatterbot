@@ -21,6 +21,16 @@ button {
   outline: 0;
 }
 
+.terms-of-use:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.terms-of-use-21:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
 .main-container {
   overflow: hidden;
   box-sizing: border-box;
@@ -46,6 +56,7 @@ button {
   width: 592px;
   margin-right: 20px;
 }
+
 .frame {
   display: flex;
   flex-direction: column;
@@ -58,26 +69,27 @@ button {
   height: 152px;
   z-index: 1;
 }
+
 .logo {
   flex-shrink: 0;
   position: relative;
   width: 48px;
   height: 48px;
-  background: url(../assets/images/fec5d9a8-5493-4bf2-a3fc-32e1419f3031.png)
-    no-repeat center;
+  background: url(../assets/images/fec5d9a8-5493-4bf2-a3fc-32e1419f3031.png) no-repeat center;
   background-size: cover;
   z-index: 2;
 }
+
 .group {
   flex-shrink: 0;
   position: relative;
   width: 44.148px;
   height: 40.472px;
-  background: url(../assets/images/cd66fd3a-6abd-4aad-8303-4d658ec5f8df.png)
-    no-repeat center;
+  background: url(../assets/images/cd66fd3a-6abd-4aad-8303-4d658ec5f8df.png) no-repeat center;
   background-size: 100% 100%;
   z-index: 3;
 }
+
 .start-chat {
   display: flex;
   align-items: center;
@@ -96,6 +108,7 @@ button {
   white-space: nowrap;
   z-index: 4;
 }
+
 .frame-1 {
   display: flex;
   flex-direction: column;
@@ -108,6 +121,7 @@ button {
   width: 592px;
   z-index: 5;
 }
+
 .basic-info {
   display: flex;
   flex-direction: column;
@@ -119,6 +133,7 @@ button {
   width: 572px;
   z-index: 6;
 }
+
 .frame-2 {
   display: flex;
   flex-direction: column;
@@ -130,6 +145,7 @@ button {
   width: 572px;
   z-index: 7;
 }
+
 .choose-country {
   flex-shrink: 0;
   flex-basis: auto;
@@ -144,6 +160,7 @@ button {
   white-space: nowrap;
   z-index: 8;
 }
+
 .frame-3 {
   display: flex;
   align-items: flex-start;
@@ -154,6 +171,7 @@ button {
   width: 519px;
   z-index: 9;
 }
+
 .text-field {
   display: flex;
   flex-direction: column;
@@ -165,6 +183,7 @@ button {
   width: 619px;
   z-index: 10;
 }
+
 .text-field-4 {
   align-self: stretch;
   flex-shrink: 0;
@@ -176,17 +195,18 @@ button {
   overflow: hidden;
   border-radius: 12px;
 }
+
 .icons {
   position: relative;
   width: 24px;
   height: 24px;
   margin: 16px 0 0 471px;
-  background: url(../assets/images/24fae1e3-4102-4b4a-9bba-0cb3f17a8242.png)
-    no-repeat center;
+  background: url(../assets/images/24fae1e3-4102-4b4a-9bba-0cb3f17a8242.png) no-repeat center;
   background-size: cover;
   z-index: 12;
   overflow: hidden;
 }
+
 .frame-5 {
   display: flex;
   flex-direction: column;
@@ -198,6 +218,7 @@ button {
   width: 578px;
   z-index: 13;
 }
+
 .gender {
   display: flex;
   flex-direction: column;
@@ -209,6 +230,7 @@ button {
   width: 375px;
   z-index: 14;
 }
+
 .whats-your-gender {
   flex-shrink: 0;
   position: relative;
@@ -222,6 +244,7 @@ button {
   white-space: nowrap;
   z-index: 15;
 }
+
 .whats-your-gender-6 {
   position: relative;
   color: #111111;
@@ -231,6 +254,7 @@ button {
   line-height: 24px;
   text-align: left;
 }
+
 .optional {
   position: relative;
   color: #666666;
@@ -240,6 +264,7 @@ button {
   line-height: 24px;
   text-align: left;
 }
+
 .red-star {
   position: relative;
   color: #ee4949;
@@ -249,6 +274,7 @@ button {
   line-height: 24px;
   text-align: left;
 }
+
 .frame-7 {
   display: flex;
   align-items: flex-start;
@@ -259,6 +285,7 @@ button {
   width: 375px;
   z-index: 16;
 }
+
 .radio-button {
   display: flex;
   align-items: center;
@@ -267,21 +294,22 @@ button {
   flex-shrink: 0;
   gap: 8px;
   position: relative;
-  /* width: 100px; */
+  width: auto;
   padding: 0 8px 0 8px;
   z-index: 17;
 }
+
 .radio-button-8 {
   flex-shrink: 0;
   position: relative;
   width: 16px;
   height: 16px;
-  background: url(../assets/images/6ed05105-bff7-4e4e-b0fb-05175420cf91.png)
-    no-repeat center;
+  background: url(../assets/images/6ed05105-bff7-4e4e-b0fb-05175420cf91.png) no-repeat center;
   background-size: cover;
   z-index: 18;
   overflow: hidden;
 }
+
 .text-female {
   flex-shrink: 0;
   flex-basis: auto;
@@ -296,6 +324,7 @@ button {
   white-space: nowrap;
   z-index: 19;
 }
+
 .radio-button-9 {
   display: flex;
   align-items: center;
@@ -308,17 +337,18 @@ button {
   padding: 0 8px 0 8px;
   z-index: 20;
 }
+
 .radio-button-a {
   flex-shrink: 0;
   position: relative;
   width: 16px;
   height: 16px;
-  background: url(../assets/images/97c9f2cf-aa59-4717-b018-81e7005420e9.png)
-    no-repeat center;
+  background: url(../assets/images/97c9f2cf-aa59-4717-b018-81e7005420e9.png) no-repeat center;
   background-size: cover;
   z-index: 21;
   overflow: hidden;
 }
+
 .text-male {
   flex-shrink: 0;
   flex-basis: auto;
@@ -333,6 +363,7 @@ button {
   white-space: nowrap;
   z-index: 22;
 }
+
 .radio-button-b {
   display: flex;
   align-items: center;
@@ -345,17 +376,18 @@ button {
   padding: 0 8px 0 8px;
   z-index: 23;
 }
+
 .radio-button-c {
   flex-shrink: 0;
   position: relative;
   width: 16px;
   height: 16px;
-  background: url(../assets/images/7b8ec1a6-4b3c-4483-a8e3-b1c042064bf1.png)
-    no-repeat center;
+  background: url(../assets/images/7b8ec1a6-4b3c-4483-a8e3-b1c042064bf1.png) no-repeat center;
   background-size: cover;
   z-index: 24;
   overflow: hidden;
 }
+
 .text-non-binary {
   flex-shrink: 0;
   flex-basis: auto;
@@ -370,6 +402,7 @@ button {
   white-space: nowrap;
   z-index: 25;
 }
+
 .frame-d {
   display: flex;
   flex-direction: column;
@@ -381,6 +414,7 @@ button {
   width: 578px;
   z-index: 26;
 }
+
 .date-of-birth {
   flex-shrink: 0;
   flex-basis: auto;
@@ -395,6 +429,7 @@ button {
   white-space: nowrap;
   z-index: 27;
 }
+
 .frame-e {
   display: flex;
   align-items: flex-start;
@@ -405,6 +440,7 @@ button {
   width: 578px;
   z-index: 28;
 }
+
 .text-field-f {
   display: flex;
   flex-direction: column;
@@ -416,6 +452,7 @@ button {
   width: 180px;
   z-index: 29;
 }
+
 .frame-10 {
   align-self: stretch;
   flex-shrink: 0;
@@ -424,6 +461,7 @@ button {
   height: 27px;
   z-index: 30;
 }
+
 .label {
   display: flex;
   align-items: flex-start;
@@ -440,7 +478,9 @@ button {
   text-align: left;
   white-space: nowrap;
   z-index: 31;
+  
 }
+
 .text-field-11 {
   align-self: stretch;
   flex-shrink: 0;
@@ -452,17 +492,18 @@ button {
   overflow: hidden;
   border-radius: 12px;
 }
+
 .icons-12 {
   position: relative;
   width: 24px;
   height: 24px;
   margin: 16px 0 0 132px;
-  background: url(../assets/images/8f350cdf-f23f-4ad0-9ed0-8fa805a3346a.png)
-    no-repeat center;
+  background: url(../assets/images/8f350cdf-f23f-4ad0-9ed0-8fa805a3346a.png) no-repeat center;
   background-size: cover;
   z-index: 33;
   overflow: hidden;
 }
+
 .text-field-13 {
   display: flex;
   flex-direction: column;
@@ -474,6 +515,7 @@ button {
   width: 179px;
   z-index: 34;
 }
+
 .frame-14 {
   align-self: stretch;
   flex-shrink: 0;
@@ -482,6 +524,7 @@ button {
   height: 27px;
   z-index: 35;
 }
+
 .label-15 {
   display: flex;
   align-items: flex-start;
@@ -499,6 +542,7 @@ button {
   white-space: nowrap;
   z-index: 36;
 }
+
 .text-field-16 {
   align-self: stretch;
   flex-shrink: 0;
@@ -510,17 +554,18 @@ button {
   overflow: hidden;
   border-radius: 12px;
 }
+
 .icons-17 {
   position: relative;
   width: 24px;
   height: 24px;
   margin: 16px 0 0 131px;
-  background: url(../assets/images/8938a64f-8b71-484c-a6d6-c08c0ee2bb95.png)
-    no-repeat center;
+  background: url(../assets/images/8938a64f-8b71-484c-a6d6-c08c0ee2bb95.png) no-repeat center;
   background-size: cover;
   z-index: 38;
   overflow: hidden;
 }
+
 .text-field-18 {
   display: flex;
   flex-direction: column;
@@ -532,6 +577,7 @@ button {
   width: 179px;
   z-index: 39;
 }
+
 .frame-19 {
   align-self: stretch;
   flex-shrink: 0;
@@ -540,6 +586,7 @@ button {
   height: 27px;
   z-index: 40;
 }
+
 .label-1a {
   display: flex;
   align-items: flex-start;
@@ -556,7 +603,9 @@ button {
   text-align: left;
   white-space: nowrap;
   z-index: 41;
+  
 }
+
 .text-field-1b {
   align-self: stretch;
   flex-shrink: 0;
@@ -568,17 +617,18 @@ button {
   overflow: hidden;
   border-radius: 12px;
 }
+
 .icons-1c {
   position: relative;
   width: 24px;
   height: 24px;
   margin: 16px 0 0 131px;
-  background: url(../assets/images/04899784-a3a0-4884-bb8b-71501634999a.png)
-    no-repeat center;
+  background: url(../assets/images/04899784-a3a0-4884-bb8b-71501634999a.png) no-repeat center;
   background-size: cover;
   z-index: 43;
   overflow: hidden;
 }
+
 .frame-1d {
   display: flex;
   flex-direction: column;
@@ -590,6 +640,7 @@ button {
   width: 592px;
   z-index: 44;
 }
+
 .check-box {
   display: flex;
   align-items: flex-start;
@@ -597,39 +648,41 @@ button {
   flex-shrink: 0;
   gap: 8px;
   position: relative;
-  width: 499px;
+  width: 600px;
   padding: 8px 8px 8px 0;
   z-index: 45;
 }
+
 .check-box-1e {
   flex-shrink: 0;
   position: relative;
   width: 24px;
   height: 24px;
-  background: url(../assets/images/181f0773-823a-4dc7-a68f-26c3df2cca36.png)
-    no-repeat center;
+  background: url(../assets/images/181f0773-823a-4dc7-a68f-26c3df2cca36.png) no-repeat center;
   background-size: cover;
   z-index: 46;
   overflow: hidden;
 }
+
 .receive-emails {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
   flex-shrink: 0;
   position: relative;
-  width: 459px;
-  height: 48px;
+  width: 600px;
+  height: auto;
   color: #333333;
   font-family: Poppins, var(--default-font-family);
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
   text-align: left;
-  text-overflow: initial;
+  /* text-overflow: ellipsis; */
   z-index: 47;
   overflow: hidden;
 }
+
 .link-text {
   display: flex;
   align-items: flex-start;
@@ -641,6 +694,7 @@ button {
   padding: 8px 8px 8px 0;
   z-index: 48;
 }
+
 .terms-privacy-policy {
   flex-shrink: 0;
   position: relative;
@@ -654,6 +708,7 @@ button {
   white-space: nowrap;
   z-index: 49;
 }
+
 .create-account {
   position: relative;
   color: #333333;
@@ -663,6 +718,7 @@ button {
   line-height: 24px;
   text-align: left;
 }
+
 .terms-of-use {
   position: relative;
   color: #111111;
@@ -673,6 +729,7 @@ button {
   text-align: left;
   text-decoration: underline;
 }
+
 .empty {
   position: relative;
   color: #666666;
@@ -682,6 +739,7 @@ button {
   line-height: 24px;
   text-align: left;
 }
+
 .create-account-1f {
   position: relative;
   color: #333333;
@@ -691,6 +749,7 @@ button {
   line-height: 24px;
   text-align: left;
 }
+
 .empty-20 {
   position: relative;
   color: #666666;
@@ -700,6 +759,7 @@ button {
   line-height: 24px;
   text-align: left;
 }
+
 .terms-of-use-21 {
   position: relative;
   color: #111111;
@@ -710,6 +770,7 @@ button {
   text-align: left;
   text-decoration: underline;
 }
+
 .empty-22 {
   position: relative;
   color: #666666;
@@ -720,6 +781,7 @@ button {
   text-align: left;
   text-decoration: underline;
 }
+
 .not-a-robot-checkbox {
   flex-shrink: 0;
   position: relative;
@@ -732,7 +794,9 @@ button {
   border-radius: 18px;
 
   padding-top: 20px;
+  
 }
+
 .not-a-robot-checkbox-input {
   position: absolute;
   width: 363px;
@@ -744,18 +808,19 @@ button {
   z-index: 55;
   outline: none;
 }
+
 .google-recaptcha-official {
   position: absolute;
   width: 48px;
   height: 46.286px;
   top: 10px;
   right: 23px;
-  background: url(../assets/images/ce3592b8-23bf-41bd-ac66-18a76334084c.png)
-    no-repeat center;
+  background: url(../assets/images/ce3592b8-23bf-41bd-ac66-18a76334084c.png) no-repeat center;
   background-size: cover;
   z-index: 54;
   overflow: hidden;
 }
+
 .frame-23 {
   display: flex;
   align-items: center;
@@ -768,18 +833,23 @@ button {
   top: 21px;
   left: 23px;
   z-index: 51;
+
+
+  
 }
+
 .check-box-24 {
   flex-shrink: 0;
   position: relative;
   width: 18px;
   height: 18px;
-  background: url(../assets/images/33df0213-7571-4f91-8f64-8521cc312cf5.png)
-    no-repeat center;
+  background: url(../assets/images/33df0213-7571-4f91-8f64-8521cc312cf5.png) no-repeat center;
   background-size: cover;
   z-index: 52;
   overflow: hidden;
+  
 }
+
 .not-a-robot {
   display: flex;
   align-items: center;
@@ -798,6 +868,7 @@ button {
   white-space: nowrap;
   z-index: 53;
 }
+
 .frame-25 {
   display: flex;
   flex-direction: column;
@@ -809,7 +880,9 @@ button {
   position: relative;
   width: 578px;
   z-index: 56;
+  
 }
+
 .button {
   flex-shrink: 0;
   position: relative;
@@ -851,13 +924,11 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: nowrap;
-  gap: 8px;
-  position: relative;
-  width: 54px;
-  margin: 15px 0 0 262px;
+  width: 100%;
+  height: 100%;
   z-index: 59;
 }
+
 .sign-up-28 {
   display: flex;
   align-items: center;
@@ -876,6 +947,7 @@ button {
   white-space: nowrap;
   z-index: 60;
 }
+
 .have-an-account-login {
   display: flex;
   align-items: flex-start;
@@ -885,6 +957,7 @@ button {
   width: 36px;
   z-index: 61;
 }
+
 .have-an-account-login-29 {
   display: flex;
   align-items: flex-start;
@@ -896,6 +969,7 @@ button {
   padding: 2px 2px 2px 2px;
   z-index: 62;
 }
+
 .already-have-an-account {
   flex-shrink: 0;
   flex-basis: auto;
@@ -911,6 +985,7 @@ button {
   white-space: nowrap;
   z-index: 63;
 }
+
 .not-a-robot-checkbox-input {
   position: absolute;
   width: 24px;
@@ -977,11 +1052,11 @@ button {
   border-radius: 3px;
 }
 
-.custom-checkbox-label:hover input ~ .checkmark {
+.custom-checkbox-label:hover input~.checkmark {
   background-color: #ccc;
 }
 
-.custom-checkbox-label input:checked ~ .checkmark {
+.custom-checkbox-label input:checked~.checkmark {
   background-color: #2196f3;
 }
 
@@ -991,7 +1066,7 @@ button {
   display: none;
 }
 
-.custom-checkbox-label input:checked ~ .checkmark:after {
+.custom-checkbox-label input:checked~.checkmark:after {
   display: block;
 }
 
@@ -1057,7 +1132,7 @@ button {
   position: relative;
 }
 
-.radio-button-input:checked + .radio-button-custom::after {
+.radio-button-input:checked+.radio-button-custom::after {
   content: "";
   width: 10px;
   height: 10px;
@@ -1101,7 +1176,7 @@ button {
   position: relative;
 }
 
-.radio-button-input:checked + .radio-button-custom::after {
+.radio-button-input:checked+.radio-button-custom::after {
   content: "";
   width: 10px;
   height: 10px;
@@ -1154,4 +1229,101 @@ button {
 
 .already-have-an-account:hover {
   color: #2196f3;
+}
+
+.info-collect-container {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.info-collect-container.fade-in {
+  opacity: 1;
+}
+
+
+
+
+/* for phone responsive design */
+
+
+/* .content {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+} */
+
+@media (max-width: 768px) {
+  .content {
+    width: 100%;
+    margin-right: 0;
+    padding: 0 16px;
+  }
+
+  .start-chat {
+    font-size: 28px;
+  }
+
+  .frame-7 {
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+
+  .radio-button {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  
+  /* .sign-up-28 {
+    font-size: 18px;
+  } */
+
+  .frame {
+    flex-direction: column;
+  }
+
+  .frame-e {
+    display: block;
+  }
+
+  .text-field-f {
+    margin-bottom: 16px;
+  }
+  
+  .receive-emails, .terms-privacy-policy, .choose-country, .whats-your-gender-6, .whats-your-gender, .gender, .date-of-birth {
+    white-space: normal;
+    word-wrap: break-word;
+    flex-wrap: wrap;
+    width: 100%;
+    height: auto;
+  }
+
+  .check-box {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 8px 8px 8px 0;
+  }
+
+  .button {
+    flex-shrink: 0;
+    position: relative;
+    width: 90%;
+    height: 64px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    z-index: 57;
+    
+  }
+
+  .sign-up-28 {
+    width: 200px;
+  }
+
+  
+  .main-container, .text-field, .country-select, .content, .frame, .frame-1, .basic-info, .frame-2, .frame-3, .frame-5, .frame-d, .frame-e, .frame-1d, .link-text, .not-a-robot-checkbox, .frame-25 {
+    width: 100%;
+  }
+
 }

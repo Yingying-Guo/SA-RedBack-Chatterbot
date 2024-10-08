@@ -5,11 +5,10 @@ import { createUser, createOpenAIChat, getOpenAIChatByUser } from '../controller
 // add a user
 router.post('/user-info', createUser);
 
-// // add a chat record
-// router.post('/chat', createOpenAIChat);
+// add a chat record
+router.post('/chat', createOpenAIChat);
 
 // get chat record by user
 router.get('/:userID', getOpenAIChatByUser);
-
 
 export default router;
