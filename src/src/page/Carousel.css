@@ -83,3 +83,19 @@
     background-color: rgba(0, 0, 0, 0.7);
   }
   
+  /* Mobile adjustments */
+  @media (max-width: 768px) {
+    .carousel-container {
+      width: 70%; /* Make the container take full width on mobile */
+    }
+  
+    .team-card {
+      flex: 0 0 80%; /* On mobile, make each card larger, taking 90% of the screen */
+    }
+  
+    .team-image {
+      width: 90%; /* Make the image take full width on mobile */
+      height: 150px; /* Increase the height for better mobile presentation */
+    }
+  }
+  

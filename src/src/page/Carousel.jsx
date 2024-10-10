@@ -3,16 +3,32 @@ import './Carousel.css'; // For styles
 
 const Carousel = ({ teamMembers }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const itemsPerSlide = 2; // Show 2 team members per slide
+  const [itemsPerSlide, setItemsPerSlide] = useState(2); // Start with 2 items per slide for desktop
+
+  // Update items per slide based on window width
+  useEffect(() => {
+    const updateItemsPerSlide = () => {
+      if (window.innerWidth <= 768) {
+        setItemsPerSlide(1); // One item per slide on mobile
+      } else {
+        setItemsPerSlide(2); // Two items per slide on desktop
+      }
+    };
+
+    updateItemsPerSlide(); // Call once when the component mounts
+    window.addEventListener('resize', updateItemsPerSlide); // Listen for window resize events
+
+    return () => window.removeEventListener('resize', updateItemsPerSlide); // Clean up on unmount
+  }, []);
 
   // Auto-slide functionality
   useEffect(() => {
     const interval = setInterval(() => {
       handleNext(); // Automatically slide to the next pair
-    }, 1800); // Change slide every 1.5 seconds
+    }, 3000); // Change slide every 3 seconds
 
     return () => clearInterval(interval); // Clean up interval on component unmount
-  }, [currentIndex]);
+  }, [currentIndex, itemsPerSlide]);
 
   // Move to the next set of items
   const handleNext = () => {
