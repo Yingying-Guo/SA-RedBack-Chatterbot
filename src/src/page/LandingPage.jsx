@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import logo from '../assets/images/ebbecad5-4964-4733-97e7-b2a0085ae42f.png';
 import image from '../assets/images/image_landing_page.png';
+import TeamPage from './TeamPage'; // Import the TeamPage component
 
 const LandingPage = ({ onGetStarted }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isTeamPageVisible, setIsTeamPageVisible] = useState(false); // State to manage TeamPage visibility
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
+
+  const toggleTeamPage = () => {
+    setIsTeamPageVisible(!isTeamPageVisible); // Toggle TeamPage visibility
+  };
 
   return (
     <div className="landing-page">
@@ -22,7 +28,22 @@ const LandingPage = ({ onGetStarted }) => {
         <button onClick={onGetStarted} className="get-started-btn animate-pulse">
           Begin Your Adventure
         </button>
+        <p></p>
+        <button onClick={toggleTeamPage} className="get-started-btn animate-pulse">
+          About Us
+        </button>
       </div>
+
+      {isTeamPageVisible && (
+        <div className="popup">
+          <div className="popup-content">
+            <button className="close-btn" onClick={toggleTeamPage}>
+              &times;
+            </button>
+            <TeamPage />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

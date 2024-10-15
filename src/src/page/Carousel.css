@@ -1,0 +1,101 @@
+.carousel-container {
+    width: 80%; /* Set the width of the popup to 80% to give more room */
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    padding: 2.5rem;
+    background-color: #fff;
+    border-radius: 10px;
+  }
+  
+  .carousel-inner {
+    display: flex;
+    justify-content: center;
+    transition: transform 0.5s ease-in-out;
+    width: 100%; /* Full width for two items */
+  }
+  
+  .team-card {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 1rem;
+    flex: 0 0 45%; /* Display two cards, each taking 45% of the container */
+    text-align: center;
+    transition: transform 0.3s ease; /* Smooth hover transition */
+  }
+  
+  .team-card:hover {
+    transform: translateY(-10px); /* Subtle hover effect */
+  }
+  
+  .team-image {
+    width: 95%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+  }
+  
+  .team-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .team-card h4 {
+    font-size: 1rem;
+    color: gray;
+    margin-bottom: 0.5rem;
+  }
+  
+  .team-card p {
+    font-size: 0.9rem;
+  }
+  
+  /* Arrow styles */
+  .arrow {
+    position: absolute;
+    top: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 13px;
+    cursor: pointer;
+    font-size: 1rem;
+    z-index: 100;
+    transform: translateY(-50%);
+    transition: background-color 0.3s ease;
+  }
+  
+  .left-arrow {
+    left: -7px; /* Move the left arrow further out */
+  }
+  
+  .right-arrow {
+    right: -7px; /* Move the right arrow further out */
+  }
+  
+  .arrow:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  
+  /* Mobile adjustments */
+  @media (max-width: 768px) {
+    .carousel-container {
+      width: 70%; /* Make the container take full width on mobile */
+    }
+  
+    .team-card {
+      flex: 0 0 80%; /* On mobile, make each card larger, taking 90% of the screen */
+    }
+  
+    .team-image {
+      width: 90%; /* Make the image take full width on mobile */
+      height: 150px; /* Increase the height for better mobile presentation */
+    }
+  }
+  

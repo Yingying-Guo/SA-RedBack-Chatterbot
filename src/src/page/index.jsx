@@ -1124,6 +1124,7 @@ export default function Main() {
                     <HCaptcha
                       sitekey={import.meta.env.VITE_HCAPTCHA_SITE_KEY}
                       onVerify={(val) => setIsRobotChecked(val)}
+                      languageOverride="en"
                     />
                     {/* <ReCAPTCHA
                       sitekey={import.meta.env.VITE_GOOGLE_SITE_KEY}
