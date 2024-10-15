@@ -303,5 +303,29 @@ All notable changes to this project will be documented in this section.
 - **Testing**: Conducted unit, integration, and end-to-end tests.
 - **Future Enhancements**: Plans include additional interaction features and data analysis improvements.
 
-### [Sprint 3] - To be updated
+### [Sprint 3] - 18 October 2024
 
+#### Added
+- **State Management Enhancements**: Introduced new states (`conversations`, `currentConversationId`) to manage conversation history, including deletion functionality.
+- **Local Storage Integration**: Added localStorage to save and retrieve conversation data for persistence across user sessions.
+- **Responsive Sidebar Design**: Implemented dynamic sidebar adjustments based on screen size (`isMobile`) to optimize the layout for mobile and desktop devices.
+- **Multi-Conversation Management**: Introduced the ability to manage multiple chat sessions, allowing users to save, load, and delete conversations.
+- **Creativity Level Selector**: Added a feature that lets users adjust the chatbot’s response creativity, with options for low, medium, and high.
+
+#### Changed
+- **Sidebar Behavior Optimization**: Adjusted the sidebar width and behavior on mobile devices for a more seamless user experience.
+- **Chat Interface Enhancement**: Preloaded `user_chat.css` to improve performance and user experience when switching between interfaces.
+- **Smooth Scroll Functionality**: Added automatic scrolling to the most recent message in chat.
+
+#### Fixed
+- **Scrolling Bug**: Resolved incorrect scrolling behavior when loading older conversations.
+- **CSS Loading Delays**: Fixed potential performance issues due to CSS loading delays across different pages.
+
+#### Removed
+- No features were removed during this sprint.
+
+#### Notes
+- **Security Enhancements**: Implemented IP address and browser fingerprint detection using FingerprintJS and a hash generation function for improved rate-limiting protection.
+- **API Integrations**: Integrated fingerprint and IP address submission for rate-limiting control, along with improved error handling for API requests related to message processing and rate limit responses.
+
+### [Sprint 4] - 1 November 2024
