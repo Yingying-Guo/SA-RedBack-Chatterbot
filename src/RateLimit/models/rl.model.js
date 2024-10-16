@@ -8,12 +8,12 @@ import mongoose from 'mongoose';
  * @property {Date} date - The record date.
  */
 const requestSchema = new mongoose.Schema({
-  hash: { type: String, required: true, unique: true },  // IP + Fingerprint 的哈希值
-  count: { type: Number, required: true, default: 1 },   // 请求次数
-  date: { type: Date, required: true }                   // 记录日期
+  hash: { type: String, required: true, unique: true },  // IP + Fingerprint
+  count: { type: Number, required: true, default: 1 }, 
+  date: { type: Date, required: true }    
 });
 
-requestSchema.index({ date: 1 }, { expireAfterSeconds: 86400 });  // 一天后过期
+requestSchema.index({ date: 1 }, { expireAfterSeconds: 86400 });  // One day expiry
 
 const Request = mongoose.model('Request', requestSchema);
 

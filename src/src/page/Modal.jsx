@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-// 自定义弹窗组件
 const Modal = ({ isOpen, onClose, message }) => {
   if (!isOpen) return null;
   

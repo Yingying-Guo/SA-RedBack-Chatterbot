@@ -15,24 +15,32 @@ Welcome to the SA RedBack project! The AI Chatterbox is a web-based AI chatbot d
   - [Dependencies](#dependencies)
   - [API Endpoints](#api-endpoints)
   - [API Usage](#api-usage)
-    - [**Node Framework**](#node-framework)
-    - [**OpenAI API (ChatGPT)**](#openai-api-chatgpt)
+    - [Node Framework](#node-framework)
+    - [OpenAI API (ChatGPT)](#openai-api-chatgpt)
   - [Testing](#testing)
   - [Contributing](#contributing)
   - [License](#license)
   - [Contact](#contact)
   - [Changelog](#changelog)
-    - [\[Sprint 1\] - 18 August 2024](#sprint-1---18-august-2024)
+    - [Sprint 1 - 18 August 2024](#sprint-1---18-august-2024)
       - [Added](#added)
       - [Changed](#changed)
       - [Fixed](#fixed)
-    - [\[Sprint 2\] - 20 September 2024](#sprint-2---20-september-2024)
+    - [Sprint 2 - 20 September 2024](#sprint-2---20-september-2024)
       - [Added](#added-1)
       - [Changed](#changed-1)
       - [Fixed](#fixed-1)
       - [Removed](#removed)
       - [Notes](#notes)
-    - [\[Sprint 3\] - To be updated](#sprint-3---to-be-updated)
+    - [Sprint 3 - 18 October 2024](#sprint-3---18-october-2024)
+      - [Added](#added-2)
+      - [Changed](#changed-2)
+      - [Fixed](#fixed-2)
+    - [Sprint 4 - 1 November 2024](#sprint-4---1-november-2024)
+      - [Added](#added-3)
+      - [Changed](#changed-3)
+      - [Fixed](#fixed-3)
+      - [Notes](#notes-1)
 
 ## Project Overview
 
@@ -90,6 +98,9 @@ Follow these steps to set up the project locally:
    ```bash
    MONGO_URI=your-mongo-connection-string
    OPENAI_API_KEY=your-openai-api-key
+   VITE_GOOGLE_SITE_KEY=your-key
+   VITE_HCAPTCHA_SITE_KEY=your-key
+   MAX_REQUESTS=your-limitation
    ```
 
 5. **Start MongoDB locally or connect to MongoDB Atlas:**
@@ -170,42 +181,71 @@ For local development, ensure your server is running by following the setup inst
 
 We follow RESTful API design principles to provide a consistent and intuitive interface.
 
-### **Node Framework**
+### Chat Completion API
 
-**Request:**
+- **Endpoint**: `/openai/completion`
+- **Method**: `POST`
+- **Description**: Generates a response based on a given message and creativity level.
+- **URL**: <https://ai-chatterbox.mb6.top/openai/completion>
 
-- **Method:** `POST`
-- **URL:** `/api/conversations/`
-- **Description:** Creates a new chat record and retrieves the corresponding reply.
+**Request Body**:
 
-### **OpenAI API (ChatGPT)**
+```json
+{
+  "message": "climate change",
+  "creativityLevel": 0.5,
+  "sessionId": ""
+}
+```
 
-**Request:**
+**Response**
 
-- **Method:** `POST`
+: The AI-generated response to the input message.
 
-- **URL:** `https://api.openai.com/v1/chat/completions`
+### User Information API
 
-- **Description:** Sends a message to the OpenAI GPT model and receives a generated reply.
+- **Endpoint**: `/db/user-info`
+- **Method**: `POST`
+- **Description**: Stores or updates user information.
+- **URL**: <https://ai-chatterbox.mb6.top/db/user-info>
 
-- **Headers:**
+**Request Body**:
 
-  - `Authorization: Bearer YOUR_API_KEY`
-  - `Content-Type: application/json`
+```json
+{
+  "location": "Brizal",
+  "gender": "Male",
+  "DoB": "22-11-2000",
+  "sessionId": ""
+}
+```
 
-- **Request Body:**
+### Export Data APIs
 
-  ```json
-  {
-    "model": "gpt-4o-mini",
-    "messages": [
-      {
-        "role": "user",
-        "content": "What if we could travel through time?"
-      }
-    ]
-  }
-  ```
+- **Users Count API**
+  - **Endpoint**: `/admin/export/users/count`
+  - **Method**: `GET`
+  - **Description**: Retrieves the total number of users.
+
+- **Chats Count API**
+  - **Endpoint**: `/admin/export/chats/count`
+  - **Method**: `GET`
+  - **Description**: Retrieves the total number of chats.
+
+### Admin APIs
+
+- **Verify Password API**
+  - **Endpoint**: `/admin/verify-password`
+  - **Method**: `POST`
+  - **Description**: Verifies admin password to allow access to secure resources.
+
+**Request Body**:
+
+```json
+{
+  "password": "admin123"
+}
+```
 
 ## Testing
 
@@ -230,7 +270,6 @@ For inquiries or feedback, please contact the project team:
 
 - **Yujun Yan (Mentor)**: yujun.yan.1@unimelb.edu.au
 - **YiYao Li Shaelyn (Product Owner)**: yiyao3@student.unimelb.edu.au
-
 - **Yiqun Liu Elva (Scrum Master)**: yiqun2@student.unimelb.edu.au
 - **Yingying Guo Vicky (Quality Assurance Leader)**: yinguo3@student.unimelb.edu.au
 - **Leyao Lyu Lydia (Developer)**: lyull@student.unimelb.edu.au
@@ -244,88 +283,74 @@ All notable changes to this project will be documented in this section.
 
 #### Added
 
-- **GitHub Repository**: Created the initial GitHub repository.
-- **Initial Project Structure**: Set up the project with `docs` and `src` directories.
-- **Essential Files**: Added `.gitignore`, `CONTRIBUTING.md`, and `LICENSE` files.
-- **Frontend Framework**: Integrated React for the user interface.
-- **Backend Framework**: Set up Django for the backend infrastructure.
-- **Database Integration**: Implemented MongoDB for managing and storing data.
-- **API Integration**: Added OpenAI API (ChatGPT) for generating "What If" questions.
-- **Initial API Endpoints**: Created endpoints for ChatGPT and Translation API.
+- Created GitHub repository.
+- Set up initial project structure with `docs` and `src` directories.
+- Added `.gitignore`, `CONTRIBUTING.md`, and `LICENSE` files.
+- Integrated React for frontend and Django for backend.
+- Implemented MongoDB for data storage.
+- Added OpenAI API (ChatGPT) for generating "What If" questions.
 
 #### Changed
 
-- **README.md**: Updated to include project overview, installation instructions, and technical considerations.
-- **Technical Considerations**: Adjusted to reflect the finalized technology stack, including the transition to serverless Netlify.
+- Updated `README.md` with project overview, installation instructions, and technical considerations.
+- Refined technology stack, transitioning to serverless Netlify.
 
 #### Fixed
 
-- **Documentation Errors**: Corrected typos and formatting issues in the README file.
+- Corrected typos and formatting issues in `README.md`.
 
 ### [Sprint 2] - 20 September 2024
 
 #### Added
 
-- **Backend Refactor to Node.js**: Migrated the backend from Django to Node.js (Express) for better integration with the JavaScript-based frontend.
-- **Prompt Engineering**: Implemented logic for the OpenAI API to generate dynamic "What If" questions based on different creativity levels.
-- **Frontend-Backend Integration**: Integrated the React frontend with the Node.js backend.
-- **Data Storage with MongoDB**: Designed and implemented a schema to securely store user interactions and generated questions.
-- **User Interface for Topic Input**: Developed an input interface for users to submit topics.
-- **Question Display Interface**: Implemented a layout for displaying generated "What If" questions.
-- **Regenerate Feature**: Added functionality to regenerate a new set of questions.
-- **Session Management**: Implemented session tracking using `node-snowflake`.
-- **Data Security and Privacy**: Ensured secure storage of sensitive data.
-- **Automatic Topic Extraction**: Enabled automatic extraction of topics from user input.
-- **Language and Content Filtering**: Integrated real-time filtering of inappropriate language.
-- **Ethical Content Guidelines**: Established guidelines to ensure socially responsible question generation.
+- Migrated backend from Django to Node.js (Express).
+- Implemented prompt engineering for OpenAI API.
+- Integrated React frontend with Node.js backend.
+- Developed schema for MongoDB to store user interactions.
+- Built UI for topic input and question display.
+- Added regenerate feature for generating new questions.
 
 #### Changed
 
-- **Technology Stack Update**: Transitioned the backend from Django to Node.js.
-- **Project Hosting Platform Migration**: Moved hosting from Netlify to AWS.
-- **Project Deployment**: Deployed the application on AWS.
-- **Frontend Layout Enhancements**: Improved the UI/UX design for better readability.
-- **Long-Term Data Storage**: Configured MongoDB for storing interaction data.
+- Transitioned backend to Node.js and hosting to AWS.
+- Enhanced frontend UI/UX for improved readability.
 
 #### Fixed
 
-- **Session Persistence Issues**: Resolved issues with session continuity.
-- **Frontend-Backend API Communication**: Fixed communication bugs between the frontend and backend.
-- **Responsive Design Fixes**: Corrected layout issues for better responsiveness.
-- **Input Validation and Feedback**: Implemented real-time input validation.
+- Resolved session persistence issues and bugs in frontend-backend communication.
 
 #### Removed
 
-- **Django Backend**: Removed the Python (Django) backend code.
+- Removed Python (Django) backend code.
 
 #### Notes
 
-- **Testing**: Conducted unit, integration, and end-to-end tests.
-- **Future Enhancements**: Plans include additional interaction features and data analysis improvements.
+- Conducted unit, integration, and end-to-end testing.
 
 ### [Sprint 3] - 18 October 2024
 
 #### Added
-- **State Management Enhancements**: Introduced new states (`conversations`, `currentConversationId`) to manage conversation history, including deletion functionality.
-- **Local Storage Integration**: Added localStorage to save and retrieve conversation data for persistence across user sessions.
-- **Responsive Sidebar Design**: Implemented dynamic sidebar adjustments based on screen size (`isMobile`) to optimize the layout for mobile and desktop devices.
-- **Multi-Conversation Management**: Introduced the ability to manage multiple chat sessions, allowing users to save, load, and delete conversations.
-- **Creativity Level Selector**: Added a feature that lets users adjust the chatbot’s response creativity, with options for low, medium, and high.
+
+- Introduced new states for managing conversation history.
+- Integrated localStorage for conversation persistence.
+- Enhanced sidebar design for mobile devices.
+- Added creativity level selector for responses.
 
 #### Changed
-- **Sidebar Behavior Optimization**: Adjusted the sidebar width and behavior on mobile devices for a more seamless user experience.
-- **Chat Interface Enhancement**: Preloaded `user_chat.css` to improve performance and user experience when switching between interfaces.
-- **Smooth Scroll Functionality**: Added automatic scrolling to the most recent message in chat.
+
+- Optimized sidebar behavior for mobile users.
+- Improved chat interface performance.
 
 #### Fixed
-- **Scrolling Bug**: Resolved incorrect scrolling behavior when loading older conversations.
-- **CSS Loading Delays**: Fixed potential performance issues due to CSS loading delays across different pages.
 
-#### Removed
-- No features were removed during this sprint.
+- Resolved scrolling bug and CSS loading delays.
 
 #### Notes
-- **Security Enhancements**: Implemented IP address and browser fingerprint detection using FingerprintJS and a hash generation function for improved rate-limiting protection.
-- **API Integrations**: Integrated fingerprint and IP address submission for rate-limiting control, along with improved error handling for API requests related to message processing and rate limit responses.
+
+- Enhanced security with IP address and browser fingerprint detection.
 
 ### [Sprint 4] - 1 November 2024
+
+#### Added
+
+- Updated session and rate-limiting controls.
