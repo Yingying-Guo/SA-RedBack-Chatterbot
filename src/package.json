@@ -14,7 +14,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "mocha --require @babel/register",
-    "deploy": "gh-pages -d dist"
+    "deploy": "npm run build --if-present"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",

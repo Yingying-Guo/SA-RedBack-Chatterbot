@@ -27,8 +27,8 @@ jobs:
         node-version: ${{ matrix.node-version }}
         
     # Using npm instead of pnpm
-    - run: npm ci
-    - run: npm run deploy
+    - run: npm ci --prefix ./src
+    - run: npm run deploy --prefix ./src
 
     - name: Deploy to Chatter
       uses: easingthemes/ssh-deploy@main
