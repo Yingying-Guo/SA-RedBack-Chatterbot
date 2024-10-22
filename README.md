@@ -200,7 +200,7 @@ We follow RESTful API design principles to provide a consistent and intuitive in
 
 **Response**
 
-: The AI-generated response to the input message.
+**Description**: The AI-generated response to the input message.
 
 ### User Information API
 
@@ -232,6 +232,16 @@ We follow RESTful API design principles to provide a consistent and intuitive in
   - **Method**: `GET`
   - **Description**: Retrieves the total number of chats.
 
+- **Export Users API**
+  - **Endpoint**: /admin/export/users
+  - **Method**: GET
+  - **Description**: Exports all user data.
+
+- **Export Chats API**
+  - **Endpoint**: /admin/export/chats
+  - **Method**: GET
+  - **Description**: Exports all chat data.
+
 ### Admin APIs
 
 - **Verify Password API**
@@ -243,9 +253,24 @@ We follow RESTful API design principles to provide a consistent and intuitive in
 
 ```json
 {
-  "password": "admin123"
+  "password": "youradminkey"
 }
 ```
+### Rate Limit API
+- **Endpoint**: `/rate_limit/submitFingerprint`
+- **Method**: `POST`
+- **Description**: Submits a combined hash of IP address and browser fingerprint for rate limiting purposes.
+
+**Request Body**:
+```json
+{
+  "hash": "a1b2c3d4e5f6g7h8i9j0"
+}
+```
+### Heartbeat API
+- Endpoint: `/heartbeat`
+- Method: `GET`
+- Description: Receives periodic heartbeat signals to ensure server uptime and maintain active connection.
 
 ## Testing
 
