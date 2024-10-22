@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://github.com/feit-comp90082/SA-RedBack",
   "scripts": {
     "prestart": "npm install",
     "start": "npm install && npm install concurrently --save-dev && concurrently --kill-others-on-fail \"npm run start:backend\" \"npm run start:frontend\"",
