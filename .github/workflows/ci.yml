@@ -3,7 +3,7 @@ name: SA-REDBACK CI/CD Deployment
 on:
   push:
     branches:
-      - SP4-Development
+      - main
 
 jobs:
   deploy:
