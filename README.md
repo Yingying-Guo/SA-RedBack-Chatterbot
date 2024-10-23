@@ -80,7 +80,7 @@ Follow these steps to set up the project locally:
 2. **Navigate to the project directory:**
 
    ```bash
-   cd SA-RedBack
+   cd SA-RedBack/src
    ```
 
 3. **Install dependencies using npm:**
@@ -379,3 +379,4 @@ All notable changes to this project will be documented in this section.
 #### Added
 
 - Updated session and rate-limiting controls.
+- Added GitHub Actions for CI/CD management.
