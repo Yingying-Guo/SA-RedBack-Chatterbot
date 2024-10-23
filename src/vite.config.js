@@ -1,9 +1,14 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import Inspect from 'vite-plugin-inspect'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    Inspect(), // Integrate Inspect
+    eslintPlugin() // Integrate ESLint 
+  ],
   server: {
     host: "localhost",
     port: 5173,
