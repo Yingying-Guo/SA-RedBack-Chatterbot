@@ -23,22 +23,22 @@ Welcome to the SA RedBack project! The AI Chatterbox is a web-based AI chatbot d
 - [License](#license)
 - [Contact](#contact)
 - [Changelog](#changelog)
-  - [Sprint 1 - August 18, 2024](#sprint-1---august-18-2024)
+  - [Sprint 1 - August 18, 2024]
     - [Added](#added)
     - [Changed](#changed)
     - [Fixed](#fixed)
-  - [Sprint 2 - September 20, 2024](#sprint-2---september-20-2024)
+  - [Sprint 2 - September 20, 2024]
     - [Added](#added-1)
     - [Changed](#changed-1)
     - [Fixed](#fixed-1)
     - [Removed](#removed)
     - [Notes](#notes)
-  - [Sprint 3 - October 18, 2024](#sprint-3---october-18-2024)
+  - [Sprint 3 - October 18, 2024]
     - [Added](#added-2)
     - [Changed](#changed-2)
     - [Fixed](#fixed-2)
     - [Notes](#notes-1)
-  - [Sprint 4 - November 1, 2024](#sprint-4---november-1-2024)
+  - [Sprint 4 - November 1, 2024]
     - [Added](#added-3)
     - [Changed](#changed-3)
     - [Fixed](#fixed-3)
