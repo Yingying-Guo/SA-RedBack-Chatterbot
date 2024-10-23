@@ -4,43 +4,46 @@ Welcome to the SA RedBack project! The AI Chatterbox is a web-based AI chatbot d
 
 ## Table of Contents
 
-- [AI Chatterbox - Software Project (SA RedBack)](#ai-chatterbox---software-project-sa-redback)
-  - [Table of Contents](#table-of-contents)
-  - [Project Overview](#project-overview)
-  - [Features](#features)
-  - [Prerequisites](#prerequisites)
-  - [Installation and Setup](#installation-and-setup)
-  - [Project Links](#project-links)
-  - [Usage](#usage)
-  - [Dependencies](#dependencies)
-  - [API Endpoints](#api-endpoints)
-  - [API Usage](#api-usage)
-    - [Node Framework](#node-framework)
-    - [OpenAI API (ChatGPT)](#openai-api-chatgpt)
-  - [Testing](#testing)
-  - [Contributing](#contributing)
-  - [License](#license)
-  - [Contact](#contact)
-  - [Changelog](#changelog)
-    - [Sprint 1 - 18 August 2024](#sprint-1---18-august-2024)
-      - [Added](#added)
-      - [Changed](#changed)
-      - [Fixed](#fixed)
-    - [Sprint 2 - 20 September 2024](#sprint-2---20-september-2024)
-      - [Added](#added-1)
-      - [Changed](#changed-1)
-      - [Fixed](#fixed-1)
-      - [Removed](#removed)
-      - [Notes](#notes)
-    - [Sprint 3 - 18 October 2024](#sprint-3---18-october-2024)
-      - [Added](#added-2)
-      - [Changed](#changed-2)
-      - [Fixed](#fixed-2)
-    - [Sprint 4 - 1 November 2024](#sprint-4---1-november-2024)
-      - [Added](#added-3)
-      - [Changed](#changed-3)
-      - [Fixed](#fixed-3)
-      - [Notes](#notes-1)
+- [Project Overview](#project-overview)
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Installation and Setup](#installation-and-setup)
+- [Project Links](#project-links)
+- [Usage](#usage)
+- [Dependencies](#dependencies)
+- [API Endpoints](#api-endpoints)
+  - [Chat Completion API](#chat-completion-api)
+  - [User Information API](#user-information-api)
+  - [Export Data APIs](#export-data-apis)
+  - [Admin APIs](#admin-apis)
+  - [Rate Limit API](#rate-limit-api)
+  - [Heartbeat API](#heartbeat-api)
+- [Testing](#testing)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+- [Changelog](#changelog)
+  - [Sprint 1 - August 18, 2024](#sprint-1---august-18-2024)
+    - [Added](#added)
+    - [Changed](#changed)
+    - [Fixed](#fixed)
+  - [Sprint 2 - September 20, 2024](#sprint-2---september-20-2024)
+    - [Added](#added-1)
+    - [Changed](#changed-1)
+    - [Fixed](#fixed-1)
+    - [Removed](#removed)
+    - [Notes](#notes)
+  - [Sprint 3 - October 18, 2024](#sprint-3---october-18-2024)
+    - [Added](#added-2)
+    - [Changed](#changed-2)
+    - [Fixed](#fixed-2)
+    - [Notes](#notes-1)
+  - [Sprint 4 - November 1, 2024](#sprint-4---november-1-2024)
+    - [Added](#added-3)
+    - [Changed](#changed-3)
+    - [Fixed](#fixed-3)
+    - [Notes](#notes-2)
+
 
 ## Project Overview
 
@@ -379,3 +382,17 @@ All notable changes to this project will be documented in this section.
 #### Added
 
 - Updated session and rate-limiting controls.
+- Added the About Us section on the landing page.
+
+#### Changed
+
+- Minor style tweaks on the landing page to align with the new "About Us" section.
+
+#### Fixed
+
+- Resolved an issue where the About Us section was not fully visible on mobile devices.
+- Further enhancements for mobile responsiveness are planned for future releases.
+
+#### Notes
+
+- Further mobile optimization will be included in upcoming updates.
