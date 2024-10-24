@@ -149,6 +149,7 @@ Follow these steps to set up the project locally:
 - **Trello Board**: [COMP90082 2024 SM2 SA Redback Trello Board](https://trello.com/b/jHGbpSQC/comp90082-2024-sm2-sa-redback)
 - **Confluence Wiki**: [COMP90082 2024 S2 Confluence Wiki](https://comp90082-2024-s2-sa-redback.atlassian.net/wiki/spaces/comp9008223/overview)
 - **Figma Design**: [Project Design on Figma](https://www.figma.com/proto/ik7MYv4wULWS3Dhnu8QjKG/SA-Redback?page-id=0%3A1&node-id=21-212&viewport=583%2C1320%2C0.37&t=gGjkFiaqu2qhT8tz-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=21%3A212&share=1)
+- **Live Demo**: [SA Redback - Live Demo](https://youtu.be/qkQzpm7dejY)
 
 ## Usage
 
